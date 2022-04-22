@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16aee1c7ec8f6a94ab6acdd65a11b48b, type: 3}
   m_Name: DiscGunBase
   m_EditorClassIdentifier: 
-  rof: 0.6
+  rof: 0.65
   rofPercentBonus: 0
   rofFlatBonus: 0
-  projectileCount: 2
+  projectileCount: 3
   projectileCountBonus: 0
   knockBackForce: 350
   knockBackForcePercentBonus: 0

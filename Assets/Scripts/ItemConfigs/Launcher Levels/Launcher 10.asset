@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc5ddfaaad574541a8fddd094b33be7, type: 3}
   m_Name: Launcher 10
   m_EditorClassIdentifier: 
-  rarity: 4
-  upgradeName: Launcher Level 10
+  upgradeName: Rocket Launcher 10
+  upgradeDescription: Greatly increased damage and blast size
   rof: 0
   damage: 100
-  projectiles: 1
+  projectiles: 2
   knockback: 50
   lifespan: 0
   aoe: 25

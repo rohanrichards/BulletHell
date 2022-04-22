@@ -38,8 +38,9 @@ public class Launcher : WeaponBase
             float rotationOffset = (arcSegment / 2) + (arcSegment * i);
             float offset = (offsetSegment / 2) + (offsetSegment * i);
             Vector3 originOffset = playerBody.transform.up + (playerBody.transform.right * ((offsetWidth / 2) - offset));
+            Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Vector3 rotation = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), bulletConfig, this);
+            BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
         }
         yield return new WaitForSeconds(1 / RateOfFire);
         StartCoroutine(Fire());

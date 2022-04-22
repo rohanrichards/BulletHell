@@ -23,17 +23,17 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         //set up the player
-        ItemBase startingItem = (ItemBase)player.GetComponent<DiscGun>();
+/*        ItemBase startingItem = (ItemBase)player.GetComponent<BeamLaser>();
         startingItem.Unlock();
-        startingItem.IncreaseLevel();
-        StartCoroutine(SetWinGameTimer());
+        startingItem.IncreaseLevel();*/
+        //StartCoroutine(SetWinGameTimer());
     }
 
     IEnumerator SetWinGameTimer()
     {
         yield return new WaitForSeconds(GameLengthInSeconds);
 
-        EndGame(true);
+        //EndGame(true);
     }
 
     public void EndGame(bool win)

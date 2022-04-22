@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc5ddfaaad574541a8fddd094b33be7, type: 3}
   m_Name: Laser 2
   m_EditorClassIdentifier: 
-  rarity: 5
-  upgradeName: Laser Level 2
+  upgradeName: Pulse Laser 2
+  upgradeDescription: Increased damage and ROF
   rof: 50
   damage: 100
   projectiles: 0

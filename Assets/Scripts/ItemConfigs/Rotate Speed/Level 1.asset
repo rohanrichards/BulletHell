@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d90f4b2e694b8439dfb30a413139b0, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  upgradeName: Turn Speed 1
+  upgradeName: Turn Speed
+  upgradeDescription: +12% increased turn speed
   health: 0
   movement: 0
-  rotation: 20
+  rotation: 12
   xp: 0

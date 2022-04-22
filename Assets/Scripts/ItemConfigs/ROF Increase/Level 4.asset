@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d17ab08e75e614b98c8aa17cad4afa, type: 3}
   m_Name: Level 4
   m_EditorClassIdentifier: 
-  rarity: 3
   upgradeName: RoF Increase 4
+  upgradeDescription: +20% global RoF
   rof: 20
   projectileCount: 0
   projectilePierce: 0

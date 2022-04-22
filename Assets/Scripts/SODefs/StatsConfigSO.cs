@@ -13,9 +13,9 @@ public class StatsConfigSO : ScriptableObject
     public int baseHealth;
     public int currentHealth;
     public float healthPercentBonus;
-    public float MaxHealth
+    public int MaxHealth
     {
-        get { return baseHealth + baseHealth * (healthPercentBonus / 100); }
+        get { return Mathf.RoundToInt(baseHealth + baseHealth * (healthPercentBonus / 100)); }
     }
     public float moveSpeed;
     public float moveSpeedPercentBonus;

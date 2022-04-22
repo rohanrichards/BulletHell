@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc5ddfaaad574541a8fddd094b33be7, type: 3}
   m_Name: Shotgun 1
   m_EditorClassIdentifier: 
-  rarity: 5
-  upgradeName: Shotgun Level 1
+  upgradeName: Shotgun
+  upgradeDescription: Fires a tight cluster of pellets
   rof: 0
   damage: 0
   projectiles: 0
   knockback: 0
   lifespan: 0
+  aoe: 0

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc5ddfaaad574541a8fddd094b33be7, type: 3}
   m_Name: Shotgun 10
   m_EditorClassIdentifier: 
-  rarity: 5
-  upgradeName: Shotgun Level 10
+  upgradeName: Shotgun 10
+  upgradeDescription: +7 pellets, greatly increased damage and lifespan
   rof: 20
   damage: 200
   projectiles: 7
   knockback: 10
   lifespan: 50
+  aoe: 0

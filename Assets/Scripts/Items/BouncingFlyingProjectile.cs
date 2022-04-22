@@ -42,25 +42,19 @@ public class BouncingFlyingProjectile : BulletBase
     {
         if(collision.gameObject.tag == "Shootable" || collision.gameObject.tag == "Terrain")
         {
-            Debug.Log("bouncing");
             // shoot a ray out in the direction of the collider
             Ray ray = new Ray(rb.transform.position, rb.transform.position - collision.gameObject.transform.position);
             RaycastHit hit;
             Physics.Raycast(ray, out hit);
-            Debug.DrawLine(ray.origin, hit.point, Color.red);
             Vector3 reflection = Vector3.Reflect(ray.direction, hit.normal);
             rb.velocity = reflection.normalized * config.baseSpeed;
 
             if(collision.gameObject.tag == "Shootable")
             {
-                GenericEnemy controller = collision.gameObject.GetComponentInParent<GenericEnemy>();
+                IShootable controller = collision.gameObject.GetComponentInParent<IShootable>();
                 Rigidbody2D targetBody = collision.gameObject.GetComponentInChildren<Rigidbody2D>();
                 targetBody.AddForce(-ray.direction.normalized * config.baseSpeed * parentWeapon.KnockBackForce * targetBody.mass * Time.fixedDeltaTime);
-
-                if (controller && controller.currentHealth > 0)
-                {
-                    controller.ApplyDamage(Damage);
-                }
+                controller.ApplyDamage(Damage);
             }
         }
     }

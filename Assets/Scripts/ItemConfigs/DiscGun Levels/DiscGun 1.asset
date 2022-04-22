@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc5ddfaaad574541a8fddd094b33be7, type: 3}
   m_Name: DiscGun 1
   m_EditorClassIdentifier: 
-  upgradeName: Disc Gun  Level 1
+  upgradeName: Disc Gun
+  upgradeDescription: Bouncy discs of doom
   rof: 0
   damage: 0
   projectiles: 0

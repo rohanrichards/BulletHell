@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class PickupBase : MonoBehaviour
 {
+    protected Rigidbody2D playerBody;
+    protected StatsController statsController;
     public static GameObject Create(GameObject prefab, Transform origin)
     {
         // create our bullet instance
@@ -15,5 +17,12 @@ public abstract class PickupBase : MonoBehaviour
         return pickupInstance;
     }
 
-    public abstract void Pickup(StatsController statsController);
+    public virtual void Start()
+    {
+        playerBody = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Rigidbody2D>();
+        statsController = GameObject.FindGameObjectWithTag("Player").GetComponent<StatsController>();
+    }
+
+    public virtual void Pickup() { }
+
 }

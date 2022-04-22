@@ -8,6 +8,9 @@ public class MonolithController : MonoBehaviour
     public List<SpriteRenderer> runes;
     public Light2D[] lights;
     public float lerpSpeed;
+    private CircleCollider2D boomCollider;
+    private ParticleSystem particles;
+    private Animation animationController;
 
     private Color curColor;
     private Color targetColor;
@@ -23,7 +26,9 @@ public class MonolithController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        boomCollider = transform.Find("BOOMCollider").gameObject.GetComponentInChildren<CircleCollider2D>(true);
+        particles = GetComponentInChildren<ParticleSystem>();
+        animationController = GetComponent<Animation>();
     }
 
     // Update is called once per frame
@@ -48,7 +53,7 @@ public class MonolithController : MonoBehaviour
 
             if(currentCharge >= 0.9)
             {
-                DoTheBoom();
+                StartCoroutine(DoTheBoom());                
             }
         }
     }
@@ -69,9 +74,11 @@ public class MonolithController : MonoBehaviour
         targetCharge = 0;
     }
 
-    void DoTheBoom()
+    IEnumerator DoTheBoom()
     {
-        Debug.Log("BOOM!!!");
+        boomCollider.enabled = true;
+        particles.Play();
+        animationController.Play();
 
         isBroken = true;
         curColor = new Color(0, 0, 0, 0);
@@ -88,11 +95,9 @@ public class MonolithController : MonoBehaviour
             l.color = currentLightColor;
         }
 
-        EnemyBase[] enemies = GameObject.FindObjectsOfType<EnemyBase>();
-        foreach (EnemyBase enemy in enemies)
-        {
-            enemy.ApplyDamage(100);
-        }
+        yield return new WaitForSeconds(2);
+        particles.Stop();
+        boomCollider.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

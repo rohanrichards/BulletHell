@@ -17,8 +17,8 @@ public class PlayerPickupColliderController : MonoBehaviour
     {
         if (other.gameObject.tag == "Pickups")
         {
-            PickupBase pickupController = (PickupBase)other.gameObject.GetComponent<PickupBase>();
-            pickupController.Pickup(controller);
+            PickupBase pickupController = other.gameObject.GetComponent<PickupBase>();
+            pickupController.Pickup();
         }
     }
 }

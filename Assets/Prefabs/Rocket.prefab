@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7607358638526295837}
   - component: {fileID: 1705407065215137340}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5910245366440310826}
   - component: {fileID: 8545139390997750488}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: LightSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}

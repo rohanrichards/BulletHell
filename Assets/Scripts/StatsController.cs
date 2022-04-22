@@ -3,6 +3,8 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class StatsController : MonoBehaviour
 {
@@ -12,8 +14,11 @@ public class StatsController : MonoBehaviour
     //availableUpgrades should only ever contain upgrades for weapons we have
     private LevelUpUIController levelUpUIController;
     public List<UpgradeSO> availableUpgrades = new List<UpgradeSO>();
+    private ParticleSystem damageNotifier;
+    private Animation damageFlashLight;
     DifficultyManager difficultyManager;
     GameManager gameManager;
+    Rigidbody2D playerBody;
 
     public float MoveSpeed
     {
@@ -35,6 +40,9 @@ public class StatsController : MonoBehaviour
         levelUpUIController = GameObject.Find("LevelUpPanel").GetComponent<LevelUpUIController>();
         difficultyManager = GameObject.FindObjectOfType<DifficultyManager>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        damageNotifier = GetComponentInChildren<ParticleSystem>();
+        damageFlashLight = GetComponentInChildren<Animation>();
+        playerBody = GetComponentInChildren<Rigidbody2D>();
     }
 
     private void Update()
@@ -53,7 +61,6 @@ public class StatsController : MonoBehaviour
 
     void CheckForLevelUp()
     {
-        Debug.Log("Current XP: " + CurrentXP + " Next Level: " + statsConfig.nextLevelXP);
         if(CurrentXP >= statsConfig.nextLevelXP)
         {
             LevelUp();
@@ -62,9 +69,9 @@ public class StatsController : MonoBehaviour
 
     void LevelUp()
     {
-        int baseLevelRequirement = 150;
+        int baseLevelRequirement = 400;
         int newPreviousLevel = statsConfig.nextLevelXP;
-        int formulaResult = Mathf.RoundToInt(1.2f * Mathf.Pow(statsConfig.currentLevel, 3));
+        int formulaResult = Mathf.RoundToInt(0.3f * Mathf.Pow(statsConfig.currentLevel, 3));
         Debug.Log("Level increase formula result: " + formulaResult);
         statsConfig.nextLevelXP += baseLevelRequirement + formulaResult;
         statsConfig.previousLevelXP = newPreviousLevel;
@@ -75,11 +82,25 @@ public class StatsController : MonoBehaviour
     }
     
     // used to apply damage to the health of the attached game object
-    public void ApplyDamage(int damage)
+    public void ApplyDamage(int damage, EnemyBase source)
     {
-        statsConfig.currentHealth -= damage;
-        Debug.Log("Player hit: " + statsConfig.currentHealth);
+        //statsConfig.currentHealth -= damage;
         CheckIfDead();
+        PlayDamageNotifier(source);
+    }
+
+    public void ApplyHealth(int health)
+    {
+        statsConfig.currentHealth += health;
+        if (statsConfig.currentHealth > statsConfig.MaxHealth) statsConfig.currentHealth = statsConfig.MaxHealth;
+    }
+
+    public void PlayDamageNotifier(EnemyBase source)
+    {
+        damageNotifier.transform.LookAt(source.rb.transform, transform.up);
+        damageNotifier.transform.Rotate(new Vector3(0, -90, 0));
+        damageNotifier.Play();
+        damageFlashLight.Play();
     }
 
     void CheckIfDead()
@@ -108,8 +129,35 @@ public class StatsController : MonoBehaviour
             string text = File.ReadAllText(path);
             StatsConfigSO loadedStats = Instantiate<StatsConfigSO>(statsConfig);
             JsonUtility.FromJsonOverwrite(text, loadedStats);
-            Debug.Log(loadedStats);
             statsConfig = loadedStats;
         }
+    }
+
+    public List<ItemBase> GenerateUpgradeList()
+    {
+        System.Random rng = new System.Random();
+        // filter out any that don't have levels available
+        List<ItemBase> filtered = MakeWeightedList(GetComponents<ItemBase>().ToList()).Where(item => item.levelUpgrades.Length > item.level).ToList();
+        // shuffle them
+        List<ItemBase> shuffled = filtered.OrderBy(item => rng.Next()).Distinct().ToList();
+        return shuffled;
+    }
+
+    private List<ItemBase> MakeWeightedList(List<ItemBase> items)
+    {
+        List<ItemBase> weighted = new List<ItemBase>();
+        foreach (ItemBase item in items)
+        {
+            for (int i = 0; i < item.rarity; i++)
+            {
+                weighted.Add(item);
+                if (item.isUnlocked)
+                {
+                    //unlocked items are twice as likely to appear
+                    weighted.Add(item);
+                }
+            }
+        }
+        return weighted;
     }
 }

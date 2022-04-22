@@ -49,15 +49,11 @@ public class ExplodingFlyingProjectile : BulletBase
             {
                 // push them away from the explosion center
                 Rigidbody2D collisionBody = collision.gameObject.GetComponentInChildren<Rigidbody2D>();
-                GenericEnemy controller = collision.gameObject.GetComponentInParent<GenericEnemy>();
+                IShootable controller = collision.gameObject.GetComponentInParent<IShootable>();
                 Vector2 dir = (collisionBody.transform.position - rb.transform.position);
                 float wearoff = 1 - (dir.magnitude / explosionRadius);
                 collisionBody.AddForce(dir.normalized * explosionForce * collisionBody.mass * wearoff);
-
-                if (controller && controller.currentHealth > 0)
-                {
-                    controller.ApplyDamage(Damage);
-                }
+                controller.ApplyDamage(Damage);
             }
         }
         Instantiate(explosionPrefab, transform.position, transform.rotation);

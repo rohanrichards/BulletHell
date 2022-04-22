@@ -6,6 +6,7 @@ public class PickupGenerator : MonoBehaviour
 {
     public GameObject XPOrbPrefab;
     public GameObject chestPrefab;
+    public GameObject repairPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,33 +21,41 @@ public class PickupGenerator : MonoBehaviour
 
     public void CreateXPOrb(Transform location, int value)
     {
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.SetLayerMask(LayerMask.GetMask("Pickups"));
-        filter.useTriggers = true;
-        List<Collider2D> hits = new List<Collider2D>();
-        Physics2D.OverlapCircle(location.position, 0.1f, filter, hits);
-        bool placed = false;
-        if (hits.Count > 0)
-        {
-            foreach(Collider2D hit in hits)
-            {
-                if(hit.gameObject.GetComponent<XPOrbController>())
+        /*        ContactFilter2D filter = new ContactFilter2D();
+                filter.SetLayerMask(LayerMask.GetMask("Pickups"));
+                filter.useTriggers = true;
+                List<Collider2D> hits = new List<Collider2D>();
+                Physics2D.OverlapCircle(location.position, 1f, filter, hits);
+                bool placed = false;
+                if (hits.Count > 0)
                 {
-                    placed = true;
-                    hit.gameObject.GetComponent<XPOrbController>().value += value;
-                    break;
+                    foreach(Collider2D hit in hits)
+                    {
+                        if(hit.gameObject.GetComponent<XPOrbController>())
+                        {
+                            placed = true;
+                            hit.gameObject.GetComponent<XPOrbController>().value += value;
+                            break;
+                        }
+                    }
                 }
-            }
-        }
-        if(!placed)
-        {
-            GameObject newPickup = PickupBase.Create(XPOrbPrefab, location);
-            newPickup.GetComponent<XPOrbController>().value = value;
-        }
+                if(!placed)
+                {
+                    //GameObject newPickup = PickupBase.Create(XPOrbPrefab, location);
+                    //newPickup.GetComponent<XPOrbController>().value = value;
+                }*/
+
+        GameObject newPickup = PickupBase.Create(XPOrbPrefab, location);
+        newPickup.GetComponent<XPOrbController>().value = value;
     }
 
     public void CreateChest(Transform location)
     {
         GameObject newPickup = PickupBase.Create(chestPrefab, location);
+    }
+
+    public void CreateRepairItem(Transform location)
+    {
+        GameObject newPickup = PickupBase.Create(repairPrefab, location);
     }
 }

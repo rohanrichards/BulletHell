@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Enemy Master
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 2
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 75
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: c5e212624d408b844be88e2f35d1e903, type: 3}
+    - {fileID: 2800000, guid: 9fc8e78b5b4302744b368cb6d917209c, type: 3}
+    - {fileID: 2800000, guid: 75e0c92b5de4a3141980dbbbb691871c, type: 3}
+    - {fileID: 2800000, guid: 0f6afe0aba398ef4ab94a867b234477c, type: 3}
+    - {fileID: 2800000, guid: 2712b30db89935f409dd343780aa81c8, type: 3}
+    - {fileID: 2800000, guid: 8f99fffd7df7d3c4a873f33749a747c3, type: 3}
+    - {fileID: 2800000, guid: 5c69325adf22e98498d052598bf56ab3, type: 3}
+    - {fileID: 2800000, guid: a3a9067b1b2988a43b7b6cb76e6cfe9b, type: 3}
+    - {fileID: 2800000, guid: e9eac63a8f604c64eb8bb8bed54ce3a3, type: 3}
+    - {fileID: 2800000, guid: 7b69384deab71a647b9ed12cffdf491e, type: 3}
+    - {fileID: 2800000, guid: 34cb68567740aeb41a535478dd4f2a5d, type: 3}
+    - {fileID: 2800000, guid: c017b89953e6b9a448e41d09dc87c7b1, type: 3}
+    - {fileID: 2800000, guid: 0c9d8c6bce81a3b43a99b74710310279, type: 3}
+    - {fileID: 2800000, guid: 1823f095b754d544daddd81b2a637678, type: 3}
+    - {fileID: 2800000, guid: aa00bde302fc35a428b8b2865b932947, type: 3}
+    - {fileID: 2800000, guid: b89948fcdbdf47b45bc45cf8c39544e2, type: 3}
+    - {fileID: 2800000, guid: 641b076e0aabf0e47bd9894cb256a3b7, type: 3}
+    - {fileID: 2800000, guid: 689eec09eef240c4d8987007be869599, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: c5e212624d408b844be88e2f35d1e903, type: 3}
+  - {fileID: 21300000, guid: aa00bde302fc35a428b8b2865b932947, type: 3}
+  - {fileID: 21300000, guid: 1823f095b754d544daddd81b2a637678, type: 3}
+  - {fileID: 21300000, guid: 34cb68567740aeb41a535478dd4f2a5d, type: 3}
+  - {fileID: 21300000, guid: 689eec09eef240c4d8987007be869599, type: 3}
+  - {fileID: 21300000, guid: c017b89953e6b9a448e41d09dc87c7b1, type: 3}
+  - {fileID: 21300000, guid: 0f6afe0aba398ef4ab94a867b234477c, type: 3}
+  - {fileID: 21300000, guid: e9eac63a8f604c64eb8bb8bed54ce3a3, type: 3}
+  - {fileID: 21300000, guid: 5c69325adf22e98498d052598bf56ab3, type: 3}
+  - {fileID: 21300000, guid: 75e0c92b5de4a3141980dbbbb691871c, type: 3}
+  - {fileID: 21300000, guid: 0c9d8c6bce81a3b43a99b74710310279, type: 3}
+  - {fileID: 21300000, guid: a3a9067b1b2988a43b7b6cb76e6cfe9b, type: 3}
+  - {fileID: 21300000, guid: 9fc8e78b5b4302744b368cb6d917209c, type: 3}
+  - {fileID: 21300000, guid: b89948fcdbdf47b45bc45cf8c39544e2, type: 3}
+  - {fileID: 21300000, guid: 2712b30db89935f409dd343780aa81c8, type: 3}
+  - {fileID: 21300000, guid: 7b69384deab71a647b9ed12cffdf491e, type: 3}
+  - {fileID: 21300000, guid: 8f99fffd7df7d3c4a873f33749a747c3, type: 3}
+  - {fileID: 21300000, guid: 641b076e0aabf0e47bd9894cb256a3b7, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - AlienSpider3
+  - Alien8
+  - Alien8-2
+  - Alien6
+  - AlienSpider2
+  - Alien7-2
+  - Alien2
+  - Alien5-2
+  - Alien4-2
+  - Alien2-2
+  - Alien7
+  - Alien4
+  - Alien1
+  - Alien9
+  - Alien3-2
+  - Alien6-2
+  - Alien3
+  - AlienSpider1
+  m_RenderDataMap: {}
+  m_Tag: Enemy Master
+  m_IsVariant: 0

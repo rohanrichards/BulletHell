@@ -4,23 +4,46 @@ using UnityEngine;
 
 public class XPOrbController : PickupBase
 {
+    public int speed = 100;
     public int value;
+    private bool collecting = false;
+    private float ticks = 1;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        
+        base.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (collecting)
+        {
+            if (Vector3.Distance(playerBody.transform.position, transform.position) < 1)
+            {
+                statsController.ApplyXP(value);
+                KillSelf();
+            }
+            else
+            {
+                float step = speed * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, playerBody.transform.position, step);
+            }
+        }
     }
 
-    public override void Pickup(StatsController statsController)
+    private void FixedUpdate()
     {
-        statsController.ApplyXP(value);
-        KillSelf();
+
+
+    }
+
+    public override void Pickup()
+    {
+        if (!collecting)
+        {
+            collecting = true;
+        }
     }
     protected void KillSelf()
     {

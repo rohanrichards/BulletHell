@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Discharger 9
   m_EditorClassIdentifier: 
   upgradeName: Discharger Level 9
+  upgradeDescription: +1 orb
   rof: 0
-  damage: 10
+  damage: 15
   projectiles: 1
   knockback: 0
   lifespan: 10

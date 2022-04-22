@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d90f4b2e694b8439dfb30a413139b0, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  rarity: 5
-  upgradeName: Bonus XP Level 1
+  upgradeName: Bonus XP
+  upgradeDescription: +10% XP gained
   health: 0
   movement: 0
   rotation: 0

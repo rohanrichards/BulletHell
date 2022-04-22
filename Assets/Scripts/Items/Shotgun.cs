@@ -38,8 +38,9 @@ public class Shotgun : WeaponBase
             float rotationOffset = (arcSegment / 2) + (arcSegment * i);
             Vector3 originOffset = new Vector3(circleposition.x, circleposition.y, 0);
             Vector3 rotationOrigin = playerBody.transform.rotation.eulerAngles;
+            Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Vector3 rotation = rotationOrigin + new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), bulletConfig, this);
+            BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
         }
         yield return new WaitForSeconds(1 / RateOfFire);
         StartCoroutine(Fire());

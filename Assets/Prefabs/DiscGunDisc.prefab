@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7607358638526295837}
   - component: {fileID: 1705407065215137340}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 6948461109263591343}
   - component: {fileID: 4370005677885482577}
   - component: {fileID: 5731907757744139645}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Particles (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4985,7 +4985,7 @@ GameObject:
   - component: {fileID: 1727932516027623626}
   - component: {fileID: 8930547875636527113}
   - component: {fileID: 2404900966102087952}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

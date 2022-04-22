@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc5ddfaaad574541a8fddd094b33be7, type: 3}
   m_Name: Discharger 2
   m_EditorClassIdentifier: 
-  upgradeName: Discharger Level 2
+  upgradeName: Discharger 2
+  upgradeDescription: Increased damage and size
   rof: 0
-  damage: 10
+  damage: 50
   projectiles: 0
   knockback: 0
   lifespan: 10

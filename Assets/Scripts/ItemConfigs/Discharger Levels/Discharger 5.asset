@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Discharger 5
   m_EditorClassIdentifier: 
   upgradeName: Discharger Level 5
+  upgradeDescription: Increased damage size and lifespan
   rof: 0
   damage: 10
   projectiles: 0

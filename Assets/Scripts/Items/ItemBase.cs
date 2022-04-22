@@ -32,7 +32,6 @@ public abstract class ItemBase : MonoBehaviour
     }
     public virtual void Unlock()
     {
-        Debug.Log("Unlocking");
         isUnlocked = true;
     }
 }

@@ -43,7 +43,6 @@ public class EndGameUIController : MonoBehaviour
 
     private void Show()
     {
-        Debug.Log("toggling UI panel");
         visible = true;
         Time.timeScale = 0;
     }

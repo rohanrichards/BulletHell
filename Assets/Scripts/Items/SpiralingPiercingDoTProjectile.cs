@@ -50,12 +50,8 @@ public class SpiralingPiercingDoTProjectile : BulletBase
         {
             if (collision.gameObject.tag == "Shootable")
             {
-                GenericEnemy controller = collision.gameObject.GetComponentInParent<GenericEnemy>();
-
-                if (controller && controller.currentHealth > 0)
-                {
-                    controller.ApplyDamage(Damage);
-                }
+                IShootable controller = collision.gameObject.GetComponentInParent<IShootable>();
+                controller.ApplyDamage(Damage);
             }
         }
         yield return new WaitForSeconds(0.1f);

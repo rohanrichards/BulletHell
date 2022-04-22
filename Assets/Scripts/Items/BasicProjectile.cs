@@ -27,14 +27,12 @@ public class BasicProjectile : BulletBase
     {
         if (collision.gameObject.tag == "Shootable")
         {
-                Rigidbody2D targetBody = collision.gameObject.GetComponentInChildren<Rigidbody2D>();
-                targetBody.AddForce(rb.velocity * parentWeapon.KnockBackForce * targetBody.mass * Time.fixedDeltaTime);
-                GenericEnemy controller = collision.gameObject.GetComponentInParent<GenericEnemy>();
-                if (controller.currentHealth > 0)
-                {
-                    controller.ApplyDamage(Damage);
-                    KillSelf();
-                }
+            Rigidbody2D targetBody = collision.gameObject.GetComponentInChildren<Rigidbody2D>();
+            targetBody.AddForce(rb.velocity * parentWeapon.KnockBackForce * targetBody.mass * Time.fixedDeltaTime);
+
+            IShootable controller = collision.gameObject.GetComponentInParent<IShootable>();
+            controller.ApplyDamage(Damage);
+            KillSelf();
         }else if(collision.gameObject.tag == "Terrain")
         {
             KillSelf();

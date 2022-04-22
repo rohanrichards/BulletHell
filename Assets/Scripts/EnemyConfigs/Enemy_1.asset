@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Enemy_1
   m_EditorClassIdentifier: 
   baseHealth: 2
+  currentHealth: 2
   moveSpeed: 500
   XPValue: 10

@@ -35,7 +35,6 @@ public class PauseGameUIController : MonoBehaviour
 
     public void Toggle()
     {
-        Debug.Log("toggling UI panel");
         if (!visible)
         {
             Show();

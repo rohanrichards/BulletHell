@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class GenericEnemy : EnemyBase
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        rb = GetComponentInChildren<Rigidbody2D>();
-        currentHealth = config.baseHealth;
-        //find a target, usually the player at this stage
-        GetTarget();
+        base.Start();
+    }
+
+    public override void Update()
+    {
+        base.Update();
+        Vector3 targetDirection = targetTransform.transform.position - rb.transform.position;
+        spriteContainer.rotation = Quaternion.LookRotation(Vector3.forward, targetDirection);
     }
 
     public override void GetTarget()
@@ -23,10 +26,6 @@ public class GenericEnemy : EnemyBase
     {
         Vector2 direction = targetTransform.transform.position - rb.transform.position;
         rb.AddForce(direction.normalized * config.moveSpeed * rb.mass * Time.deltaTime);
-
-        Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, direction);
-        targetRotation = Quaternion.RotateTowards(rb.transform.rotation, targetRotation, 360 * Time.fixedDeltaTime);
-        rb.MoveRotation(targetRotation);
     }
 
     public override void StartAttacking()
@@ -41,35 +40,35 @@ public class GenericEnemy : EnemyBase
 
     protected override IEnumerator AttemptAttack()
     {
-        Debug.Log("Attacking Player");
         StatsController playerStatsController = GameObject.FindObjectOfType<StatsController>();
-        playerStatsController.ApplyDamage(1);
-        yield return new WaitForSeconds(0.1f);
+        playerStatsController.ApplyDamage(1, this);
+        yield return new WaitForSeconds(attackRate);
         StartCoroutine(AttemptAttack());
     }
 
     public override void ApplyDamage(float damage)
     {
-        Debug.Log("applying damage: " + damage);
-        Debug.Log("health before: " + currentHealth);
-        currentHealth -= damage;
-        Debug.Log("health after: " + currentHealth);
-        if(currentHealth <= 0)
-        {
-            KillSelf();
-        }
+        base.ApplyDamage(damage);
     }
 
     public new void KillSelf()
     {
         //base creates xp orbs
         base.KillSelf();
-        StopAllCoroutines();
-        Destroy(gameObject);
     }
 
     public override float GetLikelihoodWeight(float time)
     {
         return likelihood.Evaluate(time);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+/*        Vector2 direction = rb.transform.position - collision.transform.position;
+        //Rigidbody2D targetBody = collision.gameObject.GetComponent<Rigidbody2D>();
+        float len = direction.magnitude;
+        Vector2 normalDir = direction * (1 / len);
+        Vector2 force = normalDir * (1 / len * len);
+        rb.AddForce(force * Time.fixedDeltaTime * .1f);*/
     }
 }

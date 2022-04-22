@@ -10,6 +10,9 @@ public abstract class BulletBase : MonoBehaviour
     protected Rigidbody2D rb;
     protected StatsController statsController;
     protected GameObject player;
+    protected Rigidbody2D playerBody;
+    protected Vector3 originalOffset;
+
 
     public float Damage
     {
@@ -27,11 +30,12 @@ public abstract class BulletBase : MonoBehaviour
         }
     }
 
-    public static GameObject Create(GameObject prefab, Transform origin, Vector3 offset, Quaternion rotation, BulletSO config, WeaponBase weapon)
+    public static GameObject Create(GameObject prefab, Transform origin, Vector3 offset, Quaternion rotation, Vector3 rotationOffset, BulletSO config, WeaponBase weapon)
     {
         // create our bullet instance
         GameObject bulletInstance = Instantiate<GameObject>(prefab, origin.position + offset, rotation);
         BulletBase controller = bulletInstance.GetComponent<BulletBase>();
+        controller.originalOffset = rotationOffset;
         controller.config = config;
         controller.parentWeapon = weapon;
         controller.rb = bulletInstance.GetComponent<Rigidbody2D>();
@@ -45,6 +49,7 @@ public abstract class BulletBase : MonoBehaviour
     protected virtual void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerBody = player.GetComponentInChildren<Rigidbody2D>();
         statsController = player.GetComponent<StatsController>();
     }
 

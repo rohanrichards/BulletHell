@@ -80,8 +80,6 @@ public abstract class WeaponBase : ItemBase
         base.IncreaseLevel();
         WeaponUpgradeSO levelUpgrade = (WeaponUpgradeSO)levelUpgrades[level - 1];
         levelUpgrade.ApplyUpgrade(this);
-        StopFiring();
-        StartFiring();
     }
 
     public void StartFiring()

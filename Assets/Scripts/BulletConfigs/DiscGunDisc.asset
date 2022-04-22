@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b5ca5fd2d4a2c4cb6773d0cb74c901, type: 3}
   m_Name: DiscGunDisc
   m_EditorClassIdentifier: 
-  baseDamage: 1
+  baseDamage: 1.5
   damageFlatBonus: 0
   damagePercentBonus: 0
   baseSpeed: 23

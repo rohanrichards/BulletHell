@@ -10,12 +10,15 @@ public class MapGenerator : MonoBehaviour
     public int renderBounds = 50;
     public int minObstablesPerChunk = 10;
     public int maxObstablesPerChunk = 30;
+    public int minDestroyablesPerChunk = 1;
+    public int maxDestroyablesPerChunk = 3;
     public GameObject obstaclesContainer;
     public int[,] terrainMap;
     public Tilemap tileMap;
     public Tile[] grasses;
     public GameObject[] obstacles;
     public GameObject[] structures;
+    public GameObject[] destroyables;
     public int structureChanceAsPercent = 20;
     Rigidbody2D playerBody;
 
@@ -41,6 +44,7 @@ public class MapGenerator : MonoBehaviour
         tileMap.SetTilesBlock(bounds, tiles);
         PopulateChunkWithObstables(bounds);
         TryToPlaceStructure(bounds);
+        TryToPlaceDestroyables(bounds);
     }
 
     void PopulateChunkWithObstables(BoundsInt bounds)
@@ -56,13 +60,23 @@ public class MapGenerator : MonoBehaviour
 
     void TryToPlaceStructure(BoundsInt bounds)
     {
-        int chance = Random.Range(structureChanceAsPercent, 101);
-        if(chance == 100)
+        float chance = Random.value;
+        if(chance >= structureChanceAsPercent / 100)
         {
             Vector3 location = RandomPointInBounds(bounds);
-            Debug.Log("Spawning Monolith at " + location);
             int index = Random.Range(0, structures.Length);
             GameObject obstacle = Instantiate(structures[index], location, new Quaternion(), obstaclesContainer.transform);
+        }
+    }
+
+    void TryToPlaceDestroyables(BoundsInt bounds)
+    {
+        int count = Random.Range(minDestroyablesPerChunk, maxDestroyablesPerChunk + 1);
+        for (int i = 0; i < count; i++)
+        {
+            Vector3 location = RandomPointInBounds(bounds);
+            int index = Random.Range(0, destroyables.Length);
+            GameObject obstacle = Instantiate(destroyables[index], location, new Quaternion(), obstaclesContainer.transform);
         }
     }
 
@@ -98,13 +112,10 @@ public class MapGenerator : MonoBehaviour
 
         foreach(Vector3 corner in corners)
         {
-            //Debug.Log("Checking corner at " + corner);
             if (!tileMap.HasTile(Vector3Int.FloorToInt(corner)))
             {
                 Vector3Int chunkCoordinate = GetChunkCoordinate(corner);
-                Debug.Log("rendering chunk at: " + chunkCoordinate);
                 RenderChunkAt(chunkCoordinate);
-                //break;
             }
         }
     }

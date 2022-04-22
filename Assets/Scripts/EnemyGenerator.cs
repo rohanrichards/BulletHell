@@ -50,11 +50,11 @@ public class EnemyGenerator : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        StartCoroutine(SpawnEnemies());
-        StartCoroutine(CheckForOutOfRange());
+        /*StartCoroutine(SpawnEnemies());
+        StartCoroutine(CheckForOutOfRange());*/
 
-        //GenerateTestEnemies();
-        //SpawnCluster(new Vector2(10, 10), false);
+        GenerateTestEnemies();
+        /*SpawnCluster(new Vector2(10, 10), false);*/
     }
 
     void GenerateTestEnemies()
@@ -63,19 +63,19 @@ public class EnemyGenerator : MonoBehaviour
         int height = 50;
         int padding = 2;
 
-        for(int x = 0; x<width; x+= padding)
+        for(int x = 0; x<width; x++)
         {
-            for (int y = 0; y < height; y+= padding)
+            for (int y = 0; y < height; y++)
             {
-                Vector2 location = new Vector2(x, y);
-                SpawnEnemy(location, availableEnemies[0]);
+                Vector2 location = new Vector2(x + x*padding, y + y*padding);
+                SpawnEnemy(location, availableEnemies[3]);
             }
         }
     }
 
     private void LateUpdate()
     {
-        totalEnemies = GameObject.FindObjectsOfType<EnemyBase>().Length;
+        //totalEnemies = GameObject.FindObjectsOfType<EnemyBase>().Length;
     }
 
     IEnumerator SpawnEnemies(int clusterOverride = 0)
@@ -118,7 +118,7 @@ public class EnemyGenerator : MonoBehaviour
     {
         int retry = 0;
         GameObject enemyPrefab = PickEnemyForCluster();
-        float weight = enemyPrefab.GetComponent<GenericEnemy>().GetLikelihoodWeight(difficultyManager.GetDifficultyMod());
+        float weight = enemyPrefab.GetComponent<EnemyBase>().GetLikelihoodWeight(difficultyManager.GetDifficultyMod());
         int enemyCount;
         int spawnCircle;
 
@@ -137,13 +137,13 @@ public class EnemyGenerator : MonoBehaviour
             {
                 spawnCircle += retry/3;
                 Vector2 spawnLocation = location + RandomPointInsideCircle(spawnCircle);
-                float checkRadius = enemyPrefab.GetComponentInChildren<CircleCollider2D>().radius; 
+                float checkRadius = enemyPrefab.GetComponentInChildren<CircleCollider2D>().radius * enemyPrefab.transform.localScale.x; 
                 Collider2D[] matches = Physics2D.OverlapCircleAll(spawnLocation, checkRadius);
 
                 if (matches.Length > 0)
                 {
-                    //Debug.DrawLine(new Vector2(spawnLocation.x - checkRadius, spawnLocation.y - checkRadius), new Vector2(spawnLocation.x + checkRadius, spawnLocation.y + checkRadius), Color.red, 10000);
-                    //Debug.Log("Something at this location already (retry " + retry + ")");
+                   /* Debug.DrawLine(new Vector2(spawnLocation.x - checkRadius, spawnLocation.y - checkRadius), new Vector2(spawnLocation.x + checkRadius, spawnLocation.y + checkRadius), Color.red, 10000);
+                    Debug.Log("Something at this location already (retry " + retry + ")");*/
                     retry++;
                     continue;
                 }
@@ -170,7 +170,7 @@ public class EnemyGenerator : MonoBehaviour
         AnimationCurve curve = new AnimationCurve();
         for(int i = 0; i < totalEnemies; i++)
         {
-            float weight = availableEnemies[i].GetComponent<GenericEnemy>().GetLikelihoodWeight(difficultyManager.GetDifficultyMod());
+            float weight = availableEnemies[i].GetComponent<EnemyBase>().GetLikelihoodWeight(difficultyManager.GetDifficultyMod());
             if(weight > 0)
             {
                 selectedEnemies.Add(availableEnemies[i]);
@@ -180,7 +180,7 @@ public class EnemyGenerator : MonoBehaviour
         totalEnemies = selectedEnemies.Count;
         for (int i = 0; i < totalEnemies; i++)
         {
-            float weight = selectedEnemies[i].GetComponent<GenericEnemy>().GetLikelihoodWeight(difficultyManager.GetDifficultyMod());
+            float weight = selectedEnemies[i].GetComponent<EnemyBase>().GetLikelihoodWeight(difficultyManager.GetDifficultyMod());
             Keyframe key = new Keyframe((i + 1) / totalEnemies, (i + 1) / totalEnemies);
             key.weightedMode = WeightedMode.Both;
             key.inWeight = weight;
@@ -194,7 +194,7 @@ public class EnemyGenerator : MonoBehaviour
         float point = curve.Evaluate(UnityEngine.Random.value);
         int index = Mathf.RoundToInt(point * (selectedEnemies.Count-1));
         string log = FormattableString.Invariant($"point: {point}, selectedEnemies: {selectedEnemies.Count}, index: {index}");
-        Debug.Log(log);
+        //Debug.Log(log);
         return selectedEnemies[index];
     }
 
@@ -209,16 +209,18 @@ public class EnemyGenerator : MonoBehaviour
         }
         newEnemy.transform.localScale = newEnemy.transform.localScale * 2;
         EnemyBase controller = newEnemy.GetComponent<EnemyBase>();
+        Rigidbody2D body = newEnemy.GetComponentInChildren<Rigidbody2D>();
         controller.isSuper = true;
         controller.config.XPValue *= 10;
         controller.config.baseHealth += controller.config.baseHealth * 10;
-        controller.config.moveSpeed *= 2;
+        controller.config.currentHealth = controller.config.baseHealth;
+        controller.config.moveSpeed *= 2f;
+        body.mass *= 2;
     }
 
     void SpawnEnemy(Vector2 location, GameObject prefab)
     {
         GameObject newEnemy = EnemyBase.Create(prefab, location, enemyContainer.transform);
-        Rigidbody2D body = newEnemy.GetComponentInChildren<Rigidbody2D>();
         totalEnemies++;
     }
 
@@ -232,14 +234,21 @@ public class EnemyGenerator : MonoBehaviour
             Vector3 distance = rb.transform.position - playerBody.transform.position;
             if(distance.magnitude > despawnRadius)
             {
-                Destroy(enemy.gameObject);
-                despawned++;
+                if (enemy.isSuper)
+                {
+                    Destroy(enemy.gameObject);
+                    despawned += 10;
+                }
+                else
+                {
+                    EnemyBase.SendToPool(enemy.gameObject);
+                    despawned++;
+                }
             }
         }
         int clustersToSpawn = Mathf.CeilToInt(despawned / ClusterSize);
         if(clustersToSpawn > 0)
         {
-            Debug.Log("enemies to spawn: " + clustersToSpawn);
             StartCoroutine(SpawnEnemies(clustersToSpawn));
         }
         yield return new WaitForSeconds(1); 

@@ -39,7 +39,8 @@ public class DiscGun : WeaponBase
             float offset = (offsetSegment / 2) + (offsetSegment * i);
             Vector3 originOffset = playerBody.transform.up + (playerBody.transform.right * ((offsetWidth / 2) - offset));
             Vector3 rotation = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), bulletConfig, this);
+            Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
+            BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
         }
         yield return new WaitForSeconds(1 / RateOfFire);
         StartCoroutine(Fire());

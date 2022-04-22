@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,11 +10,13 @@ public class LevelUpUIController : MonoBehaviour
     private CanvasGroup group;
     public GameObject choicePrefab;
     private GameObject player;
+    private StatsController statsController;
     public GameObject buttonContainer;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        statsController = player.GetComponent<StatsController>();
         group = gameObject.GetComponent<CanvasGroup>();
     }
 
@@ -37,7 +38,6 @@ public class LevelUpUIController : MonoBehaviour
 
     public void Show()
     {
-        Debug.Log("toggling UI panel");
         if (visible) ClearUpgrades(); //already visible so just reroll upgrades
         visible = true;
         Time.timeScale = 0;
@@ -52,12 +52,7 @@ public class LevelUpUIController : MonoBehaviour
 
     private void SelectUpgrades()
     {
-        System.Random rng = new System.Random();
-        // filter out any that don't have levels available
-        List<ItemBase> filtered = MakeWeightedList(player.GetComponents<ItemBase>().ToList()).Where(item => item.levelUpgrades.Length > item.level).ToList();
-        // shuffle them
-        List<ItemBase> shuffled = filtered.OrderBy(item => rng.Next()).Distinct().ToList();
-
+        List<ItemBase> shuffled = statsController.GenerateUpgradeList();
 
         if (shuffled.Count == 0)
         {
@@ -72,28 +67,12 @@ public class LevelUpUIController : MonoBehaviour
             ItemBase item = shuffled[i];
             GameObject choiceButton = Instantiate<GameObject>(choicePrefab, buttonContainer.transform);
             UpgradeSO nextLevel = item.levelUpgrades[item.level];
-            GameObject nameText = choiceButton.transform.Find("UpgradeName").gameObject;
+            GameObject nameText = choiceButton.transform.Find("Text/UpgradeName").gameObject;
+            GameObject descriptionText = choiceButton.transform.Find("Text/UpgradeDescription").gameObject;
             nameText.GetComponent<TMPro.TextMeshProUGUI>().text = nextLevel.upgradeName;
+            descriptionText.GetComponent<TMPro.TextMeshProUGUI>().text = nextLevel.upgradeDescription;
             choiceButton.GetComponent<Button>().onClick.AddListener(delegate { ApplyUpgrade(item); });
         }
-    }
-
-    private List<ItemBase> MakeWeightedList(List<ItemBase> items)
-    {
-        List<ItemBase> weighted = new List<ItemBase>();
-        foreach (ItemBase item in items)
-        {
-            for (int i = 0; i < item.rarity; i++)
-            {
-                weighted.Add(item);
-                if (item.isUnlocked)
-                {
-                    //unlocked items are twice as likely to appear
-                    weighted.Add(item);
-                }
-            }
-        }
-        return weighted;
     }
 
     public void ClearUpgrades()

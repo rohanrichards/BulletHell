@@ -22,5 +22,5 @@ MonoBehaviour:
   healthPercentBonus: 0
   moveSpeed: 12
   moveSpeedPercentBonus: 0
-  rotateSpeed: 150
+  rotateSpeed: 130
   rotateSpeedPercentBonus: 0

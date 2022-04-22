@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc5ddfaaad574541a8fddd094b33be7, type: 3}
   m_Name: DiscGun 10
   m_EditorClassIdentifier: 
-  upgradeName: Disc Gun  Level 1
+  upgradeName: Disc Gun 10
+  upgradeDescription: +2 discs, greatly increased damage, rof lifespan and knockback
   rof: 25
-  damage: 50
+  damage: 100
   projectiles: 2
-  knockback: 0
+  knockback: 25
   lifespan: 25
   aoe: 0

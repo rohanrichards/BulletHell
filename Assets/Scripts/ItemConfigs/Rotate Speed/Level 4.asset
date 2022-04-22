@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Level 4
   m_EditorClassIdentifier: 
   upgradeName: Turn Speed 4
+  upgradeDescription: +12% increased turn speed
   health: 0
   movement: 0
-  rotation: 20
+  rotation: 12
   xp: 0

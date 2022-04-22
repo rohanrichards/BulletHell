@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d90f4b2e694b8439dfb30a413139b0, type: 3}
   m_Name: Level 5
   m_EditorClassIdentifier: 
-  upgradeName: Movement Level 5
+  upgradeName: Move Speed 5
+  upgradeDescription: +15% move speed
   health: 0
-  movement: 20
+  movement: 15
   rotation: 0
   xp: 0

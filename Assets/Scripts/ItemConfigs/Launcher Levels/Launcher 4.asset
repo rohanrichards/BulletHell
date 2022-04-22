@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc5ddfaaad574541a8fddd094b33be7, type: 3}
   m_Name: Launcher 4
   m_EditorClassIdentifier: 
-  rarity: 4
-  upgradeName: Launcher Level 4
+  upgradeName: Rocket Launcher 4
+  upgradeDescription: Increased damage and blast size
   rof: 0
   damage: 25
   projectiles: 0

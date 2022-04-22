@@ -34,5 +34,6 @@ public abstract class StatUpgradeSO : UpgradeSO
 public abstract class UpgradeSO : ScriptableObject
 {
     public string upgradeName;
+    public string upgradeDescription;
     public abstract void ApplyUpgrade(ItemBase target);
 }

@@ -23,9 +23,9 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         //set up the player
-/*        ItemBase startingItem = (ItemBase)player.GetComponent<BeamLaser>();
+        ItemBase startingItem = (ItemBase)player.GetComponent<Shotgun>();
         startingItem.Unlock();
-        startingItem.IncreaseLevel();*/
+        startingItem.IncreaseLevel();
         //StartCoroutine(SetWinGameTimer());
     }
 

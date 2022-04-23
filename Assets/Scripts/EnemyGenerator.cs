@@ -50,10 +50,10 @@ public class EnemyGenerator : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        /*StartCoroutine(SpawnEnemies());
-        StartCoroutine(CheckForOutOfRange());*/
+        StartCoroutine(SpawnEnemies());
+        StartCoroutine(CheckForOutOfRange());
 
-        GenerateTestEnemies();
+        /*GenerateTestEnemies();*/
         /*SpawnCluster(new Vector2(10, 10), false);*/
     }
 

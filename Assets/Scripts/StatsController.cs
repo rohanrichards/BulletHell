@@ -84,7 +84,7 @@ public class StatsController : MonoBehaviour
     // used to apply damage to the health of the attached game object
     public void ApplyDamage(int damage, EnemyBase source)
     {
-        //statsConfig.currentHealth -= damage;
+        statsConfig.currentHealth -= damage;
         CheckIfDead();
         PlayDamageNotifier(source);
     }

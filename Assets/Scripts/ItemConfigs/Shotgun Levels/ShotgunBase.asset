@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16aee1c7ec8f6a94ab6acdd65a11b48b, type: 3}
   m_Name: ShotgunBase
   m_EditorClassIdentifier: 
-  rof: 0.5
+  rof: 0.45
   rofPercentBonus: 0
   rofFlatBonus: 0
   projectileCount: 8
   projectileCountBonus: 0
-  knockBackForce: 100
+  knockBackForce: 200
   knockBackForcePercentBonus: 0

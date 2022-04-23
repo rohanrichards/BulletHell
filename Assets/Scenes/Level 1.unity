@@ -8946,7 +8946,7 @@ MonoBehaviour:
     type: 3}
   isFiring: 0
   toggleButton: 283
-  arcSize: 10
+  arcSize: 20
   radius: 0.5
 --- !u!114 &2111436348
 MonoBehaviour:

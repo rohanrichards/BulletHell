@@ -60,9 +60,12 @@ public class ECSPlayerController : MonoBehaviour
         mover.moveSpeed = 200;
         mover.direction = movement;
 
-        PlayerRotatorSystem rotator = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<PlayerRotatorSystem>();
-        rotator.direction = movement;
-        rotator.turnSpeed = 0.05f;
+        if(movement != Vector3.zero)
+        {
+            PlayerRotatorSystem rotator = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<PlayerRotatorSystem>();
+            rotator.direction = movement;
+            rotator.turnSpeed = 0.1f;
+        }
     }
 
     private void OnDestroy()

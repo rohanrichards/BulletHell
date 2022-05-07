@@ -59,7 +59,6 @@ public abstract class BulletBase : MonoBehaviour
         Entity bullet = entityManager.Instantiate(prefab);
 
         entityManager.SetComponentData(bullet, new Translation { Value = origin.Position+(float3)offset });
-        
         Rotation rot = new Rotation { Value = rotation };
         entityManager.SetComponentData(bullet, rot);
 

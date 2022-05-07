@@ -26,13 +26,6 @@ public class Launcher : WeaponBase
     protected override void Update()
     {
         base.Update();
-        ExplosionSystem explosionSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystem<ExplosionSystem>();
-        NativeArray<Translation> locations = explosionSystem.locations;
-        for (int i = 0; i < locations.Length; i++)
-        {
-            Translation location = locations[i];
-            Instantiate(bulletDeathPrefab, location.Value, new Quaternion());
-        }
     }
 
     public override void Unlock()
@@ -48,6 +41,7 @@ public class Launcher : WeaponBase
     public override IEnumerator Fire()
     {
         LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
+        Debug.Log(playerLocation.Right);
         float arcSize = 90;
         float arcSegment = arcSize / ProjectileCount;
         float offsetWidth = 0.75f;
@@ -60,7 +54,7 @@ public class Launcher : WeaponBase
             Vector3 originOffset = playerLocation.Up + (playerLocation.Right * ((offsetWidth / 2) - offset));
             Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Vector3 rotation = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
+            BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation) * (Quaternion)playerLocation.Rotation, offsetVector, bulletConfig, this);
         }
         yield return new WaitForSeconds(1 / RateOfFire);
         StartCoroutine(Fire());

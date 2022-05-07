@@ -5,11 +5,6 @@ using Unity.Mathematics;
 
 public partial class BulletMoverSystem : SystemBase
 {
-    public float3 direction;
-    public float moveSpeed;
-    private EntityManager manager;
-    EndSimulationEntityCommandBufferSystem ecbs;
-
     private EntityQuery entityQuery;
     protected override void OnStartRunning()
     {
@@ -19,9 +14,6 @@ public partial class BulletMoverSystem : SystemBase
             ComponentType.ReadWrite<MoveForwardTag>(),
             ComponentType.ReadWrite<LifespanComponent>()
         );
-
-        manager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        ecbs = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
     }
 
     protected override void OnUpdate()
@@ -29,7 +21,7 @@ public partial class BulletMoverSystem : SystemBase
         MoveForwardJob moveJob = new MoveForwardJob { dt = Time.DeltaTime };
         moveJob.Schedule(entityQuery);
 
-        LifespanReducerJob lifeJob = new LifespanReducerJob { dt = Time.DeltaTime, ecb = ecbs.CreateCommandBuffer() };
+        LifespanReducerJob lifeJob = new LifespanReducerJob { dt = Time.DeltaTime };
         lifeJob.Schedule(entityQuery);
     }
 }

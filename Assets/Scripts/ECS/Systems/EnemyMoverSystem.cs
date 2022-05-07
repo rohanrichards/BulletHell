@@ -4,7 +4,7 @@ using Unity.Transforms;
 using Unity.Mathematics;
 using Unity.Collections;
 
-public partial class EnemyMoverSystem : SystemBase
+/*public partial class EnemyMoverSystem : SystemBase
 {
     public float3 target;
     private EntityQuery movingEntityQuery;
@@ -33,4 +33,4 @@ public partial class EnemyMoverSystem : SystemBase
             job.Schedule(movingEntityQuery);
         }
     }
-}
+}*/

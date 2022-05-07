@@ -9,7 +9,6 @@ using UnityEngine;
 partial struct MoveTowardTarget : IJobEntity
 {
     public float dt;
-    public float strength;
     public float3 target;
 
     public void Execute(ref PhysicsVelocity velocity, ref Translation position, in EntityMovementSettings settings)

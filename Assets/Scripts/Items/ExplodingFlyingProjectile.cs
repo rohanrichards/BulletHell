@@ -68,16 +68,16 @@ public class ExplodingFlyingProjectile : BulletBase, IConvertGameObjectToEntity
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        EntityMovementSettings settings = new EntityMovementSettings { moveSpeed = config.baseSpeed };
+/*        EntityMovementSettings settings = new EntityMovementSettings { moveSpeed = config.baseSpeed };
         dstManager.AddComponentData(entity, settings);
 
         LifespanComponent lifespan = new LifespanComponent { Value = config.Lifespan };
         dstManager.AddComponentData(entity, lifespan);
 
-        EntityTypeComponent type = new EntityTypeComponent { Value = 101 };
+        EntityDataComponent type = new EntityDataComponent { Type = EntityTypes.ExplodesOnDeath, Damage = config.Damage, Size = config.AOE };
         dstManager.AddComponentData(entity, type);
 
         dstManager.AddComponent(entity, typeof(MoveForwardTag));
-        dstManager.AddComponent(entity, typeof(BulletTag));
+        dstManager.AddComponent(entity, typeof(BulletTag));*/
     }
 }

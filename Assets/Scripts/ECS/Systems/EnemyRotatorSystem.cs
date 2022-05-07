@@ -4,7 +4,7 @@ using Unity.Physics;
 using Unity.Jobs;
 using Unity.Collections;
 
-public partial class EnemyRotatorSystem : SystemBase
+/*public partial class EnemyRotatorSystem : SystemBase
 {
     public float turnSpeed;
     private EntityQuery playerEntityQuery;
@@ -32,4 +32,4 @@ public partial class EnemyRotatorSystem : SystemBase
             job.Schedule(rotatingEntityQuery);
         }
     }
-}
+}*/

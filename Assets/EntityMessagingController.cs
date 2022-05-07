@@ -14,6 +14,10 @@ public class EntityMessagingController : MonoBehaviour
     EntityManager manager;
     private EntityQuery entityQuery;
 
+    public enum MessageTypes {
+        Death = 100
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,30 +25,36 @@ public class EntityMessagingController : MonoBehaviour
 
         entityQuery = manager.CreateEntityQuery(
             ComponentType.ReadWrite<MessageDataComponent>(),
-            ComponentType.ReadWrite<EntityTypeComponent>()
+            ComponentType.ReadWrite<EntityDataComponent>()
         );
     }
 
     // Update is called once per frame
     void Update()
     {
-        NativeArray<MessageDataComponent> entityData = entityQuery.ToComponentDataArray<MessageDataComponent>(Allocator.Temp);
-        NativeArray<EntityTypeComponent> typeData = entityQuery.ToComponentDataArray<EntityTypeComponent>(Allocator.Temp);
+/*        NativeArray<MessageDataComponent> entityData = entityQuery.ToComponentDataArray<MessageDataComponent>(Allocator.Temp);
+        NativeArray<EntityDataComponent> typeData = entityQuery.ToComponentDataArray<EntityDataComponent>(Allocator.Temp);
         for (int i = 0; i < entityData.Length; i++)
         {
             MessageDataComponent message = entityData[i];
-            EntityTypeComponent type = typeData[i];
+            EntityDataComponent type = typeData[i];
 
-            if(message.type == 100)
+            if(message.type == MessageTypes.Death)
             {
-                //death message
-                Instantiate(bulletDeathPrefab, message.position, message.rotation);
-                Entity exploder = manager.CreateEntity();
-                manager.AddComponent<ExplodeAndDeleteTag>(exploder);
-                manager.AddComponent<Translation>(exploder);
-                manager.SetComponentData<Translation>(exploder, new Translation { Value = message.position });
+                if(type.Type == EntityTypes.ExplodesOnDeath)
+                {
+                    Instantiate(bulletDeathPrefab, message.position, message.rotation);
+                    Entity exploder = manager.CreateEntity();
+                    manager.AddComponent<ExplodeAndDeleteTag>(exploder);
+
+                    manager.AddComponent<EntityDataComponent>(exploder);
+                    manager.SetComponentData(exploder, type);
+
+                    manager.AddComponent<Translation>(exploder);
+                    manager.SetComponentData(exploder, new Translation { Value = message.position });
+                }
             }
         }
-        manager.DestroyEntity(entityQuery);
+        manager.DestroyEntity(entityQuery);*/
     }
 }

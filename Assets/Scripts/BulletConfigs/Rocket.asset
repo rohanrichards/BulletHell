@@ -15,9 +15,9 @@ MonoBehaviour:
   baseDamage: 2
   damageFlatBonus: 0
   damagePercentBonus: 0
-  baseSpeed: 20
+  baseSpeed: 100
   baseLifespan: 0.5
   lifespanFlatBonus: 0
   lifespanPercentBonus: 0
-  baseAOE: 1
+  baseAOE: 2
   aoePercentBonus: 0

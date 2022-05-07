@@ -4,7 +4,7 @@ using Unity.Physics;
 using Unity.Jobs;
 using Unity.Collections;
 
-/*public partial class EnemyRotatorSystem : SystemBase
+public partial class EnemyRotatorSystem : SystemBase
 {
     public float turnSpeed;
     private EntityQuery playerEntityQuery;
@@ -26,10 +26,10 @@ using Unity.Collections;
     protected override void OnUpdate()
     {
         var location = playerEntityQuery.ToComponentDataArray<Translation>(Allocator.Temp);
-        if(location.Length > 0)
+        if (location.Length > 0)
         {
             RotateToTargetJob job = new RotateToTargetJob { dt = Time.DeltaTime, facingTarget = location[0].Value, turnSpeed = turnSpeed };
             job.Schedule(rotatingEntityQuery);
         }
     }
-}*/
+}

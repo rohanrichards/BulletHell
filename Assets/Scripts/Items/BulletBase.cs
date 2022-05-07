@@ -62,15 +62,6 @@ public abstract class BulletBase : MonoBehaviour
         Rotation rot = new Rotation { Value = rotation };
         entityManager.SetComponentData(bullet, rot);
 
-/*        BulletBase controller = bulletInstance.GetComponent<BulletBase>();
-        controller.originalOffset = rotationOffset;
-        controller.config = config;
-        controller.parentWeapon = weapon;
-        controller.rb = bulletInstance.GetComponent<Rigidbody2D>();*/
-
-        // tell it when to die
-        /*controller.SetDeath();*/
-
         return bullet;
     }
 

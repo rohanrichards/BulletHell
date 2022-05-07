@@ -41,7 +41,6 @@ public class Launcher : WeaponBase
     public override IEnumerator Fire()
     {
         LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
-        Debug.Log(playerLocation.Right);
         float arcSize = 90;
         float arcSegment = arcSize / ProjectileCount;
         float offsetWidth = 0.75f;

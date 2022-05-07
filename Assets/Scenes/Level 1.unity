@@ -840,6 +840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 787155971}
   - component: {fileID: 787155972}
+  - component: {fileID: 787155973}
   m_Layer: 0
   m_Name: DOTSScripts
   m_TagString: Untagged
@@ -873,6 +874,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa8cdf193eb4244780210c4bc7dc62b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &787155973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787155970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2cc0e2251d7ec4ca16c4df7136a2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletDeathPrefab: {fileID: 6797496188564239212, guid: 02adfa424ef4f3648856648160c54ec8,
+    type: 3}
 --- !u!1 &787851633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,6 +1231,8 @@ MonoBehaviour:
     type: 3}
   isFiring: 0
   toggleButton: 282
+  bulletDeathPrefab: {fileID: 6797496188564239212, guid: 02adfa424ef4f3648856648160c54ec8,
+    type: 3}
 --- !u!114 &1046950704
 MonoBehaviour:
   m_ObjectHideFlags: 0

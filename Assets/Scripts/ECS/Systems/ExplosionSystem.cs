@@ -8,7 +8,7 @@ using UnityEngine;
 using Unity.Physics.Extensions;
 using Unity.Physics.Systems;
 
-/*[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
 [UpdateAfter(typeof(BuildPhysicsWorld))]
 [UpdateBefore(typeof(EndFramePhysicsSystem))]
 public partial class ExplosionSystem : SystemBase
@@ -28,9 +28,9 @@ public partial class ExplosionSystem : SystemBase
 
     protected override void OnUpdate()
     {
-*//*        NativeArray<Translation> locations = entityQuery.ToComponentDataArray<Translation>(Allocator.Temp);
-        NativeArray<EntityDataComponent> datas = entityQuery.ToComponentDataArray<EntityDataComponent>(Allocator.Temp);*/
-/*
+        NativeArray<Translation> locations = entityQuery.ToComponentDataArray<Translation>(Allocator.Temp);
+        NativeArray<EntityDataComponent> datas = entityQuery.ToComponentDataArray<EntityDataComponent>(Allocator.Temp);
+
         for (int i = 0; i < locations.Length; i++)
         {
             var location = locations[i];
@@ -79,6 +79,6 @@ public partial class ExplosionSystem : SystemBase
                 }
             }
         }
-        EntityManager.DestroyEntity(entityQuery);*//*
+        EntityManager.DestroyEntity(entityQuery);
     }
-}*/
+}

@@ -11,7 +11,7 @@ public class EnemyMoverController : MonoBehaviour
 
     private void FixedUpdate()
     {
-/*        EnemyRotatorSystem rotator = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<EnemyRotatorSystem>();
-        rotator.turnSpeed = .03f;*/
+        EnemyRotatorSystem rotator = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<EnemyRotatorSystem>();
+        rotator.turnSpeed = .03f;
     }
 }

@@ -18,7 +18,6 @@ public class EntityMessagingController : MonoBehaviour
         Death = 100
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         manager = World.DefaultGameObjectInjectionWorld.EntityManager;
@@ -29,19 +28,18 @@ public class EntityMessagingController : MonoBehaviour
         );
     }
 
-    // Update is called once per frame
     void Update()
     {
-/*        NativeArray<MessageDataComponent> entityData = entityQuery.ToComponentDataArray<MessageDataComponent>(Allocator.Temp);
+        NativeArray<MessageDataComponent> entityData = entityQuery.ToComponentDataArray<MessageDataComponent>(Allocator.Temp);
         NativeArray<EntityDataComponent> typeData = entityQuery.ToComponentDataArray<EntityDataComponent>(Allocator.Temp);
         for (int i = 0; i < entityData.Length; i++)
         {
             MessageDataComponent message = entityData[i];
             EntityDataComponent type = typeData[i];
 
-            if(message.type == MessageTypes.Death)
+            if (message.type == MessageTypes.Death)
             {
-                if(type.Type == EntityTypes.ExplodesOnDeath)
+                if (type.Type == EntityTypes.ExplodesOnDeath)
                 {
                     Instantiate(bulletDeathPrefab, message.position, message.rotation);
                     Entity exploder = manager.CreateEntity();
@@ -55,6 +53,6 @@ public class EntityMessagingController : MonoBehaviour
                 }
             }
         }
-        manager.DestroyEntity(entityQuery);*/
+        manager.DestroyEntity(entityQuery);
     }
 }

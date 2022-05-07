@@ -63,11 +63,11 @@ public class GenericEnemy : EnemyBase, IConvertGameObjectToEntity
         dstManager.AddComponent(entity, typeof(RotateToTargetTag));
         dstManager.AddComponent(entity, typeof(EnemyTag));
 
-/*        dstManager.AddComponent(entity, typeof(EntityMovementSettings));
+        dstManager.AddComponent(entity, typeof(EntityMovementSettings));
         dstManager.SetComponentData(entity, new EntityMovementSettings { moveSpeed = config.moveSpeed });
 
 
         dstManager.AddComponent<EntityHealthComponent>(entity);
-        dstManager.SetComponentData(entity, new EntityHealthComponent { CurrentHealth = config.currentHealth, MaxHealth = config.baseHealth});*/
+        dstManager.SetComponentData(entity, new EntityHealthComponent { CurrentHealth = config.currentHealth, MaxHealth = config.baseHealth });
     }
 }

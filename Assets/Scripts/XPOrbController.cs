@@ -7,7 +7,6 @@ public class XPOrbController : PickupBase
     public int speed = 100;
     public int value;
     private bool collecting = false;
-    private float ticks = 1;
     // Start is called before the first frame update
     public override void Start()
     {

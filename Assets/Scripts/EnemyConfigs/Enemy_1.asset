@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHealth: 2
   currentHealth: 2
-  moveSpeed: 500
+  moveSpeed: 12
   XPValue: 10

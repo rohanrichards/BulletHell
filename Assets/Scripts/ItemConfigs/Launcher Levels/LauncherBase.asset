@@ -15,7 +15,7 @@ MonoBehaviour:
   rof: 0.3
   rofPercentBonus: 0
   rofFlatBonus: 0
-  projectileCount: 1
+  projectileCount: 5
   projectileCountBonus: 0
   knockBackForce: 500
   knockBackForcePercentBonus: 0

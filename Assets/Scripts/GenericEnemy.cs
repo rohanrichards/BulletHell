@@ -1,31 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
-public class GenericEnemy : EnemyBase
+public class GenericEnemy : EnemyBase, IConvertGameObjectToEntity
 {
     public override void Start()
     {
-        base.Start();
+        //base.Start();
     }
 
     public override void Update()
     {
-        base.Update();
-        Vector3 targetDirection = targetTransform.transform.position - rb.transform.position;
-        spriteContainer.rotation = Quaternion.LookRotation(Vector3.forward, targetDirection);
+        //base.Update();
     }
 
     public override void GetTarget()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
-        targetTransform = target.GetComponentInChildren<Rigidbody2D>().transform;
     }
 
     private void FixedUpdate()
     {
-        Vector2 direction = targetTransform.transform.position - rb.transform.position;
-        rb.AddForce(direction.normalized * config.moveSpeed * rb.mass * Time.deltaTime);
     }
 
     public override void StartAttacking()
@@ -62,13 +57,14 @@ public class GenericEnemy : EnemyBase
         return likelihood.Evaluate(time);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-/*        Vector2 direction = rb.transform.position - collision.transform.position;
-        //Rigidbody2D targetBody = collision.gameObject.GetComponent<Rigidbody2D>();
-        float len = direction.magnitude;
-        Vector2 normalDir = direction * (1 / len);
-        Vector2 force = normalDir * (1 / len * len);
-        rb.AddForce(force * Time.fixedDeltaTime * .1f);*/
+        dstManager.AddComponent(entity, typeof(MoveTowardTargetTag));
+        dstManager.AddComponent(entity, typeof(RotateToTargetTag));
+        dstManager.AddComponent(entity, typeof(EnemyTag));
+
+        dstManager.AddComponent(entity, typeof(EntityMovementSettings));
+        EntityMovementSettings settings = new EntityMovementSettings { moveSpeed = config.moveSpeed };
+        dstManager.AddComponentData(entity, settings);
     }
 }

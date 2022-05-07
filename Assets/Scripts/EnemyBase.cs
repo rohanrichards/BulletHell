@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour, IShootable
@@ -38,6 +39,7 @@ public abstract class EnemyBase : MonoBehaviour, IShootable
 
         return enemyInstance;
     }
+
 
     public static GameObject GetFromPool(string name)
     {

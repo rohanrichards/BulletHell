@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
-public class ExplodingFlyingProjectile : BulletBase
+public class ExplodingFlyingProjectile : BulletBase, IConvertGameObjectToEntity
 {
     public float explosionRadius = 5.0f;
     public int targetRange = 10;
@@ -63,5 +64,20 @@ public class ExplodingFlyingProjectile : BulletBase
     {
         Vector2 point = UnityEngine.Random.insideUnitCircle.normalized * radius;
         return new Vector3(point.x, point.y, 0);
+    }
+
+    public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
+    {
+        EntityMovementSettings settings = new EntityMovementSettings { moveSpeed = config.baseSpeed };
+        dstManager.AddComponentData(entity, settings);
+
+        LifespanComponent lifespan = new LifespanComponent { Value = config.Lifespan };
+        dstManager.AddComponentData(entity, lifespan);
+
+        EntityTypeComponent type = new EntityTypeComponent { Value = 101 };
+        dstManager.AddComponentData(entity, type);
+
+        dstManager.AddComponent(entity, typeof(MoveForwardTag));
+        dstManager.AddComponent(entity, typeof(BulletTag));
     }
 }

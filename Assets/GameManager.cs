@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private GameObject player;
+    private GameObject playerScripts;
     public int GameLengthInSeconds;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        playerScripts = GameObject.Find("PlayerScripts");
         StartCoroutine(StartNewGame());
     }
 
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         //set up the player
-        ItemBase startingItem = (ItemBase)player.GetComponent<Shotgun>();
+        ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Launcher>();
         startingItem.Unlock();
         startingItem.IncreaseLevel();
         //StartCoroutine(SetWinGameTimer());

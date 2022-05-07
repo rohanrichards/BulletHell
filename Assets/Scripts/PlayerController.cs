@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
+using Unity.Entities;
+using Unity.Transforms;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IConvertGameObjectToEntity
 {
     public Camera mainCamera;
     Rigidbody2D playerBody;
@@ -64,5 +67,15 @@ public class PlayerController : MonoBehaviour
         {
             statsController.LoadStats();
         }
+    }
+
+    public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
+    {
+        // set up player components
+        dstManager.AddComponent(entity, typeof(PlayerTag));
+
+        dstManager.AddComponent(entity, typeof(EntityMovementSettings));
+        EntityMovementSettings settings = new EntityMovementSettings { moveSpeed = 200 };
+        dstManager.AddComponentData(entity, settings);
     }
 }

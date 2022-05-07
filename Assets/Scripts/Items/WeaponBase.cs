@@ -41,8 +41,7 @@ public abstract class WeaponBase : ItemBase
         base.Start();
         weaponConfig = Instantiate<WeaponSO>(weaponConfig);
         bulletConfig = Instantiate<BulletSO>(bulletConfig);
-        playerBody = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Rigidbody2D>();
-        statsController = GameObject.FindGameObjectWithTag("Player").GetComponent<StatsController>();
+        statsController = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
     }
 
     protected override void Update()

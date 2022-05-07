@@ -1,10 +1,28 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
+using Unity.Entities;
+using Unity.Transforms;
 using UnityEngine;
 
 public class EnemyGenerator : MonoBehaviour
 {
+    [Header("ECS Props")]
+    //ECS Properties
+    public bool usingECS = true;
+    [HideInInspector]
+    public GameObject testingPrefab;
+    protected EntityManager entityManager;
+    protected Entity testingEntityPrefab;
+    protected BlobAssetStore blobAssetStore;
+
+    [Header("Testing Settings")]
+    public bool testing = false;
+    public int testEnemyIndex = 3;
+    public int testGridSize = 10;
+
+    [Header("Spawning Settings")]
     public float baseWaveSpeed = 5.0f;
     public float minWaveSpeed = 1.0f;
     public int baseClusterSize = 3;
@@ -17,12 +35,14 @@ public class EnemyGenerator : MonoBehaviour
     public int maxEnemies = 3000;
     public GameObject[] availableEnemies;
     public GameObject enemyContainer;
-    private GameObject player;
-    private Rigidbody2D playerBody;
+
+    [Header("Debug Info")]
     public int totalEnemies = 0;
     public AnimationCurve vizualizedSpawnDitribution;
+
+    private GameObject player;
+    private Rigidbody2D playerBody;
     private DifficultyManager difficultyManager;
-    // Start is called before the first frame update
 
     public float WaveSpeed
     {
@@ -40,27 +60,72 @@ public class EnemyGenerator : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerBody = player.GetComponentInChildren<Rigidbody2D>();
+        //playerBody = player.GetComponentInChildren<Rigidbody2D>();
         difficultyManager = gameObject.GetComponent<DifficultyManager>();
 
+        if (usingECS)
+        {
+            blobAssetStore = new BlobAssetStore();
+            testingPrefab = availableEnemies[testEnemyIndex];
+            entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            testingEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(testingPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
+        }
+
         StartCoroutine(DelayedStart());
+    }
+
+    private void OnDestroy()
+    {
+        blobAssetStore.Dispose();
     }
 
     IEnumerator DelayedStart()
     {
         yield return new WaitForSeconds(1);
 
-        StartCoroutine(SpawnEnemies());
-        StartCoroutine(CheckForOutOfRange());
-
-        /*GenerateTestEnemies();*/
-        /*SpawnCluster(new Vector2(10, 10), false);*/
+        if (testing)
+        {
+            if (usingECS)
+            {
+                GenerateTestEntities(testGridSize);
+            }else
+            {
+                GenerateTestEnemies(testEnemyIndex, testGridSize);
+            }
+        }else
+        {
+            StartCoroutine(SpawnEnemies());
+            StartCoroutine(CheckForOutOfRange());
+        }
     }
 
-    void GenerateTestEnemies()
+    void GenerateTestEntities(int size)
     {
-        int width = 50;
-        int height = 50;
+        int width = size;
+        int height = size;
+        int padding = 2;
+
+        NativeArray<Entity> enemies = new NativeArray<Entity>(size * size, Allocator.TempJob);
+        entityManager.Instantiate(testingEntityPrefab, enemies);
+
+        int index = 0;
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Vector3 location = new Vector3(x + x * padding, y + y * padding, 0);
+                entityManager.SetComponentData(enemies[index], new Translation { Value = location });
+                index++;
+            }
+        }
+
+        enemies.Dispose();
+    }
+
+    void GenerateTestEnemies(int index, int size)
+    {
+        int width = size;
+        int height = size;
         int padding = 2;
 
         for(int x = 0; x<width; x++)
@@ -68,7 +133,7 @@ public class EnemyGenerator : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Vector2 location = new Vector2(x + x*padding, y + y*padding);
-                SpawnEnemy(location, availableEnemies[3]);
+                SpawnEnemy(location, availableEnemies[index]);
             }
         }
     }

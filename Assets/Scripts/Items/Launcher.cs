@@ -1,19 +1,38 @@
 using System.Collections;
-using System.Collections.Generic;
+using Unity.Transforms;
+using Unity.Entities;
 using UnityEngine;
+using Unity.Collections;
 
 public class Launcher : WeaponBase
 {
-    // Start is called before the first frame update
+    public GameObject bulletDeathPrefab;
+    private EntityQuery playerQuery;
+    protected Entity bulletEntityPrefab;
+    protected BlobAssetStore blobAssetStore;
+    private EntityManager manager;
     protected override void Start()
     {
         base.Start();
+        manager = World.DefaultGameObjectInjectionWorld.EntityManager;
+        playerQuery = manager.CreateEntityQuery(
+            ComponentType.ReadWrite<Translation>(),
+            ComponentType.ReadWrite<PlayerTag>()
+        );
+        blobAssetStore = new BlobAssetStore();
+        bulletEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(bulletPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
     }
 
-    // Update is called once per frame
     protected override void Update()
     {
         base.Update();
+        ExplosionSystem explosionSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystem<ExplosionSystem>();
+        NativeArray<Translation> locations = explosionSystem.locations;
+        for (int i = 0; i < locations.Length; i++)
+        {
+            Translation location = locations[i];
+            Instantiate(bulletDeathPrefab, location.Value, new Quaternion());
+        }
     }
 
     public override void Unlock()
@@ -21,13 +40,14 @@ public class Launcher : WeaponBase
         base.Unlock();
     }
 
+    private void OnDestroy()
+    {
+        blobAssetStore.Dispose();
+    }
+
     public override IEnumerator Fire()
     {
-        if (!playerBody)
-        {
-            playerBody = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Rigidbody2D>();
-        }
-
+        LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
         float arcSize = 90;
         float arcSegment = arcSize / ProjectileCount;
         float offsetWidth = 0.75f;
@@ -37,10 +57,10 @@ public class Launcher : WeaponBase
 
             float rotationOffset = (arcSegment / 2) + (arcSegment * i);
             float offset = (offsetSegment / 2) + (offsetSegment * i);
-            Vector3 originOffset = playerBody.transform.up + (playerBody.transform.right * ((offsetWidth / 2) - offset));
+            Vector3 originOffset = playerLocation.Up + (playerLocation.Right * ((offsetWidth / 2) - offset));
             Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Vector3 rotation = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
+            BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
         }
         yield return new WaitForSeconds(1 / RateOfFire);
         StartCoroutine(Fire());

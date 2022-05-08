@@ -13,6 +13,7 @@ public class ECSPlayerController : MonoBehaviour
     protected Entity playerEntityPrefab;
     protected BlobAssetStore blobAssetStore;
     private static EntityQuery playerQuery;
+    protected StatsController stats;
 
     public static LocalToWorld getPlayerLocation()
     {
@@ -27,9 +28,23 @@ public class ECSPlayerController : MonoBehaviour
         }
     }
 
+    public static PhysicsVelocity getPlayerPhysicsVelocity()
+    {
+        var queryResult = playerQuery.ToComponentDataArray<PhysicsVelocity>(Allocator.Temp);
+        if (queryResult.Length > 0)
+        {
+            return queryResult[0];
+        }
+        else
+        {
+            return new PhysicsVelocity();
+        }
+    }
+
     public void Awake()
     {
         playerQuery = World.DefaultGameObjectInjectionWorld.EntityManager.CreateEntityQuery(
+            ComponentType.ReadWrite<PhysicsVelocity>(),
             ComponentType.ReadWrite<LocalToWorld>(),
             ComponentType.ReadWrite<PlayerTag>()
         );
@@ -43,6 +58,8 @@ public class ECSPlayerController : MonoBehaviour
 
         Entity player = entityManager.Instantiate(playerEntityPrefab);
         entityManager.SetComponentData(player, new Translation());
+
+        stats = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
     }
 
     void Update()
@@ -57,15 +74,16 @@ public class ECSPlayerController : MonoBehaviour
         Vector3 movement = new Vector3(horizontalInput, verticalInput, 0);
 
         PlayerMoverSystem mover = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<PlayerMoverSystem>();
-        mover.moveSpeed = 200;
+        mover.moveSpeed = stats.statsConfig.RotateSpeed;
         mover.direction = movement;
 
-        if(movement != Vector3.zero)
-        {
-            PlayerRotatorSystem rotator = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<PlayerRotatorSystem>();
-            rotator.direction = movement;
-            rotator.turnSpeed = 0.1f;
-        }
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        Vector3 direction = new Vector3(mousePosition.x - getPlayerLocation().Position.x, mousePosition.y - getPlayerLocation().Position.y, 0);
+
+        PlayerRotatorSystem rotator = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<PlayerRotatorSystem>();
+        rotator.direction = direction;
+        rotator.turnSpeed = stats.statsConfig.RotateSpeed;
     }
 
     private void OnDestroy()

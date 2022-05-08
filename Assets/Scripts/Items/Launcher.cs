@@ -2,25 +2,13 @@ using System.Collections;
 using Unity.Transforms;
 using Unity.Entities;
 using UnityEngine;
-using Unity.Collections;
+using Unity.Physics;
 
 public class Launcher : WeaponBase
 {
-    public GameObject bulletDeathPrefab;
-    private EntityQuery playerQuery;
-    protected Entity bulletEntityPrefab;
-    protected BlobAssetStore blobAssetStore;
-    private EntityManager manager;
     protected override void Start()
     {
         base.Start();
-        manager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        playerQuery = manager.CreateEntityQuery(
-            ComponentType.ReadWrite<Translation>(),
-            ComponentType.ReadWrite<PlayerTag>()
-        );
-        blobAssetStore = new BlobAssetStore();
-        bulletEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(bulletPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
     }
 
     protected override void Update()
@@ -31,11 +19,6 @@ public class Launcher : WeaponBase
     public override void Unlock()
     {
         base.Unlock();
-    }
-
-    private void OnDestroy()
-    {
-        blobAssetStore.Dispose();
     }
 
     public override IEnumerator Fire()
@@ -53,7 +36,15 @@ public class Launcher : WeaponBase
             Vector3 originOffset = playerLocation.Up + (playerLocation.Right * ((offsetWidth / 2) - offset));
             Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Vector3 rotation = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation) * (Quaternion)playerLocation.Rotation, offsetVector, bulletConfig, this);
+            Entity bullet = BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation) * playerLocation.Rotation, offsetVector, bulletConfig, this);
+
+            EntityDataComponent data = manager.GetComponentData<EntityDataComponent>(bullet);
+            data.Force = KnockBackForce;
+            manager.SetComponentData(bullet, data);
+
+            PhysicsVelocity vel = manager.GetComponentData<PhysicsVelocity>(bullet);
+            vel.Linear += ECSPlayerController.getPlayerPhysicsVelocity().Linear;
+            manager.SetComponentData(bullet, vel);
         }
         yield return new WaitForSeconds(1 / RateOfFire);
         StartCoroutine(Fire());

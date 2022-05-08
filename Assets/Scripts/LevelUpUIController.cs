@@ -9,14 +9,12 @@ public class LevelUpUIController : MonoBehaviour
     public bool visible = false;
     private CanvasGroup group;
     public GameObject choicePrefab;
-    private GameObject player;
     private StatsController statsController;
     public GameObject buttonContainer;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        statsController = player.GetComponent<StatsController>();
+        statsController = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
         group = gameObject.GetComponent<CanvasGroup>();
     }
 

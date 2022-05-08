@@ -7,36 +7,6 @@ public class SpiralingPiercingDoTProjectile : BulletBase
     protected override void Start()
     {
         base.Start();
-        StartCoroutine(DamageLoop());
-
-        // set scale based on AOE bonus
-        transform.localScale = transform.localScale * AOE;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
-
-    private void FixedUpdate()
-    {
-        // always turning left
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, -120) * Time.fixedDeltaTime);
-        rb.MoveRotation(rb.transform.rotation * targetRotation);
-
-        // always moving "forward"
-        rb.AddForce(rb.transform.right * config.baseSpeed * Time.deltaTime);
-    }
-
-    public override void SetDeath()
-    {
-        Invoke("KillSelf", config.Lifespan);
-    }
-
-
-    protected override void KillSelf()
-    {
-        Destroy(gameObject);
     }
 
     IEnumerator DamageLoop()

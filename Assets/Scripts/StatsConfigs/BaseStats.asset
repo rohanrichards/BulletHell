@@ -20,7 +20,7 @@ MonoBehaviour:
   baseHealth: 100
   currentHealth: 100
   healthPercentBonus: 0
-  moveSpeed: 12
+  moveSpeed: 50
   moveSpeedPercentBonus: 0
-  rotateSpeed: 130
+  rotateSpeed: 0.1
   rotateSpeedPercentBonus: 0

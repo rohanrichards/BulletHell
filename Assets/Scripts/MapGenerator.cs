@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -20,12 +21,9 @@ public class MapGenerator : MonoBehaviour
     public GameObject[] structures;
     public GameObject[] destroyables;
     public int structureChanceAsPercent = 20;
-    Rigidbody2D playerBody;
 
-    // Start is called before the first frame update
     void Start()
     {
-        playerBody = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Rigidbody2D>();
     }
 
     Tile GetRandomTile()
@@ -92,7 +90,8 @@ public class MapGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 offsetOrigin = new Vector3(playerBody.position.x - (renderBounds/2), playerBody.position.y - (renderBounds/2), 0);
+        LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
+        Vector3 offsetOrigin = new Vector3(playerLocation.Position.x - (renderBounds/2), playerLocation.Position.y - (renderBounds/2), 0);
         BoundsInt bounds = new BoundsInt(Vector3Int.FloorToInt(offsetOrigin), new Vector3Int(renderBounds, renderBounds, 0));
         List<Vector3> corners = new List<Vector3>();
         // bl, tl, tr, br

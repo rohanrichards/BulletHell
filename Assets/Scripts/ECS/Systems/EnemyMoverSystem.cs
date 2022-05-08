@@ -30,7 +30,7 @@ public partial class EnemyMoverSystem : SystemBase
         if (location.Length > 0)
         {
             MoveTowardTarget job = new MoveTowardTarget { dt = Time.DeltaTime, target = location[0].Value };
-            job.Schedule(movingEntityQuery);
+            job.ScheduleParallel(movingEntityQuery);
         }
     }
 }

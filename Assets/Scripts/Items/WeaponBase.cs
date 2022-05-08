@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
 public abstract class WeaponBase : ItemBase
@@ -11,6 +11,11 @@ public abstract class WeaponBase : ItemBase
     public GameObject bulletPrefab;
     public bool isFiring = false;
     public KeyCode toggleButton;
+
+    // ECS Stuff
+    protected Entity bulletEntityPrefab;
+    protected BlobAssetStore blobAssetStore;
+    protected EntityManager manager;
 
     public float RateOfFire
     {
@@ -42,6 +47,10 @@ public abstract class WeaponBase : ItemBase
         weaponConfig = Instantiate<WeaponSO>(weaponConfig);
         bulletConfig = Instantiate<BulletSO>(bulletConfig);
         statsController = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
+
+        manager = World.DefaultGameObjectInjectionWorld.EntityManager;
+        blobAssetStore = new BlobAssetStore();
+        bulletEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(bulletPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
     }
 
     protected override void Update()
@@ -91,6 +100,11 @@ public abstract class WeaponBase : ItemBase
     {
         isFiring = false;
         StopAllCoroutines();
+    }
+
+    private void OnDestroy()
+    {
+        blobAssetStore.Dispose();
     }
 
     public abstract IEnumerator Fire();

@@ -13,10 +13,10 @@ public class PlayerController : MonoBehaviour, IConvertGameObjectToEntity
     public bool mouseLook = true;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerBody = GetComponentInChildren<Rigidbody2D>();
-        statsController = GetComponent<StatsController>();
+        statsController = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
     }
 
     void FixedUpdate()
@@ -71,11 +71,13 @@ public class PlayerController : MonoBehaviour, IConvertGameObjectToEntity
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
+        statsController = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
+
         // set up player components
         dstManager.AddComponent(entity, typeof(PlayerTag));
 
         dstManager.AddComponent(entity, typeof(EntityMovementSettings));
-        EntityMovementSettings settings = new EntityMovementSettings { moveSpeed = 200 };
+        EntityMovementSettings settings = new EntityMovementSettings { moveSpeed = statsController.MoveSpeed };
         dstManager.AddComponentData(entity, settings);
     }
 }

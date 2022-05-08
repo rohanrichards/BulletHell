@@ -2,19 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
-public abstract class BulletBase : MonoBehaviour
+public abstract class BulletBase : MonoBehaviour, IConvertGameObjectToEntity
 {
     public BulletSO config;
     public GameObject deathPrefab;
     [HideInInspector]
     public WeaponBase parentWeapon;
-    protected Rigidbody2D rb;
     protected StatsController statsController;
-    protected GameObject player;
-    protected Rigidbody2D playerBody;
     protected Vector3 originalOffset;
     static protected EntityManager entityManager;
 
@@ -38,17 +36,18 @@ public abstract class BulletBase : MonoBehaviour
     public static GameObject Create(GameObject prefab, Transform origin, Vector3 offset, Quaternion rotation, Vector3 rotationOffset, BulletSO config, WeaponBase weapon)
     {
         // create our bullet instance
-        GameObject bulletInstance = Instantiate<GameObject>(prefab, origin.position + offset, rotation);
-        BulletBase controller = bulletInstance.GetComponent<BulletBase>();
-        controller.originalOffset = rotationOffset;
-        controller.config = config;
-        controller.parentWeapon = weapon;
-        controller.rb = bulletInstance.GetComponent<Rigidbody2D>();
+        /*        GameObject bulletInstance = Instantiate<GameObject>(prefab, origin.position + offset, rotation);
+                BulletBase controller = bulletInstance.GetComponent<BulletBase>();
+                controller.originalOffset = rotationOffset;
+                controller.config = config;
+                controller.parentWeapon = weapon;
+                controller.rb = bulletInstance.GetComponent<Rigidbody2D>();
 
-        // tell it when to die
-        controller.SetDeath();
+                // tell it when to die
+                controller.SetDeath();
 
-        return bulletInstance;
+                return bulletInstance;*/
+        return null;
     }
 
     public static Entity CreateEntity(Entity prefab, LocalToWorld origin, Vector3 offset, Quaternion rotation, Vector3 rotationOffset, BulletSO config, WeaponBase weapon)
@@ -59,28 +58,26 @@ public abstract class BulletBase : MonoBehaviour
         Entity bullet = entityManager.Instantiate(prefab);
 
         entityManager.SetComponentData(bullet, new Translation { Value = origin.Position+(float3)offset });
-        Rotation rot = new Rotation { Value = rotation };
-        entityManager.SetComponentData(bullet, rot);
+        entityManager.SetComponentData(bullet, new Rotation { Value = rotation });
+        PhysicsVelocity vel = entityManager.GetComponentData<PhysicsVelocity>(bullet);
+        vel.Linear = rotation * Vector3.up * config.baseSpeed * Time.deltaTime;
+        entityManager.SetComponentData<PhysicsVelocity>(bullet, vel);
 
         return bullet;
     }
 
-    private void Awake()
-    {
-    }
-
     protected virtual void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerBody = player.GetComponentInChildren<Rigidbody2D>();
-        statsController = player.GetComponent<StatsController>();
+        statsController = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
     }
 
-    protected virtual void Update()
+    public virtual void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
+        dstManager.AddComponentData(entity, new EntityMovementSettings { moveSpeed = config.baseSpeed });
+        dstManager.AddComponentData(entity, new LifespanComponent { Value = config.Lifespan });
+        dstManager.AddComponentData(entity, new BulletConfigComponent { Damage = config.Damage });
 
+        dstManager.AddComponent(entity, typeof(MoveForwardTag));
+        dstManager.AddComponent(entity, typeof(BulletTag));
     }
-    public abstract void SetDeath();
-    protected abstract void KillSelf();
-
 }

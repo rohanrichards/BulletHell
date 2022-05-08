@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
+using Unity.Physics;
+using Unity.Transforms;
 using UnityEngine;
 
 public class Laser : WeaponBase
@@ -23,10 +26,7 @@ public class Laser : WeaponBase
 
     public override IEnumerator Fire()
     {
-        if (!playerBody)
-        {
-            playerBody = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Rigidbody2D>();
-        }
+        LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
 
         float arcSize = 50 + (45 * bulletConfig.AOE);
         float arcSegment = arcSize / ProjectileCount;
@@ -37,11 +37,19 @@ public class Laser : WeaponBase
 
             float rotationOffset = (arcSegment / 2) + (arcSegment * i);
             float offset = (offsetSegment / 2) + (offsetSegment * i);
-            Vector3 originOffset = playerBody.transform.up + (playerBody.transform.right * ((offsetWidth / 2) - offset));
-            Vector3 rotationOrigin = playerBody.transform.rotation.eulerAngles;
+            Vector3 originOffset = playerLocation.Up + (playerLocation.Right * ((offsetWidth / 2) - offset));
+            Vector3 rotationOrigin = ((Quaternion)playerLocation.Rotation).eulerAngles;
             Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Vector3 rotation = rotationOrigin + new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
+            Entity bullet = BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
+
+            PhysicsVelocity vel = manager.GetComponentData<PhysicsVelocity>(bullet);
+            vel.Linear += ECSPlayerController.getPlayerPhysicsVelocity().Linear;
+            manager.SetComponentData(bullet, vel);
+
+            EntityDataComponent data = manager.GetComponentData<EntityDataComponent>(bullet);
+            data.Force = KnockBackForce;
+            manager.SetComponentData(bullet, data);
         }
         yield return new WaitForSeconds(1 / RateOfFire);
         StartCoroutine(Fire());

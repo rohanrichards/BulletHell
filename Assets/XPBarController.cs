@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class XPBarController : MonoBehaviour
 {
-    private GameObject player;
     private StatsController statsController;
 
     public TMPro.TextMeshProUGUI currentLevel;
@@ -15,8 +14,7 @@ public class XPBarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        statsController = player.GetComponent<StatsController>();
+        statsController = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
         slider = GetComponent<Slider>();
     }
 

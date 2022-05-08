@@ -69,13 +69,13 @@ public partial class ExplosionSystem : SystemBase
                 if (math.lengthsq(location.Value - position.Value) <= sqrRadius)
                 {
                     float3 direction = position.Value - location.Value;
-                    float falloff = data.Size / math.length(direction);
-                    float3 force = math.normalize(direction) * 1 * falloff * Time.DeltaTime;
+                    float falloff = 1 - math.length(direction) / data.Size;
+                    float3 force = math.normalize(direction) * data.Force * falloff * Time.DeltaTime;
                     PhysicsWorldExtensions.ApplyLinearImpulse(world, rigidBodyIndex, force);
 
                     EntityHealthComponent health = GetComponent<EntityHealthComponent>(entity);
-                    health.CurrentHealth -= data.Damage;
-                    EntityManager.SetComponentData<EntityHealthComponent>(entity, health);
+                    health.CurrentHealth -= data.Damage * falloff;
+                    EntityManager.SetComponentData(entity, health);
                 }
             }
         }

@@ -4,7 +4,6 @@ using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
-[UpdateAfter(typeof(BulletMoverSystem))]
 public partial class EnemyHealthSystem : SystemBase
 {
     private EntityQueryDesc enemyQueryDesc;
@@ -31,8 +30,6 @@ public partial class EnemyHealthSystem : SystemBase
     {
         DestroyDeadEntitiesJob deadJob = new DestroyDeadEntitiesJob { ecb = ecbs.CreateCommandBuffer() };
         JobHandle jobHandle = deadJob.Schedule(deadQuery);
-        jobHandle.Complete();
-
         DestroyExpiredEntitiesJob exJob = new DestroyExpiredEntitiesJob { ecb = ecbs.CreateCommandBuffer() };
         JobHandle exJobHandle = exJob.Schedule(expiredQuery);
         exJobHandle.Complete();

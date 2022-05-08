@@ -4,6 +4,7 @@ using Unity.Physics;
 using Unity.Mathematics;
 using Unity.Burst;
 using UnityEngine;
+using System;
 
 [BurstCompile]
 partial struct MoveTowardTarget : IJobEntity

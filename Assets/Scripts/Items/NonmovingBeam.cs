@@ -25,9 +25,9 @@ public class NonmovingBeam : BulletBase
         particlesTrail = transform.Find("ParticlesTrail").gameObject.GetComponent<ParticleSystem>();
     }
 
-    protected override void Update()
+    protected void Update()
     {
-        base.Update();
+/*        base.Update();
         rb.transform.position = playerBody.transform.position;
         rb.transform.rotation = Quaternion.Euler(originalOffset) * playerBody.transform.rotation;
 
@@ -52,17 +52,9 @@ public class NonmovingBeam : BulletBase
         ParticleSystem.ShapeModule trailShape = particlesTrail.shape;
 
         topShape.position = new Vector3(topShape.position.x, distance - topShape.radius * 2);
-        trailShape.position = new Vector3(topShape.position.x, distance - topShape.radius * 2);
+        trailShape.position = new Vector3(topShape.position.x, distance - topShape.radius * 2);*/
     }
-
-    public void FixedUpdate()
-    {
-    }
-    public override void SetDeath()
-    {
-        Invoke("KillSelf", config.Lifespan);
-    }
-
+/*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         collisions.Add(collision);
@@ -71,7 +63,7 @@ public class NonmovingBeam : BulletBase
     private void OnTriggerExit2D(Collider2D collision)
     {
         collisions.Remove(collision);
-    }
+    }*/
 
     private  IEnumerator AttemptAttack()
     {
@@ -88,13 +80,5 @@ public class NonmovingBeam : BulletBase
         }
         yield return new WaitForSeconds(attackRateInSeconds);
         StartCoroutine(AttemptAttack());
-    }
-
-    protected override void KillSelf()
-    {
-        particlesTrail.transform.parent = null;
-        particlesTrail.Stop();
-        StopAllCoroutines();
-        Destroy(gameObject);
     }
 }

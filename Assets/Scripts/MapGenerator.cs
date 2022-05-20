@@ -7,6 +7,11 @@ using UnityEngine.Tilemaps;
 //[ExecuteInEditMode]
 public class MapGenerator : MonoBehaviour
 {
+    public bool generateGround = true;
+    public bool generateObstacles = true;
+    public bool generateStructures = true;
+    public bool generateDestroyables = true;
+    
     public int chunkSize = 10;
     public int renderBounds = 50;
     public int minObstablesPerChunk = 10;
@@ -33,25 +38,38 @@ public class MapGenerator : MonoBehaviour
 
     void RenderChunkAt(Vector3 position)
     {
-        TileBase[] tiles = new TileBase[chunkSize * chunkSize];
-        for (int i = 0; i < tiles.Length; i++)
-        {
-            tiles[i] = GetRandomTile();
-        }
         BoundsInt bounds = new BoundsInt(Vector3Int.FloorToInt(position), new Vector3Int(chunkSize, chunkSize, 1));
-        tileMap.SetTilesBlock(bounds, tiles);
-        PopulateChunkWithObstables(bounds);
-        TryToPlaceStructure(bounds);
-        TryToPlaceDestroyables(bounds);
+        if (generateGround)
+        {
+            TileBase[] tiles = new TileBase[chunkSize * chunkSize];
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                tiles[i] = GetRandomTile();
+            }
+            tileMap.SetTilesBlock(bounds, tiles);
+        }
+        if (generateObstacles)
+        {
+            PopulateChunkWithObstables(bounds);
+        }
+        if (generateStructures)
+        {
+            TryToPlaceStructure(bounds);
+        }
+        if (generateDestroyables)
+        {
+            TryToPlaceDestroyables(bounds);
+        }
+
     }
 
     void PopulateChunkWithObstables(BoundsInt bounds)
     {
-        int obstacleCount = Random.Range(minObstablesPerChunk, maxObstablesPerChunk+1);
-        for(int i = 0; i < obstacleCount; i++)
+        int obstacleCount = Random.Range(minObstablesPerChunk, maxObstablesPerChunk + 1);
+        for (int i = 0; i < obstacleCount; i++)
         {
             Vector3 location = RandomPointInBounds(bounds);
-            int index = Random.Range(0, obstacles.Length );
+            int index = Random.Range(0, obstacles.Length);
             GameObject obstacle = Instantiate(obstacles[index], location, new Quaternion(), obstaclesContainer.transform);
         }
     }

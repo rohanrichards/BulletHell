@@ -43,10 +43,10 @@ public class ChargingEnemy : EnemyBase
 
     protected override IEnumerator AttemptAttack()
     {
-        StatsController playerStatsController = GameObject.FindObjectOfType<StatsController>();
-        playerStatsController.ApplyDamage(1, this);
+/*        StatsController playerStatsController = GameObject.FindObjectOfType<StatsController>();
+        playerStatsController.ApplyDamage(1, this);*/
         yield return new WaitForSeconds(attackRate);
-        StartCoroutine(AttemptAttack());
+        //StartCoroutine(AttemptAttack());
     }
 
     public override void ApplyDamage(float damage)

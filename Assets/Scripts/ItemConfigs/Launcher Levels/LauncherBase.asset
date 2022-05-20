@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16aee1c7ec8f6a94ab6acdd65a11b48b, type: 3}
   m_Name: LauncherBase
   m_EditorClassIdentifier: 
-  rof: 0.5
+  rof: 0.6
   rofPercentBonus: 0
   rofFlatBonus: 0
-  projectileCount: 1
+  projectileCount: 3
   projectileCountBonus: 0
-  knockBackForce: 10
+  knockBackForce: 8
   knockBackForcePercentBonus: 0

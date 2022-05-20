@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PickupGenerator : MonoBehaviour
@@ -7,55 +9,47 @@ public class PickupGenerator : MonoBehaviour
     public GameObject XPOrbPrefab;
     public GameObject chestPrefab;
     public GameObject repairPrefab;
-    // Start is called before the first frame update
+    private Entity XPOrbEntityPrefab;
+    private Entity chestEntityPrefab;
+    private Entity repairEntityPrefab;
+
+    protected EntityManager entityManager;
+    protected BlobAssetStore blobAssetStore;
+
     void Start()
     {
-        
+        blobAssetStore = new BlobAssetStore();
+        entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+        XPOrbEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(XPOrbPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
+        chestEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(chestPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
+        repairEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(repairPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
-    public void CreateXPOrb(Transform location, int value)
+    public void CreateXPOrb(float3 location, int value)
     {
-        /*        ContactFilter2D filter = new ContactFilter2D();
-                filter.SetLayerMask(LayerMask.GetMask("Pickups"));
-                filter.useTriggers = true;
-                List<Collider2D> hits = new List<Collider2D>();
-                Physics2D.OverlapCircle(location.position, 1f, filter, hits);
-                bool placed = false;
-                if (hits.Count > 0)
-                {
-                    foreach(Collider2D hit in hits)
-                    {
-                        if(hit.gameObject.GetComponent<XPOrbController>())
-                        {
-                            placed = true;
-                            hit.gameObject.GetComponent<XPOrbController>().value += value;
-                            break;
-                        }
-                    }
-                }
-                if(!placed)
-                {
-                    //GameObject newPickup = PickupBase.Create(XPOrbPrefab, location);
-                    //newPickup.GetComponent<XPOrbController>().value = value;
-                }*/
+        Entity newPickup = PickupBase.Create(XPOrbEntityPrefab, location);
+        entityManager.AddComponentData(newPickup, new EntityDataComponent { XP = value });
+        entityManager.AddComponentData(newPickup, new EntityMovementSettings { moveSpeed = 20 });
 
-        GameObject newPickup = PickupBase.Create(XPOrbPrefab, location);
-        newPickup.GetComponent<XPOrbController>().value = value;
     }
 
-    public void CreateChest(Transform location)
+    public void CreateChest(float3 location)
     {
-        GameObject newPickup = PickupBase.Create(chestPrefab, location);
+        Entity newPickup = PickupBase.Create(chestEntityPrefab, location);
     }
 
-    public void CreateRepairItem(Transform location)
+    public void CreateRepairItem(float3 location)
     {
-        GameObject newPickup = PickupBase.Create(repairPrefab, location);
+        Entity newPickup = PickupBase.Create(repairEntityPrefab, location);
+    }
+
+    private void OnDestroy()
+    {
+        blobAssetStore.Dispose();
     }
 }

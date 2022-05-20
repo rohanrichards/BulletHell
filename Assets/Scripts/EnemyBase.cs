@@ -93,7 +93,7 @@ public abstract class EnemyBase : MonoBehaviour, IShootable
     }
     public virtual void KillSelf()
     {
-        pickupGenerator.CreateXPOrb(rb.transform, config.XPValue);
+/*        pickupGenerator.CreateXPOrb(rb.transform, config.XPValue);
         GameObject corpse = Instantiate(deathPrefab, rb.transform.position, spriteContainer.transform.rotation);
         corpse.transform.localScale = gameObject.transform.localScale;
         StopAllCoroutines();
@@ -104,7 +104,7 @@ public abstract class EnemyBase : MonoBehaviour, IShootable
             Destroy(gameObject);
         }
 
-        SendToPool(gameObject);
+        SendToPool(gameObject);*/
     }
     public abstract float GetLikelihoodWeight(float time);
     public abstract void StartAttacking();

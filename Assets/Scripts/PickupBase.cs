@@ -1,28 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
 
-public abstract class PickupBase : MonoBehaviour
+public class PickupBase : MonoBehaviour, IConvertGameObjectToEntity
 {
-    protected Rigidbody2D playerBody;
+    static protected EntityManager entityManager;
     protected StatsController statsController;
-    public static GameObject Create(GameObject prefab, Transform origin)
+    public static Entity Create(Entity prefab, float3 origin)
     {
-        // create our bullet instance
-        GameObject pickupInstance = Instantiate<GameObject>(prefab);
+        entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
 
-        // set it's origin and rotation
-        pickupInstance.transform.position = origin.transform.position;
+        Entity pickupInstance = entityManager.Instantiate(prefab);
+        entityManager.SetComponentData(pickupInstance, new Translation { Value = origin });
 
         return pickupInstance;
     }
 
     public virtual void Start()
     {
-        playerBody = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Rigidbody2D>();
-        statsController = GameObject.FindGameObjectWithTag("Player").GetComponent<StatsController>();
+        statsController = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
     }
 
     public virtual void Pickup() { }
 
+    public virtual void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
+    {
+        dstManager.AddComponent(entity, typeof(PickupTag));
+    }
 }

@@ -1,27 +1,32 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Physics;
-using Unity.Mathematics;
 using Unity.Collections;
-using Unity.Physics.Extensions;
 using UnityEngine;
+using Unity.Mathematics;
 
 public class EntityMessagingController : MonoBehaviour
 {
-    public GameObject bulletDeathPrefab;
+    public GameObject explosionDeathPrefab;
+    public GameObject splatterDeathPrefab;
+    public GameObject EnemyAttackPrefab;
     EntityManager manager;
     private EntityQuery entityQuery;
+    private StatsController stats;
+    private PickupGenerator pickupGenerator;
 
     public enum MessageTypes {
-        Death = 100
+        Death = 100,
+        Pickup = 200,
+        Attack = 300
     }
 
     void Start()
     {
+        stats = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
+        pickupGenerator = GameObject.Find("Scripts").GetComponent<PickupGenerator>();
         manager = World.DefaultGameObjectInjectionWorld.EntityManager;
-
         entityQuery = manager.CreateEntityQuery(
             ComponentType.ReadWrite<MessageDataComponent>(),
             ComponentType.ReadWrite<EntityDataComponent>()
@@ -41,7 +46,7 @@ public class EntityMessagingController : MonoBehaviour
             {
                 if (type.Type == EntityTypes.ExplodesOnDeath)
                 {
-                    Instantiate(bulletDeathPrefab, message.position, message.rotation);
+                    Instantiate(explosionDeathPrefab, message.position, message.rotation);
                     Entity exploder = manager.CreateEntity();
                     manager.AddComponent<ExplodeAndDeleteTag>(exploder);
 
@@ -51,6 +56,27 @@ public class EntityMessagingController : MonoBehaviour
                     manager.AddComponent<Translation>(exploder);
                     manager.SetComponentData(exploder, new Translation { Value = message.position });
                 }
+                if (type.Type == EntityTypes.SplattersOnDeath)
+                {
+                    Instantiate(splatterDeathPrefab, message.position, message.rotation);
+                }
+
+                if (type.XP != 0)
+                {
+                    pickupGenerator.CreateXPOrb(message.position, Mathf.CeilToInt(type.XP));
+                }
+            }
+            if(message.type == MessageTypes.Pickup)
+            {
+                stats.ApplyXP(Mathf.CeilToInt(type.XP));
+            }
+
+            if(message.type == MessageTypes.Attack)
+            {
+                float3 euler = message.rotation.eulerAngles;
+                GameObject particleInstance = Instantiate(EnemyAttackPrefab, message.position, message.rotation);
+                ParticleSystem.MainModule particles = particleInstance.GetComponent<ParticleSystem>().main;
+                particles.startRotation = (euler.z - 90) * Mathf.Deg2Rad;
             }
         }
         manager.DestroyEntity(entityQuery);

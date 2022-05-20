@@ -886,7 +886,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2cc0e2251d7ec4ca16c4df7136a2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDeathPrefab: {fileID: 6797496188564239212, guid: 02adfa424ef4f3648856648160c54ec8,
+  explosionDeathPrefab: {fileID: 6797496188564239212, guid: 02adfa424ef4f3648856648160c54ec8,
+    type: 3}
+  splatterDeathPrefab: {fileID: 4846751104775270111, guid: db36dfd70e2daf041bdd3d864c4bc389,
+    type: 3}
+  EnemyAttackPrefab: {fileID: 6797496188564239212, guid: 9f6fe131c353e4b448ca56d345040cda,
     type: 3}
 --- !u!1 &787851633
 GameObject:
@@ -1862,7 +1866,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -20
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2276,11 +2280,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1585473014}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c23aaa72a621da747af8be3e7b5a1279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generateGround: 1
+  generateObstacles: 1
+  generateStructures: 0
+  generateDestroyables: 0
   chunkSize: 200
   renderBounds: 50
   minObstablesPerChunk: 20
@@ -2458,7 +2466,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1585473014}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b76a0afb0a8fa0247afe029beb2c7601, type: 3}
   m_Name: 

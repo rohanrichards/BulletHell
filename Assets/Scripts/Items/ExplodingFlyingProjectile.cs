@@ -15,5 +15,6 @@ public class ExplodingFlyingProjectile : BulletBase, IConvertGameObjectToEntity
 
         EntityDataComponent type = new EntityDataComponent { Type = EntityTypes.ExplodesOnDeath, Damage = config.Damage, Size = config.AOE };
         dstManager.AddComponentData(entity, type);
+        dstManager.AddComponent(entity, typeof(MoveForwardTag));
     }
 }

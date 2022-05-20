@@ -4,9 +4,8 @@ using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
-public partial class EnemyHealthSystem : SystemBase
+public partial class EntityExpirationSystem : SystemBase
 {
-    private EntityQueryDesc enemyQueryDesc;
     EndSimulationEntityCommandBufferSystem ecbs;
     private EntityQuery expiredQuery;
     private EntityQuery deadQuery;

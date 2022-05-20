@@ -17,7 +17,7 @@ public partial class DamageOnTriggerSystem : SystemBase
     struct DamageOnTriggerJob : ITriggerEventsJob
     {
         [ReadOnly] public ComponentDataFromEntity<BulletTag> bulletGroup;
-        [ReadOnly] public ComponentDataFromEntity<EnemyTag> enemyGroup;
+        [ReadOnly] public ComponentDataFromEntity<ShootableTag> enemyGroup;
         [ReadOnly] public ComponentDataFromEntity<BulletConfigComponent> configGroup;
         public ComponentDataFromEntity<LifespanComponent> lifespanGroup;
         public ComponentDataFromEntity<EntityHealthComponent> healthGroup;
@@ -26,27 +26,36 @@ public partial class DamageOnTriggerSystem : SystemBase
             Entity entityA = triggerEvent.EntityA;
             Entity entityB = triggerEvent.EntityB;
             Entity bullet;
-            Entity enemy;
+            Entity shootable;
 
             if (bulletGroup.HasComponent(entityA) && enemyGroup.HasComponent(entityB)) 
             {
                 bullet = entityA;
-                enemy = entityB;
-            } else
+                shootable = entityB;
+            } else if (bulletGroup.HasComponent(entityB) && enemyGroup.HasComponent(entityA))
             {
                 bullet = entityB;
-                enemy = entityA;
+                shootable = entityA;
+            } else
+            {
+                return;
             }
 
             LifespanComponent lifespan = lifespanGroup[bullet];
             if(lifespan.Value > 0)
             {
-                EntityHealthComponent health = healthGroup[enemy];
-                health.CurrentHealth -= configGroup[bullet].Damage;
-                healthGroup[enemy] = health;
-
+                // bulllet hit a shootable so stop it
                 lifespan.Value = 0;
                 lifespanGroup[bullet] = lifespan;
+
+                //  if the shootable has health reduce it
+                if (healthGroup.HasComponent(shootable))
+                {
+                    EntityHealthComponent health = healthGroup[shootable];
+                    health.CurrentHealth -= configGroup[bullet].Damage;
+                    healthGroup[shootable] = health;
+
+                }
             }
         }
     }
@@ -67,7 +76,7 @@ public partial class DamageOnTriggerSystem : SystemBase
     {
         Dependency = new DamageOnTriggerJob{
             bulletGroup = GetComponentDataFromEntity<BulletTag>(true),
-            enemyGroup = GetComponentDataFromEntity<EnemyTag>(true),
+            enemyGroup = GetComponentDataFromEntity<ShootableTag>(true),
             configGroup = GetComponentDataFromEntity<BulletConfigComponent>(true),
             lifespanGroup = GetComponentDataFromEntity<LifespanComponent>(),
             healthGroup = GetComponentDataFromEntity<EntityHealthComponent>()

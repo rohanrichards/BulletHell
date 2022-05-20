@@ -15,6 +15,7 @@ public partial class ExplosionSystem : SystemBase
 {
     public NativeArray<Translation> locations;
     private EntityQuery entityQuery;
+    private EntityQuery playerQuery;
     private EndSimulationEntityCommandBufferSystem ecbs;
     protected override void OnStartRunning()
     {
@@ -23,18 +24,24 @@ public partial class ExplosionSystem : SystemBase
             ComponentType.ReadWrite<EntityDataComponent>(),
             ComponentType.ReadWrite<ExplodeAndDeleteTag>()
         );
+        playerQuery = EntityManager.CreateEntityQuery(
+            ComponentType.ReadWrite<Translation>(),
+            ComponentType.ReadOnly<PlayerTag>()
+        );
         ecbs = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
     }
 
     protected override void OnUpdate()
     {
         NativeArray<Translation> locations = entityQuery.ToComponentDataArray<Translation>(Allocator.Temp);
+        NativeArray<Translation> playerLocations = playerQuery.ToComponentDataArray<Translation>(Allocator.Temp);
         NativeArray<EntityDataComponent> datas = entityQuery.ToComponentDataArray<EntityDataComponent>(Allocator.Temp);
 
         for (int i = 0; i < locations.Length; i++)
         {
             var location = locations[i];
             var data = datas[i];
+            var playerLocation = playerLocations[0];
             var physicsWorldSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystem<BuildPhysicsWorld>();
             var collisionWorld = physicsWorldSystem.PhysicsWorld.CollisionWorld;
             var world = physicsWorldSystem.PhysicsWorld;
@@ -66,8 +73,11 @@ public partial class ExplosionSystem : SystemBase
                 RigidBody rigidBody = bodies[rigidBodyIndex];
                 Entity entity = rigidBody.Entity;
                 Translation position = GetComponent<Translation>(entity);
+                float3 distanceOfPlayer = playerLocation.Value - location.Value;
+                float3 directionOfPlayer = math.normalize(distanceOfPlayer);
                 if (math.lengthsq(location.Value - position.Value) <= sqrRadius)
                 {
+                    //location.Value -= directionOfPlayer;
                     float3 direction = position.Value - location.Value;
                     float falloff = 1 - math.length(direction) / data.Size;
                     float3 force = math.normalize(direction) * data.Force * falloff * Time.DeltaTime;

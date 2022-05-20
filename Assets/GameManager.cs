@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         //set up the player
-        ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Laser>();
+        ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Launcher>();
         startingItem.Unlock();
         startingItem.IncreaseLevel();
         //StartCoroutine(SetWinGameTimer());

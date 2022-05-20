@@ -23,15 +23,15 @@ public class Launcher : WeaponBase
 
     public override IEnumerator Fire()
     {
-        LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
-        float arcSize = 90;
+        float arcSize = 30;
         float arcSegment = arcSize / ProjectileCount;
         float offsetWidth = 0.75f;
         float offsetSegment = offsetWidth / ProjectileCount;
         for (int i = 0; i < ProjectileCount; i++)
         {
+            LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
 
-            float rotationOffset = (arcSegment / 2) + (arcSegment * i);
+            float rotationOffset = (arcSegment / 2) + (arcSegment * Random.Range(0, ProjectileCount));
             float offset = (offsetSegment / 2) + (offsetSegment * i);
             Vector3 originOffset = playerLocation.Up + (playerLocation.Right * ((offsetWidth / 2) - offset));
             Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
@@ -42,9 +42,14 @@ public class Launcher : WeaponBase
             data.Force = KnockBackForce;
             manager.SetComponentData(bullet, data);
 
+            LifespanComponent lifespan = manager.GetComponentData<LifespanComponent>(bullet);
+            lifespan.Value += Random.Range(0, bulletConfig.Lifespan);
+            manager.SetComponentData(bullet, lifespan);
+
             PhysicsVelocity vel = manager.GetComponentData<PhysicsVelocity>(bullet);
             vel.Linear += ECSPlayerController.getPlayerPhysicsVelocity().Linear;
             manager.SetComponentData(bullet, vel);
+            yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(1 / RateOfFire);
         StartCoroutine(Fire());

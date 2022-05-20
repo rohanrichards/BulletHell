@@ -3,8 +3,6 @@ using Unity.Transforms;
 using Unity.Physics;
 using Unity.Mathematics;
 using Unity.Burst;
-using UnityEngine;
-using System;
 
 [BurstCompile]
 partial struct MoveTowardTarget : IJobEntity
@@ -12,7 +10,7 @@ partial struct MoveTowardTarget : IJobEntity
     public float dt;
     public float3 target;
 
-    public void Execute(ref PhysicsVelocity velocity, ref Translation position, in EntityMovementSettings settings)
+    public void Execute(ref PhysicsVelocity velocity, in Translation position, in EntityMovementSettings settings)
     {
         float3 diff = target - position.Value;
         float dist = math.length(diff);

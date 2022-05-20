@@ -16,7 +16,9 @@ public class HealthBarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        slider.maxValue = statsController.statsConfig.MaxHealth;
-        slider.value = statsController.statsConfig.currentHealth;
+        float maxHealth = ECSPlayerController.getPlayerHealth().MaxHealth;
+        float currentHealth = ECSPlayerController.getPlayerHealth().CurrentHealth;
+        slider.maxValue = maxHealth;
+        slider.value = currentHealth;
     }
 }

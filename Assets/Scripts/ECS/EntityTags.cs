@@ -8,6 +8,9 @@ public struct RotateToTargetTag: IComponentData { }
 public struct RotateToDirectionTag : IComponentData { }
 public struct ExplodeAndDeleteTag: IComponentData { }
 public struct EnemyTag: IComponentData { }
+public struct ShootableTag: IComponentData { }
 public struct PlayerTag : IComponentData { }
 public struct BulletTag : IComponentData { }
+public struct PickupTag : IComponentData { }
+public struct MagneticPickupTag : IComponentData { }
 

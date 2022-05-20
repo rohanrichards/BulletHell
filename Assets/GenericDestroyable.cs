@@ -26,11 +26,11 @@ public class GenericDestroyable : ContainerBase
 
     public override void KillSelf()
     {
-        if(Random.Range(0f,1f) > 0.66)
+/*        if(Random.Range(0f,1f) > 0.66)
         {
             PickupGenerator pickupGenerator = GameObject.FindObjectOfType<PickupGenerator>();
             pickupGenerator.CreateRepairItem(rb.transform);
         }
-        Destroy(gameObject);
+        Destroy(gameObject);*/
     }
 }

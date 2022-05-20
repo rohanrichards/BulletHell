@@ -11,8 +11,7 @@ public partial class BulletMoverSystem : SystemBase
         entityQuery = EntityManager.CreateEntityQuery(
             ComponentType.ReadWrite<PhysicsVelocity>(),
             ComponentType.ReadWrite<Translation>(),
-            ComponentType.ReadWrite<MoveForwardTag>(),
-            ComponentType.ReadWrite<LifespanComponent>()
+            ComponentType.ReadWrite<MoveForwardTag>()
         );
     }
 
@@ -20,8 +19,5 @@ public partial class BulletMoverSystem : SystemBase
     {
         MoveForwardJob moveJob = new MoveForwardJob { dt = Time.DeltaTime };
         moveJob.Schedule(entityQuery);
-
-        LifespanReducerJob lifeJob = new LifespanReducerJob { dt = Time.DeltaTime };
-        lifeJob.Schedule(entityQuery);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Transforms;
 using UnityEngine;
 
 public class GenericEnemy : EnemyBase, IConvertGameObjectToEntity
@@ -35,10 +36,10 @@ public class GenericEnemy : EnemyBase, IConvertGameObjectToEntity
 
     protected override IEnumerator AttemptAttack()
     {
-        StatsController playerStatsController = GameObject.FindObjectOfType<StatsController>();
-        playerStatsController.ApplyDamage(1, this);
+        /*StatsController playerStatsController = GameObject.FindObjectOfType<StatsController>();
+        playerStatsController.ApplyDamage(1, this);*/
         yield return new WaitForSeconds(attackRate);
-        StartCoroutine(AttemptAttack());
+        //StartCoroutine(AttemptAttack());
     }
 
     public override void ApplyDamage(float damage)
@@ -62,12 +63,12 @@ public class GenericEnemy : EnemyBase, IConvertGameObjectToEntity
         dstManager.AddComponent(entity, typeof(MoveTowardTargetTag));
         dstManager.AddComponent(entity, typeof(RotateToTargetTag));
         dstManager.AddComponent(entity, typeof(EnemyTag));
-
-        dstManager.AddComponent(entity, typeof(EntityMovementSettings));
-        dstManager.SetComponentData(entity, new EntityMovementSettings { moveSpeed = config.moveSpeed });
+        dstManager.AddComponent(entity, typeof(ShootableTag));
 
 
-        dstManager.AddComponent<EntityHealthComponent>(entity);
-        dstManager.SetComponentData(entity, new EntityHealthComponent { CurrentHealth = config.currentHealth, MaxHealth = config.baseHealth });
+        dstManager.AddComponentData(entity, new EntityDataComponent { Type = EntityTypes.SplattersOnDeath, Size = transform.localScale.x, XP = config.XPValue });
+        dstManager.AddComponentData(entity, new EntityMovementSettings { moveSpeed = config.moveSpeed });
+        dstManager.AddComponentData(entity, new EntityHealthComponent { CurrentHealth = config.currentHealth, MaxHealth = config.baseHealth });
+        dstManager.AddComponentData(entity, new EntityDamageComponent { Damage = config.damage, attacking = false, attackTime = 0, attackCooldown = 1f });
     }
 }

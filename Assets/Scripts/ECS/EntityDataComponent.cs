@@ -3,9 +3,15 @@ using Unity.Entities;
 
 public enum EntityTypes
 {
+    // Death Types
     ExplodesOnDeath = 100,
-    SplattersOnDeath = 200,
-    DoesNothingOnDeath = 300,
+    SplattersOnDeath = 101,
+    DoesNothingOnDeath = 102,
+    EndsGameOnDeath = 103,
+    // Pickup Types
+    XP = 201,
+    Health = 202,
+    Chest = 203,
 }
 
 public struct EntityDataComponent : IComponentData
@@ -14,4 +20,6 @@ public struct EntityDataComponent : IComponentData
     public float Size;
     public float Damage;
     public float Force;
+    public float XP;
+    public float Health;
 }

@@ -16,7 +16,6 @@ public abstract class BulletBase : MonoBehaviour, IConvertGameObjectToEntity
     protected Vector3 originalOffset;
     static protected EntityManager entityManager;
 
-
     public float Damage
     {
         get
@@ -60,7 +59,7 @@ public abstract class BulletBase : MonoBehaviour, IConvertGameObjectToEntity
         entityManager.SetComponentData(bullet, new Translation { Value = origin.Position+(float3)offset });
         entityManager.SetComponentData(bullet, new Rotation { Value = rotation });
         PhysicsVelocity vel = entityManager.GetComponentData<PhysicsVelocity>(bullet);
-        vel.Linear = rotation * Vector3.up * config.baseSpeed * Time.deltaTime;
+        vel.Linear = rotation * Vector3.up * config.baseSpeed;
         entityManager.SetComponentData<PhysicsVelocity>(bullet, vel);
 
         return bullet;
@@ -77,7 +76,6 @@ public abstract class BulletBase : MonoBehaviour, IConvertGameObjectToEntity
         dstManager.AddComponentData(entity, new LifespanComponent { Value = config.Lifespan });
         dstManager.AddComponentData(entity, new BulletConfigComponent { Damage = config.Damage });
 
-        dstManager.AddComponent(entity, typeof(MoveForwardTag));
         dstManager.AddComponent(entity, typeof(BulletTag));
     }
 }

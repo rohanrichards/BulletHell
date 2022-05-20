@@ -17,8 +17,8 @@ MonoBehaviour:
   - Bullets
   - Player
   - Terrain
-  - 
-  - 
+  - Pickups
+  - PickupMagnet
   - 
   - 
   - 

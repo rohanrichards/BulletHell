@@ -41,10 +41,38 @@ public class ECSPlayerController : MonoBehaviour
         }
     }
 
+    public static EntityHealthComponent getPlayerHealth()
+    {
+        var queryResult = playerQuery.ToComponentDataArray<EntityHealthComponent>(Allocator.Temp);
+        if (queryResult.Length > 0)
+        {
+            return queryResult[0];
+        }
+        else
+        {
+            return new EntityHealthComponent();
+        }
+    }
+
+    public static EntityXPComponent getPlayerXP()
+    {
+        var queryResult = playerQuery.ToComponentDataArray<EntityXPComponent>(Allocator.Temp);
+        if (queryResult.Length > 0)
+        {
+            return queryResult[0];
+        }
+        else
+        {
+            return new EntityXPComponent();
+        }
+    }
+
     public void Awake()
     {
         playerQuery = World.DefaultGameObjectInjectionWorld.EntityManager.CreateEntityQuery(
             ComponentType.ReadWrite<PhysicsVelocity>(),
+            ComponentType.ReadWrite<Translation>(),
+            ComponentType.ReadWrite<EntityHealthComponent>(),
             ComponentType.ReadWrite<LocalToWorld>(),
             ComponentType.ReadWrite<PlayerTag>()
         );
@@ -64,7 +92,6 @@ public class ECSPlayerController : MonoBehaviour
 
     void Update()
     {
-
     }
 
     private void FixedUpdate()

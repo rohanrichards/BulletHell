@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Experimental.Rendering.Universal;
+using Unity.Mathematics;
+using Unity.Transforms;
 
 public class StatsController : MonoBehaviour
 {
@@ -80,14 +82,6 @@ public class StatsController : MonoBehaviour
         Debug.Log("Leveled up! New Level: " + statsConfig.currentLevel);
         levelUpUIController.Show();
     }
-    
-    // used to apply damage to the health of the attached game object
-    public void ApplyDamage(int damage, EnemyBase source)
-    {
-        statsConfig.currentHealth -= damage;
-        CheckIfDead();
-        PlayDamageNotifier(source);
-    }
 
     public void ApplyHealth(int health)
     {
@@ -95,20 +89,13 @@ public class StatsController : MonoBehaviour
         if (statsConfig.currentHealth > statsConfig.MaxHealth) statsConfig.currentHealth = statsConfig.MaxHealth;
     }
 
-    public void PlayDamageNotifier(EnemyBase source)
+    public void PlayDamageNotifier(float3 source)
     {
-        damageNotifier.transform.LookAt(source.rb.transform, transform.up);
+        LocalToWorld playerLocal = ECSPlayerController.getPlayerLocation();
+        damageNotifier.transform.LookAt(source, playerLocal.Up);
         damageNotifier.transform.Rotate(new Vector3(0, -90, 0));
         damageNotifier.Play();
         damageFlashLight.Play();
-    }
-
-    void CheckIfDead()
-    {
-        if(statsConfig.currentHealth <= 0)
-        {
-            gameManager.EndGame(false);
-        }
     }
 
     public void SaveStats()

@@ -113,7 +113,7 @@ public class EnemyGenerator : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                Vector3 location = new Vector3(x + x * padding, y + y * padding, 0);
+                Vector3 location = new Vector3(10+ x + x * padding, 10 +  y + y * padding, 0);
                 entityManager.SetComponentData(enemies[index], new Translation { Value = location });
                 index++;
             }

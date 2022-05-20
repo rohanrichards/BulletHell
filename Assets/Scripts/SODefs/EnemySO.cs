@@ -7,4 +7,5 @@ public class EnemySO : DestroyableSO
 {
     public float moveSpeed = 1.0f;
     public int XPValue = 1;
+    public int damage = 1;
 }

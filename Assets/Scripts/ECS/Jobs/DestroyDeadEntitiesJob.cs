@@ -25,12 +25,13 @@ partial struct DestroyExpiredEntitiesJob : IJobEntity
 partial struct DestroyDeadEntitiesJob : IJobEntity
 {
     public EntityCommandBuffer ecb;
-    public void Execute([EntityInQueryIndex] int index, Entity entity, in EntityHealthComponent health, in LocalToWorld local)
+    public void Execute(Entity entity, in EntityHealthComponent health, in LocalToWorld local, in EntityDataComponent data)
     {
         if (health.CurrentHealth <= 0)
         {
             Entity message = ecb.CreateEntity();
             ecb.AddComponent(message, new MessageDataComponent { position = local.Position, rotation = local.Rotation, type = MessageTypes.Death });
+            ecb.AddComponent(message, data);
             ecb.DestroyEntity(entity);
         }
     }

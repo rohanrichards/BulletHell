@@ -64,6 +64,7 @@ public class GenericEnemy : EnemyBase, IConvertGameObjectToEntity
         dstManager.AddComponent(entity, typeof(RotateToTargetTag));
         dstManager.AddComponent(entity, typeof(EnemyTag));
         dstManager.AddComponent(entity, typeof(ShootableTag));
+        //dstManager.AddComponent(entity, typeof(BoidTag));
 
 
         dstManager.AddComponentData(entity, new EntityDataComponent { Type = EntityTypes.SplattersOnDeath, Size = transform.localScale.x, XP = config.XPValue });

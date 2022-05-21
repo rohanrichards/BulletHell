@@ -3,7 +3,9 @@ using Unity.Physics;
 using Unity.Transforms;
 using Unity.Mathematics;
 using Unity.Collections;
+using Unity.Physics.Systems;
 
+[UpdateAfter(typeof(EndFramePhysicsSystem))]
 public partial class EnemyMoverSystem : SystemBase
 {
     public float3 target;

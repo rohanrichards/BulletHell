@@ -1,6 +1,7 @@
 using System;
 using Unity.Entities;
 
+public struct BoidTag: IComponentData { }
 public struct MoveInDirectionTag: IComponentData { }
 public struct MoveForwardTag : IComponentData { }
 public struct MoveTowardTargetTag : IComponentData { }

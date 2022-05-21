@@ -103,7 +103,7 @@ public class EnemyGenerator : MonoBehaviour
     {
         int width = size;
         int height = size;
-        int padding = 2;
+        int padding = 4;
 
         NativeArray<Entity> enemies = new NativeArray<Entity>(size * size, Allocator.TempJob);
         entityManager.Instantiate(testingEntityPrefab, enemies);
@@ -113,7 +113,8 @@ public class EnemyGenerator : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                Vector3 location = new Vector3(10+ x + x * padding, 10 +  y + y * padding, 0);
+                Vector3 location = new Vector3(10 + x + (x * padding), 10 +  y + (y * padding), 0);
+                Debug.Log("location: " + location);
                 entityManager.SetComponentData(enemies[index], new Translation { Value = location });
                 index++;
             }

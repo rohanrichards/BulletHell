@@ -7,7 +7,6 @@ using Unity.Burst;
 partial struct RotateToFixedTargetJob : IJobEntity
 {
     public float dt;
-    public float turnSpeed;
 
     public void Execute(ref Rotation rotation, in EntityTargetSettings targetSettings, in EntityMovementSettings moveSettings)
     {

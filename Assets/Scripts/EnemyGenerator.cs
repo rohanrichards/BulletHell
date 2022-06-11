@@ -182,6 +182,8 @@ public class EnemyGenerator : MonoBehaviour
             {
                 float3 targetMoveDirection = ECSPlayerController.getPlayerLocation().Position - location;
                 entityManager.SetComponentData(enemies[i], new EntityTargetSettings { targetMovementDirection = targetMoveDirection});
+                Quaternion originRotation = Quaternion.AngleAxis(Mathf.Atan2(targetMoveDirection.y, targetMoveDirection.x), new Vector3(0, 0, 1));
+                entityManager.SetComponentData(enemies[i], new Rotation { Value = originRotation});
             }
 
             shellIndex++;

@@ -10,4 +10,5 @@ public struct EntityDamageComponent : IComponentData
     public bool attacking;
     public float attackTime;
     public float attackCooldown;
+    public float attackRange;
 }

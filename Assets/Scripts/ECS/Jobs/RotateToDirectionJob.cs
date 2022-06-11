@@ -12,6 +12,7 @@ partial struct RotateToDirectionJob : IJobEntity
 
     public void Execute(ref Rotation rotation)
     {
+
         quaternion targetRotation = quaternion.LookRotationSafe(math.forward(), direction);
         rotation.Value = math.slerp(rotation.Value, targetRotation, turnSpeed);
     }

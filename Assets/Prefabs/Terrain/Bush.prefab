@@ -94,7 +94,8 @@ GameObject:
   - component: {fileID: 3652531606514822336}
   - component: {fileID: 8787421268754335492}
   - component: {fileID: 2530316099609610327}
-  - component: {fileID: 4608766135015956844}
+  - component: {fileID: -910872387268605684}
+  - component: {fileID: 934255784225050872}
   m_Layer: 8
   m_Name: Bush
   m_TagString: Terrain
@@ -328,7 +329,19 @@ MonoBehaviour:
         Tag07: 0
     m_SerializedVersion: 1
   m_SerializedVersion: 1
---- !u!114 &4608766135015956844
+--- !u!114 &-910872387268605684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7251585231742559334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce1c061b5f44c814d9a880e453cd513a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &934255784225050872
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

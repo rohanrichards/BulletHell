@@ -13,7 +13,7 @@ public class LaserBolt : BulletBase
     {
         base.Convert(entity, dstManager, conversionSystem);
 
-        EntityDataComponent type = new EntityDataComponent { Type = EntityTypes.DoesNothingOnDeath, Damage = config.Damage, Size = config.AOE };
+        EntityDataComponent type = new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath, Damage = config.Damage, Size = config.AOE };
         dstManager.AddComponentData(entity, type);
     }
 

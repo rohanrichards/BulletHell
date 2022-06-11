@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHealth: 250
   currentHealth: 250
-  moveSpeed: 700
+  moveSpeed: 15
   XPValue: 20
+  damage: 1

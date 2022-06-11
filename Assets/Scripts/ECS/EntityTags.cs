@@ -6,6 +6,7 @@ public struct MoveInDirectionTag: IComponentData { }
 public struct MoveForwardTag : IComponentData { }
 public struct MoveTowardTargetTag : IComponentData { }
 public struct RotateToTargetTag: IComponentData { }
+public struct RotateToFixedTargetTag: IComponentData { }
 public struct RotateToDirectionTag : IComponentData { }
 public struct ExplodeAndDeleteTag: IComponentData { }
 public struct EnemyTag: IComponentData { }

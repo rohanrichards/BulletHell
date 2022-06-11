@@ -19,7 +19,7 @@ partial struct AttackTargetJob : IJobEntity
 
             if (damage.attackTime <= 0)
             {
-                UnityEngine.Debug.Log("attacking: " + targetHealth.CurrentHealth);
+                //UnityEngine.Debug.Log("attacking: " + targetHealth.CurrentHealth);
                 damage.attackTime = damage.attackCooldown;
                 targetHealth.CurrentHealth -= damage.Damage;
                 ecb.SetComponent(target, targetHealth);
@@ -27,7 +27,7 @@ partial struct AttackTargetJob : IJobEntity
                 // create attack message
                 Entity message = ecb.CreateEntity();
                 ecb.AddComponent(message, new MessageDataComponent { position=position.Value, rotation = rotation.Value,  type = MessageTypes.Attack });
-                ecb.AddComponent<EntityDataComponent>(message, new EntityDataComponent { Type = EntityTypes.DoesNothingOnDeath});
+                ecb.AddComponent<EntityDataComponent>(message, new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath});
             }
         }
     }

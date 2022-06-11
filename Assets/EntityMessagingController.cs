@@ -15,18 +15,15 @@ public class EntityMessagingController : MonoBehaviour
     private EntityQuery entityQuery;
     private StatsController stats;
     private PickupGenerator pickupGenerator;
-
-    public enum MessageTypes {
-        Death = 100,
-        Pickup = 200,
-        Attack = 300
-    }
+    private OpenChestUIController chestUIController;
 
     void Start()
     {
         stats = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
         pickupGenerator = GameObject.Find("Scripts").GetComponent<PickupGenerator>();
         manager = World.DefaultGameObjectInjectionWorld.EntityManager;
+        chestUIController = GameObject.FindObjectOfType<OpenChestUIController>();
+
         entityQuery = manager.CreateEntityQuery(
             ComponentType.ReadWrite<MessageDataComponent>(),
             ComponentType.ReadWrite<EntityDataComponent>()
@@ -44,7 +41,7 @@ public class EntityMessagingController : MonoBehaviour
 
             if (message.type == MessageTypes.Death)
             {
-                if (type.Type == EntityTypes.ExplodesOnDeath)
+                if (type.Type == EntityDeathTypes.ExplodesOnDeath)
                 {
                     Instantiate(explosionDeathPrefab, message.position, message.rotation);
                     Entity exploder = manager.CreateEntity();
@@ -56,7 +53,7 @@ public class EntityMessagingController : MonoBehaviour
                     manager.AddComponent<Translation>(exploder);
                     manager.SetComponentData(exploder, new Translation { Value = message.position });
                 }
-                if (type.Type == EntityTypes.SplattersOnDeath)
+                if (type.Type == EntityDeathTypes.SplattersOnDeath)
                 {
                     Instantiate(splatterDeathPrefab, message.position, message.rotation);
                 }
@@ -65,10 +62,31 @@ public class EntityMessagingController : MonoBehaviour
                 {
                     pickupGenerator.CreateXPOrb(message.position, Mathf.CeilToInt(type.XP));
                 }
+
+                if(type.Health != 0)
+                {
+                    pickupGenerator.CreateRepairItem(message.position, Mathf.CeilToInt(type.Health));
+                }
+
+                if(type.Chest)
+                {
+                    pickupGenerator.CreateChest(message.position);
+                }
             }
             if(message.type == MessageTypes.Pickup)
             {
-                stats.ApplyXP(Mathf.CeilToInt(type.XP));
+                if(type.XP > 0)
+                {
+                    stats.ApplyXP(Mathf.CeilToInt(type.XP));
+                }
+                if(type.Health > 0)
+                {
+                    stats.ApplyHealth(Mathf.CeilToInt(type.Health));
+                }
+                if(type.Chest)
+                {
+                    chestUIController.Show();
+                }
             }
 
             if(message.type == MessageTypes.Attack)

@@ -1,36 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
-public class GenericDestroyable : ContainerBase
-{
-
-    protected override void Start()
+public class GenericDestroyable : ContainerBase, IConvertGameObjectToEntity
+{    public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        base.Start();
+        dstManager.AddComponent(entity, typeof(ShootableTag));
+
+        dstManager.AddComponentData(entity, GetPickupType());
+        dstManager.AddComponentData(entity, new EntityHealthComponent { CurrentHealth = config.currentHealth, MaxHealth = config.baseHealth });
     }
 
-    protected override void Update()
+    private EntityDataComponent GetPickupType()
     {
-        base.Update();
-    }
-
-    public override void ApplyDamage(float damage)
-    {
-        config.currentHealth -= damage;
-        if (config.currentHealth <= 0)
+        float chance = Random.Range(0f, 1f);
+        if(chance <= 0.075)
         {
-            KillSelf();
+            return new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath, Chest = true };
+        }else if(chance <= 0.25) {
+            return new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath, Health = 10 };
         }
-    }
-
-    public override void KillSelf()
-    {
-/*        if(Random.Range(0f,1f) > 0.66)
+        else
         {
-            PickupGenerator pickupGenerator = GameObject.FindObjectOfType<PickupGenerator>();
-            pickupGenerator.CreateRepairItem(rb.transform);
+            return new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath};
         }
-        Destroy(gameObject);*/
     }
 }

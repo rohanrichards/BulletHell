@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 7624393271198051818}
   - component: {fileID: 894970786369719751}
   - component: {fileID: 5269013700776554023}
+  - component: {fileID: -6831877798504738129}
   m_Layer: 8
   m_Name: TreeParent
   m_TagString: Terrain
@@ -370,6 +371,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConversionMode: 0
+--- !u!114 &-6831877798504738129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7251585231742559334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce1c061b5f44c814d9a880e453cd513a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8650539736162191273
 GameObject:
   m_ObjectHideFlags: 0

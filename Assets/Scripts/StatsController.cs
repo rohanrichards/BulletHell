@@ -85,8 +85,11 @@ public class StatsController : MonoBehaviour
 
     public void ApplyHealth(int health)
     {
-        statsConfig.currentHealth += health;
-        if (statsConfig.currentHealth > statsConfig.MaxHealth) statsConfig.currentHealth = statsConfig.MaxHealth;
+        float maxHealth = ECSPlayerController.getPlayerHealth().MaxHealth;
+        float currentHealth = ECSPlayerController.getPlayerHealth().CurrentHealth;
+        currentHealth += health;
+        if(currentHealth > maxHealth) { currentHealth = maxHealth; }
+        ECSPlayerController.setPlayerHealth(Mathf.CeilToInt(currentHealth));
     }
 
     public void PlayDamageNotifier(float3 source)

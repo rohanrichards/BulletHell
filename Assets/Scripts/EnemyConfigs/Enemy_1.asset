@@ -16,3 +16,4 @@ MonoBehaviour:
   currentHealth: 2
   moveSpeed: 12
   XPValue: 10
+  damage: 1

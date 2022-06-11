@@ -4,6 +4,12 @@ using Unity.Mathematics;
 using UnityEngine;
 using static EntityMessagingController;
 
+public enum MessageTypes
+{
+    Death = 100,
+    Pickup = 200,
+    Attack = 300
+}
 public struct MessageDataComponent : IComponentData
 {
     public float3 position;

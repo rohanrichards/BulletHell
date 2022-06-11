@@ -35,17 +35,18 @@ public class PickupGenerator : MonoBehaviour
         Entity newPickup = PickupBase.Create(XPOrbEntityPrefab, location);
         entityManager.AddComponentData(newPickup, new EntityDataComponent { XP = value });
         entityManager.AddComponentData(newPickup, new EntityMovementSettings { moveSpeed = 20 });
-
     }
 
     public void CreateChest(float3 location)
     {
         Entity newPickup = PickupBase.Create(chestEntityPrefab, location);
+        entityManager.AddComponentData(newPickup, new EntityDataComponent { Chest = true });
     }
 
-    public void CreateRepairItem(float3 location)
+    public void CreateRepairItem(float3 location, int value)
     {
         Entity newPickup = PickupBase.Create(repairEntityPrefab, location);
+        entityManager.AddComponentData(newPickup, new EntityDataComponent { Health = value });
     }
 
     private void OnDestroy()

@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour, IConvertGameObjectToEntity
 
         dstManager.AddComponentData(entity, new EntityMovementSettings { moveSpeed = statsController.MoveSpeed });
         dstManager.AddComponentData(entity, new EntityXPComponent { CurrentXP = statsController.CurrentXP });
-        dstManager.AddComponentData(entity, new EntityDataComponent { Type = EntityTypes.EndsGameOnDeath });
+        dstManager.AddComponentData(entity, new EntityDataComponent { Type = EntityDeathTypes.EndsGameOnDeath });
         dstManager.AddComponentData(entity, new EntityHealthComponent { CurrentHealth = statsController.statsConfig.MaxHealth, MaxHealth = statsController.statsConfig.MaxHealth });
     }
 }

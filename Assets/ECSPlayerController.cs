@@ -9,11 +9,12 @@ using UnityEngine;
 public class ECSPlayerController : MonoBehaviour
 {
     public GameObject playerPrefab;
-    protected EntityManager entityManager;
+    protected static EntityManager entityManager;
     protected Entity playerEntityPrefab;
     protected BlobAssetStore blobAssetStore;
     private static EntityQuery playerQuery;
     protected StatsController stats;
+    private static Entity player;
 
     public static LocalToWorld getPlayerLocation()
     {
@@ -54,6 +55,22 @@ public class ECSPlayerController : MonoBehaviour
         }
     }
 
+    public static void setPlayerHealth(int value)
+    {
+        var queryResult = playerQuery.ToComponentDataArray<EntityHealthComponent>(Allocator.Temp);
+        if (queryResult.Length > 0)
+        {
+            EntityHealthComponent health = queryResult[0];
+            health.CurrentHealth = value;
+            entityManager.SetComponentData(player, health);
+        }
+        else
+        {
+            entityManager.SetComponentData(player, new EntityHealthComponent{ CurrentHealth = value, MaxHealth = value});
+        }
+
+    }
+
     public static EntityXPComponent getPlayerXP()
     {
         var queryResult = playerQuery.ToComponentDataArray<EntityXPComponent>(Allocator.Temp);
@@ -84,7 +101,7 @@ public class ECSPlayerController : MonoBehaviour
         entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
         playerEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(playerPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
 
-        Entity player = entityManager.Instantiate(playerEntityPrefab);
+        player = entityManager.Instantiate(playerEntityPrefab);
         entityManager.SetComponentData(player, new Translation());
 
         stats = GameObject.Find("PlayerScripts").GetComponent<StatsController>();

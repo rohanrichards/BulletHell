@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
@@ -20,7 +21,8 @@ public class EnemyGenerator : MonoBehaviour
     [Header("Testing Settings")]
     public bool testing = false;
     public int testEnemyIndex = 3;
-    public int testGridSize = 10;
+    public int testClusterCount = 5;
+    public int testGridSize = 3;
 
     [Header("Spawning Settings")]
     public float baseWaveSpeed = 5.0f;
@@ -30,18 +32,15 @@ public class EnemyGenerator : MonoBehaviour
     public int baseClusterCount = 2;
     public int maxClusterCount = 10;
     public int spawnRadius = 30;
-    public int clusterRadius = 3;
     public int despawnRadius = 45;
-    public int maxEnemies = 3000;
     public GameObject[] availableEnemies;
+    public List<Entity> availableEnemyEntities = new List<Entity>();
     public GameObject enemyContainer;
 
     [Header("Debug Info")]
     public int totalEnemies = 0;
     public AnimationCurve vizualizedSpawnDitribution;
 
-    private GameObject player;
-    private Rigidbody2D playerBody;
     private DifficultyManager difficultyManager;
 
     public float WaveSpeed
@@ -59,17 +58,17 @@ public class EnemyGenerator : MonoBehaviour
     }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        //playerBody = player.GetComponentInChildren<Rigidbody2D>();
         difficultyManager = gameObject.GetComponent<DifficultyManager>();
 
-        if (usingECS)
+        blobAssetStore = new BlobAssetStore();
+        entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+
+        for (int i = 0; i < availableEnemies.Length; i++)
         {
-            blobAssetStore = new BlobAssetStore();
-            testingPrefab = availableEnemies[testEnemyIndex];
-            entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-            testingEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(testingPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
+            GameObject prefab = availableEnemies[i];
+            availableEnemyEntities.Add(GameObjectConversionUtility.ConvertGameObjectHierarchy(prefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore)));
         }
+        testingEntityPrefab = availableEnemyEntities[testEnemyIndex];
 
         StartCoroutine(DelayedStart());
     }
@@ -85,36 +84,41 @@ public class EnemyGenerator : MonoBehaviour
 
         if (testing)
         {
-            if (usingECS)
-            {
-                GenerateTestEntities(testGridSize);
-            }else
-            {
-                GenerateTestEnemies(testEnemyIndex, testGridSize);
-            }
-        }else
+            GenerateTestEntities(testClusterCount);
+        }
+        else
         {
-            StartCoroutine(SpawnEnemies());
-            StartCoroutine(CheckForOutOfRange());
+            StartCoroutine(GenerateEntityEnemies());
         }
     }
 
     void GenerateTestEntities(int size)
     {
-        int width = size;
-        int height = size;
-        int padding = 4;
+        EnemyGeneratorSystem generatorSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystem<EnemyGeneratorSystem>();
+        NativeArray<Translation> locations = generatorSystem.GetClusterLocations(size, spawnRadius);
 
-        NativeArray<Entity> enemies = new NativeArray<Entity>(size * size, Allocator.TempJob);
+        for (int i = 0; i < locations.Length; i++)
+        {
+            SpawnTestEntityCluster(testGridSize, locations[i]);
+        }
+
+        locations.Dispose();
+    }
+
+
+    void SpawnTestEntityCluster(int count, Translation clusterLocation)
+    {
+        NativeArray<Entity> enemies = new NativeArray<Entity>(count*count, Allocator.TempJob);
         entityManager.Instantiate(testingEntityPrefab, enemies);
+        int padding = 1;
+        int width = count, height = count;
 
         int index = 0;
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                Vector3 location = new Vector3(10 + x + (x * padding), 10 +  y + (y * padding), 0);
-                Debug.Log("location: " + location);
+                Vector3 location = new Vector3(clusterLocation.Value.x + x + (x * padding), clusterLocation.Value.y + y + (y * padding), 0);
                 entityManager.SetComponentData(enemies[index], new Translation { Value = location });
                 index++;
             }
@@ -123,113 +127,75 @@ public class EnemyGenerator : MonoBehaviour
         enemies.Dispose();
     }
 
-    void GenerateTestEnemies(int index, int size)
+    IEnumerator GenerateEntityEnemies(int clusterOverride = 0)
     {
-        int width = size;
-        int height = size;
-        int padding = 2;
+        int clustersToSpawn = clusterOverride == 0 ? ClusterCount : clusterOverride;
 
-        for(int x = 0; x<width; x++)
+        EnemyGeneratorSystem generatorSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystem<EnemyGeneratorSystem>();
+        NativeArray<Translation> locations = generatorSystem.GetClusterLocations(clustersToSpawn, spawnRadius);
+
+        for (int i = 0; i < locations.Length; i++)
         {
-            for (int y = 0; y < height; y++)
-            {
-                Vector2 location = new Vector2(x + x*padding, y + y*padding);
-                SpawnEnemy(location, availableEnemies[index]);
-            }
+            SpawnEntityCluster(locations[i]);
         }
+
+        locations.Dispose();
+        yield return new WaitForSeconds(WaveSpeed);
+        StartCoroutine(GenerateEntityEnemies());
     }
 
-    private void LateUpdate()
+    void SpawnEntityCluster(Translation clusterLocation)
     {
-        //totalEnemies = GameObject.FindObjectsOfType<EnemyBase>().Length;
-    }
+        bool super = UnityEngine.Random.value > 0.98;
+        int enemyCount = super ? 1 : ClusterSize;
+        int enemyPrefabIndex = PickEnemyForCluster();
 
-    IEnumerator SpawnEnemies(int clusterOverride = 0)
-    {
-        if(totalEnemies < maxEnemies)
+        // create the entities
+        NativeArray<Entity> enemies = new NativeArray<Entity>(enemyCount, Allocator.TempJob);
+        entityManager.Instantiate(availableEnemyEntities[enemyPrefabIndex], enemies);
+
+        // set their positions
+        float shellDistance = 1.0f;
+        float shellSpacing = 1.0f;
+        int shell = 0;
+        int shellIndex = 0;
+
+        for (int i = 0; i < enemies.Length; i++)
         {
-            int clustersToSpawn = clusterOverride == 0 ? ClusterCount : clusterOverride;
-            for (int i = 0; i < clustersToSpawn; i++)
+            float radius = shell * shellDistance;
+            float circumference = radius * (2 * Mathf.PI);
+            int numberInShell = Mathf.Min(Mathf.FloorToInt(circumference / shellSpacing), enemies.Length - i + shellIndex + 1);
+            if(numberInShell == 0)
             {
-                int retry = 0;
-                bool super = UnityEngine.Random.value > 0.98;
+                numberInShell = 1;
+            }
+            
+            float frac = (float)shellIndex / (float)numberInShell;
+            float angle = frac * (2 * Mathf.PI);
+            float x = Mathf.Sin(angle) * radius;
+            float y = Mathf.Cos(angle) * radius;
 
-                while (retry < 3)
-                {
-                    int clusterCircle = spawnRadius + (retry * 10);
-                    Vector2 clusterLocation = (Vector2)player.GetComponentInChildren<Rigidbody2D>().transform.position + RandomPointOnCircleEdge(clusterCircle);
-                    Collider2D match = Physics2D.OverlapCircle(clusterLocation, clusterRadius);
+            float3 location = new Vector3(clusterLocation.Value.x + x, clusterLocation.Value.y + y, 0);
+            entityManager.SetComponentData(enemies[i], new Translation { Value = location });
 
-                    if (match)
-                    {
-                        //Debug.Log("Failed to spawn cluster, expanding zone");
-                        retry++;
-                    }
-                    else
-                    {
-                        SpawnCluster(clusterLocation, super);
-                        break;
-                    }
-                }
+            if(entityManager.HasComponent(enemies[i], typeof(EntityTargetSettings)))
+            {
+                float3 targetMoveDirection = ECSPlayerController.getPlayerLocation().Position - location;
+                entityManager.SetComponentData(enemies[i], new EntityTargetSettings { targetMovementDirection = targetMoveDirection});
+            }
+
+            shellIndex++;
+            if(shellIndex >= numberInShell)
+            {
+                shellIndex = 0;
+                shell++;
             }
         }
-        if(clusterOverride == 0)
-        {
-            yield return new WaitForSeconds(WaveSpeed);
-            StartCoroutine(SpawnEnemies());
-        }
-}
 
-    void SpawnCluster(Vector2 location, bool super)
-    {
-        int retry = 0;
-        GameObject enemyPrefab = PickEnemyForCluster();
-        float weight = enemyPrefab.GetComponent<EnemyBase>().GetLikelihoodWeight(difficultyManager.GetDifficultyMod());
-        int enemyCount;
-        int spawnCircle;
-
-        if (super)
-        {
-            enemyCount = 1;
-        }else
-        {
-            enemyCount = ClusterSize;
-        }
-
-        for (int i = 0; i < enemyCount; i++)
-        {
-            spawnCircle = 0;
-            while(retry < 10)
-            {
-                spawnCircle += retry/3;
-                Vector2 spawnLocation = location + RandomPointInsideCircle(spawnCircle);
-                float checkRadius = enemyPrefab.GetComponentInChildren<CircleCollider2D>().radius * enemyPrefab.transform.localScale.x; 
-                Collider2D[] matches = Physics2D.OverlapCircleAll(spawnLocation, checkRadius);
-
-                if (matches.Length > 0)
-                {
-                   /* Debug.DrawLine(new Vector2(spawnLocation.x - checkRadius, spawnLocation.y - checkRadius), new Vector2(spawnLocation.x + checkRadius, spawnLocation.y + checkRadius), Color.red, 10000);
-                    Debug.Log("Something at this location already (retry " + retry + ")");*/
-                    retry++;
-                    continue;
-                }
-                else
-                {
-                    if (super)
-                    {
-                        SpawnSuper(spawnLocation, enemyPrefab);
-                    }else
-                    {
-                        SpawnEnemy(spawnLocation, enemyPrefab);
-                    }
-                    retry = 0;
-                    break;
-                }
-            }
-        }
+        enemies.Dispose();
     }
 
-    GameObject PickEnemyForCluster()
+    int PickEnemyForCluster()
     {
         int totalEnemies = availableEnemies.Length;
         List<GameObject> selectedEnemies = new List<GameObject>();
@@ -254,19 +220,22 @@ public class EnemyGenerator : MonoBehaviour
             curve.AddKey(key);
         }
 
-        if (selectedEnemies.Count == 1) return selectedEnemies[0];
+        if (selectedEnemies.Count == 1)
+        {
+            return Array.FindIndex(availableEnemies, e => e == selectedEnemies[0]);
+        };
 
         vizualizedSpawnDitribution = curve;
         float point = curve.Evaluate(UnityEngine.Random.value);
         int index = Mathf.RoundToInt(point * (selectedEnemies.Count-1));
-        string log = FormattableString.Invariant($"point: {point}, selectedEnemies: {selectedEnemies.Count}, index: {index}");
+        //string log = FormattableString.Invariant($"point: {point}, selectedEnemies: {selectedEnemies.Count}, index: {index}");
         //Debug.Log(log);
-        return selectedEnemies[index];
+        return Array.FindIndex(availableEnemies, e => e == selectedEnemies[index]);
     }
 
     void SpawnSuper(Vector2 location, GameObject prefab)
     {
-        GameObject newEnemy = EnemyBase.Create(prefab, location, enemyContainer.transform);
+/*        GameObject newEnemy = EnemyBase.Create(prefab, location, enemyContainer.transform);
         newEnemy.transform.position = location;
         SpriteRenderer[] sprites = newEnemy.GetComponentsInChildren<SpriteRenderer>();
         foreach(SpriteRenderer r in sprites)
@@ -281,18 +250,12 @@ public class EnemyGenerator : MonoBehaviour
         controller.config.baseHealth += controller.config.baseHealth * 10;
         controller.config.currentHealth = controller.config.baseHealth;
         controller.config.moveSpeed *= 2f;
-        body.mass *= 2;
-    }
-
-    void SpawnEnemy(Vector2 location, GameObject prefab)
-    {
-        GameObject newEnemy = EnemyBase.Create(prefab, location, enemyContainer.transform);
-        totalEnemies++;
+        body.mass *= 2;*/
     }
 
     IEnumerator CheckForOutOfRange()
     {
-        int despawned = 0;
+/*        int despawned = 0;
         EnemyBase[] enemies = GameObject.FindObjectsOfType<EnemyBase>();
         foreach(EnemyBase enemy in enemies)
         {
@@ -316,21 +279,9 @@ public class EnemyGenerator : MonoBehaviour
         if(clustersToSpawn > 0)
         {
             StartCoroutine(SpawnEnemies(clustersToSpawn));
-        }
+        }*/
         yield return new WaitForSeconds(1); 
         StartCoroutine(CheckForOutOfRange());
-    }
-
-    Vector2 RandomPointOnCircleEdge(float radius)
-    {
-        Vector2 point =  UnityEngine.Random.insideUnitCircle.normalized * radius;
-        return new Vector2(point.x, point.y);
-    }
-
-    Vector2 RandomPointInsideCircle(float radius)
-    {
-        Vector2 point = UnityEngine.Random.insideUnitCircle * radius;
-        return new Vector2(point.x, point.y);
     }
 
 }

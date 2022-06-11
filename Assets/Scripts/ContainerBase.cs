@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
-public abstract class ContainerBase : MonoBehaviour, IShootable
+public abstract class ContainerBase : MonoBehaviour
 {
     protected Rigidbody2D rb;
     public DestroyableSO config;
@@ -12,22 +13,6 @@ public abstract class ContainerBase : MonoBehaviour, IShootable
         GameObject containerInstance = Instantiate<GameObject>(prefab, (Vector3)origin, new Quaternion(), container);
         ContainerBase controller = containerInstance.GetComponent<ContainerBase>();
         controller.config = Instantiate<DestroyableSO>(controller.config);
-        controller.rb = containerInstance.GetComponentInChildren<Rigidbody2D>();
         return containerInstance;
     }
-
-    protected virtual void Start()
-    {
-        rb = GetComponentInChildren<Rigidbody2D>();
-        rb.tag = "Shootable";
-    }
-
-    protected virtual void Update()
-    {
-        
-    }
-
-    public abstract void ApplyDamage(float damage);
-    public abstract void KillSelf();
-
 }

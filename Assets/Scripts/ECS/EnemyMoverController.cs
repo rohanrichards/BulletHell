@@ -15,7 +15,7 @@ public class EnemyMoverController : MonoBehaviour
         EnemyRotatorSystem rotator = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<EnemyRotatorSystem>();
         rotator.turnSpeed = .03f;
 
-        RaycastSystem raycaster = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<RaycastSystem>();
+        DamagerRaycastSystem raycaster = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<DamagerRaycastSystem>();
         raycaster.target = ECSPlayerController.getPlayerLocation().Position;
     }
 }

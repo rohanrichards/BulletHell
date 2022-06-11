@@ -6,7 +6,6 @@ public class OpenChestUIController : MonoBehaviour
 {
     public bool visible = false;
     private CanvasGroup group;
-    private GameObject player;
     private StatsController statsController;
     public GameObject itemDisplay;
 
@@ -14,8 +13,7 @@ public class OpenChestUIController : MonoBehaviour
     void Start()
     {
         group = gameObject.GetComponent<CanvasGroup>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        statsController = player.GetComponent<StatsController>();
+        statsController = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
     }
 
     // Update is called once per frame

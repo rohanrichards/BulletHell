@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class XPOrbAuthoringComponent : PickupBase, IConvertGameObjectToEntity
 {
-
     public override void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
         base.Convert(entity, dstManager, conversionSystem);

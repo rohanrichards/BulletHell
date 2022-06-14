@@ -734,7 +734,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1462,7 +1462,7 @@ RectTransform:
   - {fileID: 1423399330}
   - {fileID: 1305835599}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2288,10 +2288,10 @@ MonoBehaviour:
   generateGround: 1
   generateObstacles: 1
   generateStructures: 0
-  generateDestroyables: 1
+  generateDestroyables: 0
   chunkSize: 200
-  renderBounds: 50
-  minObstablesPerChunk: 20
+  renderBounds: 200
+  minObstablesPerChunk: 300
   maxObstablesPerChunk: 50
   minDestroyablesPerChunk: 20
   maxDestroyablesPerChunk: 30
@@ -2348,7 +2348,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f705d9780fd6a6847a33cc62a5c4b9ac, type: 2}
   obstacles:
   - {fileID: 7251585231742559334, guid: 2a4e74b10f85af847b4389171b174209, type: 3}
-  - {fileID: 7251585231742559334, guid: 1129d73d24cdcbc4e8bd5e332700b643, type: 3}
   structures:
   - {fileID: 7215588353806131240, guid: 5ef2a2c36d1c9834b89dcb27a2257a11, type: 3}
   - {fileID: 7215588353806131240, guid: 14acbcafacba3ce4da43664d6140ff0c, type: 3}
@@ -2377,7 +2376,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1585473014}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbef2578282f2574bb61c4c6b974c778, type: 3}
   m_Name: 
@@ -2385,7 +2384,7 @@ MonoBehaviour:
   usingECS: 1
   testingPrefab: {fileID: 0}
   testing: 0
-  testEnemyIndex: 3
+  testEnemyIndex: 1
   testClusterCount: 10
   testGridSize: 3
   baseWaveSpeed: 5
@@ -2400,19 +2399,6 @@ MonoBehaviour:
   - {fileID: 4239134364593895138, guid: e76252eb15e461248ac85c19cf65072b, type: 3}
   - {fileID: 4239134364593895138, guid: 24f0789956e462649aed471954d23489, type: 3}
   - {fileID: 4239134364593895138, guid: a8270fd5b0fcd24478608c5ce1ba4fbe, type: 3}
-  - {fileID: 4239134364593895138, guid: 0fb8be942187af549b0d44a71af6b4d9, type: 3}
-  - {fileID: 4239134364593895138, guid: e1c569e874910584d9c95fecb6abf23f, type: 3}
-  - {fileID: 4239134364593895138, guid: 78d1a8a58f993f746822973b8e04a962, type: 3}
-  - {fileID: 4239134364593895138, guid: 0260d968d45fce644ba0ad4c3a5d4ff4, type: 3}
-  - {fileID: 4239134364593895138, guid: 40cd5aedccd047d4f970871b88069e29, type: 3}
-  - {fileID: 4239134364593895138, guid: a6a7badfc0ba8f84fbc0775582956450, type: 3}
-  - {fileID: 4239134364593895138, guid: 1a4ece42a3831424c99509161727b84c, type: 3}
-  - {fileID: 4239134364593895138, guid: 076f243e18d569c4ab8795d79627db76, type: 3}
-  - {fileID: 4239134364593895138, guid: 5c04240fbe37f324397c6f0ab07e4312, type: 3}
-  - {fileID: 4239134364593895138, guid: ab799a6f28d34c74ba87a568bec0fd9f, type: 3}
-  - {fileID: 4239134364593895138, guid: 0097d40cd2983be4a9105e2b58a409d5, type: 3}
-  - {fileID: 4239134364593895138, guid: 8e1a5b8d049cc2c41acbb385c1109c3a, type: 3}
-  - {fileID: 4239134364593895138, guid: 48b003c6e6daf724983572a5a7065784, type: 3}
   enemyContainer: {fileID: 1407568195}
   totalEnemies: 0
   vizualizedSpawnDitribution:
@@ -3377,7 +3363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22451668, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 22451668, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_AnchorMax.x

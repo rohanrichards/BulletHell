@@ -5,12 +5,10 @@ using UnityEngine;
 public class DifficultyManager : MonoBehaviour
 {
     public AnimationCurve difficultyCurve;
-    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -21,7 +19,7 @@ public class DifficultyManager : MonoBehaviour
 
     public float GetDifficultyMod()
     {
-        float percentage = (Time.timeSinceLevelLoad / gameManager.GameLengthInSeconds);
+        float percentage = (Time.timeSinceLevelLoad / GameManager.instance.GameLengthInSeconds);
         return difficultyCurve.Evaluate(percentage);
     }
 }

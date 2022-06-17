@@ -7,25 +7,32 @@ using UnityEngine.Tilemaps;
 //[ExecuteInEditMode]
 public class MapGenerator : MonoBehaviour
 {
+    [Header("Worldgen Toggles")]
     public bool generateGround = true;
     public bool generateObstacles = true;
     public bool generateStructures = true;
     public bool generateDestroyables = true;
-    
+
+    [Header("Worldgen Settings")]
     public int chunkSize = 10;
     public int renderBounds = 50;
     public int minObstablesPerChunk = 10;
     public int maxObstablesPerChunk = 30;
     public int minDestroyablesPerChunk = 1;
     public int maxDestroyablesPerChunk = 3;
-    public GameObject obstaclesContainer;
-    public int[,] terrainMap;
-    public Tilemap tileMap;
-    public Tile[] grasses;
-    public GameObject[] obstacles;
-    public GameObject[] structures;
-    public GameObject[] destroyables;
     public int structureChanceAsPercent = 20;
+
+    [Header("Config")]
+    public GameObject obstaclesContainer;
+    public Tilemap tileMap;
+
+    [Header("Provided Assets")]
+    public Tile[] grassTiles;
+    public GameObject[] obstaclesPrefabs;
+    public GameObject[] structurePrefabs;
+    public GameObject[] destroyablePrefabs;
+
+    public int[,] terrainMap;
 
     void Start()
     {
@@ -33,7 +40,7 @@ public class MapGenerator : MonoBehaviour
 
     Tile GetRandomTile()
     {
-        return grasses[Random.Range(0, grasses.Length)];
+        return grassTiles[Random.Range(0, grassTiles.Length)];
     }
 
     void RenderChunkAt(Vector3 position)
@@ -69,19 +76,19 @@ public class MapGenerator : MonoBehaviour
         for (int i = 0; i < obstacleCount; i++)
         {
             Vector3 location = RandomPointInBounds(bounds);
-            int index = Random.Range(0, obstacles.Length);
-            GameObject obstacle = Instantiate(obstacles[index], location, new Quaternion(), obstaclesContainer.transform);
+            int index = Random.Range(0, obstaclesPrefabs.Length);
+            GameObject obstacle = Instantiate(obstaclesPrefabs[index], location, new Quaternion(), obstaclesContainer.transform);
         }
     }
 
     void TryToPlaceStructure(BoundsInt bounds)
     {
         float chance = Random.value;
-        if(chance >= structureChanceAsPercent / 100)
+        if(chance <= structureChanceAsPercent / 100.0f)
         {
             Vector3 location = RandomPointInBounds(bounds);
-            int index = Random.Range(0, structures.Length);
-            GameObject obstacle = Instantiate(structures[index], location, new Quaternion(), obstaclesContainer.transform);
+            int index = Random.Range(0, structurePrefabs.Length);
+            GameObject obstacle = Instantiate(structurePrefabs[index], location, new Quaternion(), obstaclesContainer.transform);
         }
     }
 
@@ -91,8 +98,8 @@ public class MapGenerator : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             Vector3 location = RandomPointInBounds(bounds);
-            int index = Random.Range(0, destroyables.Length);
-            GameObject obstacle = Instantiate(destroyables[index], location, new Quaternion(), obstaclesContainer.transform);
+            int index = Random.Range(0, destroyablePrefabs.Length);
+            GameObject obstacle = Instantiate(destroyablePrefabs[index], location, new Quaternion(), obstaclesContainer.transform);
         }
     }
 

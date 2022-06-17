@@ -20,7 +20,6 @@ public class StatsController : MonoBehaviour
     private Animation damageFlashLight;
     DifficultyManager difficultyManager;
     GameManager gameManager;
-    Rigidbody2D playerBody;
 
     public float MoveSpeed
     {
@@ -44,7 +43,6 @@ public class StatsController : MonoBehaviour
         gameManager = GameObject.FindObjectOfType<GameManager>();
         damageNotifier = GetComponentInChildren<ParticleSystem>();
         damageFlashLight = GetComponentInChildren<Animation>();
-        playerBody = GetComponentInChildren<Rigidbody2D>();
     }
 
     private void Update()

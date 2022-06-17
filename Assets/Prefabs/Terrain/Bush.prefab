@@ -182,10 +182,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300134, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
-  - {fileID: 21300140, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
-  - {fileID: 21300138, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
-  - {fileID: 21300080, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
+  - {fileID: 21300136, guid: 95d5bcc7fec83e347952924918cb0ef3, type: 3}
+  - {fileID: 21300134, guid: 95d5bcc7fec83e347952924918cb0ef3, type: 3}
+  - {fileID: 21300140, guid: 95d5bcc7fec83e347952924918cb0ef3, type: 3}
+  - {fileID: 21300138, guid: 95d5bcc7fec83e347952924918cb0ef3, type: 3}
+  - {fileID: 21300132, guid: 95d5bcc7fec83e347952924918cb0ef3, type: 3}
+  - {fileID: 21300080, guid: 95d5bcc7fec83e347952924918cb0ef3, type: 3}
 --- !u!114 &2530316099609610327
 MonoBehaviour:
   m_ObjectHideFlags: 0

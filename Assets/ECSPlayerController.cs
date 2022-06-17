@@ -93,18 +93,25 @@ public class ECSPlayerController : MonoBehaviour
             ComponentType.ReadWrite<LocalToWorld>(),
             ComponentType.ReadWrite<PlayerTag>()
         );
+
+        blobAssetStore = new BlobAssetStore();
+        entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+        playerEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(playerPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
     }
 
     void Start()
     {
-        blobAssetStore = new BlobAssetStore();
-        entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        playerEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(playerPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
+
+    }
+
+    public void CreatePlayer(StatsConfigSO startingPlayerStatsConfig, GlobalStatsConfigSO startingPlayerGlobalStatsConfig)
+    {
+        stats = GetComponent<StatsController>();
+        stats.statsConfig = Instantiate(startingPlayerStatsConfig);
+        stats.globalStatsConfig = Instantiate(startingPlayerGlobalStatsConfig);
 
         player = entityManager.Instantiate(playerEntityPrefab);
         entityManager.SetComponentData(player, new Translation());
-
-        stats = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
     }
 
     void Update()
@@ -113,21 +120,24 @@ public class ECSPlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(horizontalInput, verticalInput, 0);
+        if (player != Entity.Null)
+        {
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+            Vector3 movement = new Vector3(horizontalInput, verticalInput, 0);
 
-        PlayerMoverSystem mover = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<PlayerMoverSystem>();
-        mover.moveSpeed = stats.statsConfig.RotateSpeed;
-        mover.direction = movement;
+            PlayerMoverSystem mover = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<PlayerMoverSystem>();
+            mover.moveSpeed = stats.statsConfig.RotateSpeed;
+            mover.direction = movement;
 
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        Vector3 direction = new Vector3(mousePosition.x - getPlayerLocation().Position.x, mousePosition.y - getPlayerLocation().Position.y, 0);
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            Vector3 direction = new Vector3(mousePosition.x - getPlayerLocation().Position.x, mousePosition.y - getPlayerLocation().Position.y, 0);
 
-        PlayerRotatorSystem rotator = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<PlayerRotatorSystem>();
-        rotator.direction = direction;
-        rotator.turnSpeed = stats.statsConfig.RotateSpeed;
+            PlayerRotatorSystem rotator = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<PlayerRotatorSystem>();
+            rotator.direction = direction;
+            rotator.turnSpeed = stats.statsConfig.RotateSpeed;
+        }
     }
 
     private void OnDestroy()

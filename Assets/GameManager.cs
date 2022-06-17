@@ -1,28 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     private GameObject playerScripts;
     public int GameLengthInSeconds;
-    // Start is called before the first frame update
+    public StatsConfigSO startingPlayerStatsConfig;
+    public GlobalStatsConfigSO startingPlayerGlobalStatsConfig;
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     void Start()
     {
-        playerScripts = GameObject.Find("PlayerScripts");
-        StartCoroutine(StartNewGame());
-    }
+    } 
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
-    IEnumerator StartNewGame()
+    public void NewGame()
     {
-        yield return new WaitForSeconds(1);
+        StartCoroutine(LoadScene());
+    }
+
+    public IEnumerator LoadScene()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level 1");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        StartCoroutine(GameManager.instance.StartNewGame());
+    }
+
+    public IEnumerator StartNewGame()
+    {
         //set up the player
+        playerScripts = GameObject.Find("PlayerScripts");
+        playerScripts.GetComponent<ECSPlayerController>().CreatePlayer(startingPlayerStatsConfig, startingPlayerGlobalStatsConfig);
+        
+        yield return new WaitForSeconds(0.5f);
         ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Launcher>();
         startingItem.Unlock();
         startingItem.IncreaseLevel();

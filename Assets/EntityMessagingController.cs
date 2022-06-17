@@ -20,7 +20,7 @@ public class EntityMessagingController : MonoBehaviour
     void Start()
     {
         stats = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
-        pickupGenerator = GameObject.Find("Scripts").GetComponent<PickupGenerator>();
+        pickupGenerator = GameObject.Find("GameplayScripts").GetComponent<PickupGenerator>();
         manager = World.DefaultGameObjectInjectionWorld.EntityManager;
         chestUIController = GameObject.FindObjectOfType<OpenChestUIController>();
 

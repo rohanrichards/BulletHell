@@ -9,9 +9,6 @@ using UnityEngine;
 
 public class EnemyGenerator : MonoBehaviour
 {
-    [Header("ECS Props")]
-    //ECS Properties
-    public bool usingECS = true;
     [HideInInspector]
     public GameObject testingPrefab;
     protected EntityManager entityManager;

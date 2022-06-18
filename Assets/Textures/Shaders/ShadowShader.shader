@@ -71,25 +71,26 @@ Shader "Unlit/ShadowShader"
 
                 float light_result = 0.0;
                 {
-                    const float uv_step = 0.01;
+                    const int NUM_STEPS = 128;
+                    //const float uv_step = 0.01;
                     float2 delta = (i.uv - light_pos);
                     float delta_len = length(delta);
-                    delta *= 1.0 / delta_len;
+                    //delta *= 1.0 / delta_len;
 
                     //fixed4 lookup = QuantizedTex(lerp(light_pos, i.uv, 0.5));
                     //bool blocked = !IsShadowed(lookup);
 
-                    bool blocked = false;
-                    for(int x = 0; x < 256; x++) {
-                        float2 pos = lerp(light_pos, i.uv, float(x) / 256.0);
+                    //bool blocked = false;
+                    int blocked = 0;
+                    for(int x = 0; x < NUM_STEPS; x++) {
+                        float2 pos = lerp(light_pos, i.uv, float(x) / float(NUM_STEPS));
                         fixed4 lookup = QuantizedTex(pos);
-                        bool pixel_blocked = !IsShadowed(lookup);
-                        blocked = blocked || pixel_blocked;
+                        blocked += IsShadowed(lookup) ? 0 : 1;
                     }
                     
-                    if(!blocked) {
-                        light_result += 1.0 - smoothstep(0.1, 0.6, delta_len);
-                    }
+                    float block_frac = pow(1.0 - float(blocked) / float(NUM_STEPS), 3.0);
+                    //float block_frac = step(blocked, 1);
+                    light_result += (1.0 - smoothstep(0.1, 0.6, delta_len)) * block_frac;
                 }
 
                 light_result = lerp(0.02, 1.0, light_result);

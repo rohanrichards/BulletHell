@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1132647691430176076}
   - component: {fileID: 9010832001166543377}
   - component: {fileID: 9120051144106755472}
+  - component: {fileID: 2399396901431575738}
   m_Layer: 7
   m_Name: ChargingEnemyMesh 1
   m_TagString: Shootable
@@ -315,3 +316,16 @@ MonoBehaviour:
         Tag07: 0
     m_SerializedVersion: 1
   m_SerializedVersion: 1
+--- !u!114 &2399396901431575738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4239134364593895138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConversionMode: 0

@@ -5,7 +5,8 @@ Shader "Unlit/ShadowShader"
         _MainTex ("Texture", 2D) = "white" {}
         _ShadowStrength ("Shadow Strength", Range(0.0,10.0)) = 2.0
         _ShadowRadius ("Shadow Radius", Range(0.0,5.0)) = 0.8
-        _ShadowFalloff ("Shadow Falloff", Range(0.0,50.0)) = 2.0
+        _ShadowFalloff ("Shadow Falloff", Range(0.0,100.0)) = 2.0
+        _ShadowFade ("Shadow Fade", Range(0.0,10.0)) = 0.0
         _LightPower ("Light Power", Range(0.0,5.0)) = 2.0
         _LightAmbient ("Light Ambient", Range(0.0,1.0)) = 0.02
 
@@ -47,6 +48,7 @@ Shader "Unlit/ShadowShader"
             float _ShadowStrength;
             float _ShadowRadius;
             float _ShadowFalloff;
+            float _ShadowFade;
             float _LightPower;
             float _LightAmbient;
             float _TextureBump;
@@ -113,10 +115,11 @@ Shader "Unlit/ShadowShader"
                     fixed4 previous_lookup = QuantizedTex(light_pos);
 
                     for(int x = 0; x < NUM_STEPS; x++) {
-                        float2 pos = lerp(light_pos, i.uv, float(x) / float(NUM_STEPS));
+                        float along_frac = float(x) / float(NUM_STEPS);
+                        float2 pos = lerp(light_pos, i.uv, along_frac);
                         fixed4 lookup = QuantizedTex(pos);
                         float prev_diff = abs(ColGradient(lookup, previous_lookup)) * _TextureBumpShadow;
-                        blocked += IsShadowed(lookup) ? prev_diff : 1.0;
+                        blocked += IsShadowed(lookup) ? prev_diff : pow(along_frac, _ShadowFade);
                         previous_lookup = lookup;
                     }
                     float normal_frac = 1.0 - ColGradient(col, previous_lookup) * _TextureBump;

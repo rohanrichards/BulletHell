@@ -92,14 +92,21 @@ Shader "Unlit/ShadowShader"
                     //bool blocked = !IsShadowed(lookup);
 
                     //bool blocked = false;
-                    int blocked = 0;
+                    float blocked = 0.0;
+
+                    fixed4 previous_lookup = QuantizedTex(light_pos);
+
                     for(int x = 0; x < NUM_STEPS; x++) {
                         float2 pos = lerp(light_pos, i.uv, float(x) / float(NUM_STEPS));
                         fixed4 lookup = QuantizedTex(pos);
-                        blocked += IsShadowed(lookup) ? 0 : 1;
+                        float3 prev_delta = lookup.xyz - previous_lookup.xyz;
+                        float prev_diff = pow(dot(prev_delta, prev_delta), 0.2) * 0.3;
+                        blocked += IsShadowed(lookup) ? prev_diff : 1.0;
+                        //blocked += IsShadowed(lookup) ? (pow((lookup.x + lookup.y + lookup.z) / 3.0, 10.1) * 0.5) : 1.0;
+                        previous_lookup = lookup;
                     }
                     
-                    float block_frac = pow(1.0 - float(blocked) / float(NUM_STEPS), _ShadowStrength);
+                    float block_frac = pow(1.0 - blocked / float(NUM_STEPS), _ShadowStrength);
                     //float block_frac = step(blocked, 1);
                     light_result += (1.0 - smoothstep(0.0, _ShadowRadius, delta_len)) * block_frac;
                 }

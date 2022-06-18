@@ -3,6 +3,11 @@ Shader "Unlit/ShadowShader"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _ShadowStrength ("Shadow Strength", Range(0.0,10.0)) = 2.0
+        _ShadowRadius ("Shadow Radius", Range(0.0,5.0)) = 0.8
+        _ShadowFalloff ("Shadow Falloff", Range(0.0,50.0)) = 2.0
+        _LightPower ("Light Power", Range(0.0,5.0)) = 2.0
+        _LightAmbient ("Light Ambient", Range(0.0,1.0)) = 0.02
     }
     SubShader
     {
@@ -35,6 +40,12 @@ Shader "Unlit/ShadowShader"
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float4 _MainTex_TexelSize;
+
+            float _ShadowStrength;
+            float _ShadowRadius;
+            float _ShadowFalloff;
+            float _LightPower;
+            float _LightAmbient;
 
             v2f vert (appdata v)
             {
@@ -88,12 +99,12 @@ Shader "Unlit/ShadowShader"
                         blocked += IsShadowed(lookup) ? 0 : 1;
                     }
                     
-                    float block_frac = pow(1.0 - float(blocked) / float(NUM_STEPS), 3.0);
+                    float block_frac = pow(1.0 - float(blocked) / float(NUM_STEPS), _ShadowStrength);
                     //float block_frac = step(blocked, 1);
-                    light_result += (1.0 - smoothstep(0.1, 0.6, delta_len)) * block_frac;
+                    light_result += (1.0 - smoothstep(0.0, _ShadowRadius, delta_len)) * block_frac;
                 }
 
-                light_result = lerp(0.02, 1.0, light_result);
+                light_result = lerp(_LightAmbient, _LightPower, pow(light_result, _ShadowFalloff));
 
                 col.xyz *= light_result;
                 /*

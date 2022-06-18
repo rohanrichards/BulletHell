@@ -96,7 +96,6 @@ public class ECSPlayerController : MonoBehaviour
 
         blobAssetStore = new BlobAssetStore();
         entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        playerEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(playerPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
     }
 
     void Start()
@@ -110,8 +109,8 @@ public class ECSPlayerController : MonoBehaviour
         stats.statsConfig = Instantiate(startingPlayerStatsConfig);
         stats.globalStatsConfig = Instantiate(startingPlayerGlobalStatsConfig);
 
+        playerEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(playerPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
         player = entityManager.Instantiate(playerEntityPrefab);
-        entityManager.SetComponentData(player, new Translation());
     }
 
     void Update()

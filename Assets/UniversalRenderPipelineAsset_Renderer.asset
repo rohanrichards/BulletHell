@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86179ed5e4839b4c9bb59cbcc239a34, type: 3}
   m_Name: ShadowPass
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     Event: 300
     blitMaterial: {fileID: 0}

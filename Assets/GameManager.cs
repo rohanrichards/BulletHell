@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public class MechConfig
+{
+    public string title;
+    public StatsConfigSO statsConfig;
+    public GlobalStatsConfigSO globalStatsConfig;
+}
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -10,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int GameLengthInSeconds;
     public StatsConfigSO startingPlayerStatsConfig;
     public GlobalStatsConfigSO startingPlayerGlobalStatsConfig;
+    public List<MechConfig> mechConfigs;
 
     private void Awake()
     {

@@ -8,6 +8,9 @@ Shader "Unlit/ShadowShader"
         _ShadowFalloff ("Shadow Falloff", Range(0.0,50.0)) = 2.0
         _LightPower ("Light Power", Range(0.0,5.0)) = 2.0
         _LightAmbient ("Light Ambient", Range(0.0,1.0)) = 0.02
+
+        _TextureBump ("Texture Bumpiness", Range(0.0,50.0)) = 2.0
+        _TextureBumpShadow ("Texture Bumpiness Shadow", Range(0.0,10.0)) = 0.5
     }
     SubShader
     {
@@ -46,6 +49,8 @@ Shader "Unlit/ShadowShader"
             float _ShadowFalloff;
             float _LightPower;
             float _LightAmbient;
+            float _TextureBump;
+            float _TextureBumpShadow;
 
             v2f vert (appdata v)
             {
@@ -59,8 +64,10 @@ Shader "Unlit/ShadowShader"
             bool IsShadowed(fixed4 col) {
                 float3 input_col = float3(col.xyz);
                 input_col = floor(input_col * 255.0); // converts into 0-255 space
-                float3 pass_col = floor(input_col / 2.0) * 2.0; // removes lower bit
-                bool is_shadowed = length(pass_col - input_col) > 0.0;
+                float3 pass_col = floor(input_col * 0.5) * 2.0; // removes lower bit
+                //bool is_shadowed = length(pass_col - input_col) > 0.0;
+                float3 diff = abs(pass_col - input_col);
+                bool is_shadowed = (diff.x > 0.0) || (diff.y > 0.0) || (diff.z > 0.0);
                 return is_shadowed;
             }
 
@@ -69,11 +76,19 @@ Shader "Unlit/ShadowShader"
                 return tex2Dlod(_MainTex, float4(uv, 0, 0));
             }
 
+            float ColGradient(fixed4 col_a, fixed4 col_b) {
+                const float pow_lev = 2.0;
+                float3 diff = pow(float3(col_b.xyz), pow_lev) - pow(float3(col_a.xyz), pow_lev);
+                return diff.x + diff.y + diff.z;
+            }
+
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
                 //bool is_shadowed = IsShadowed(col);
+
+                float aspect_ratio = _MainTex_TexelSize.y / _MainTex_TexelSize.x;
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
@@ -85,6 +100,7 @@ Shader "Unlit/ShadowShader"
                     const int NUM_STEPS = 128;
                     //const float uv_step = 0.01;
                     float2 delta = (i.uv - light_pos);
+                    delta.x *= aspect_ratio;
                     float delta_len = length(delta);
                     //delta *= 1.0 / delta_len;
 
@@ -99,19 +115,17 @@ Shader "Unlit/ShadowShader"
                     for(int x = 0; x < NUM_STEPS; x++) {
                         float2 pos = lerp(light_pos, i.uv, float(x) / float(NUM_STEPS));
                         fixed4 lookup = QuantizedTex(pos);
-                        float3 prev_delta = lookup.xyz - previous_lookup.xyz;
-                        float prev_diff = pow(dot(prev_delta, prev_delta), 0.2) * 0.3;
+                        float prev_diff = abs(ColGradient(lookup, previous_lookup)) * _TextureBumpShadow;
                         blocked += IsShadowed(lookup) ? prev_diff : 1.0;
-                        //blocked += IsShadowed(lookup) ? (pow((lookup.x + lookup.y + lookup.z) / 3.0, 10.1) * 0.5) : 1.0;
                         previous_lookup = lookup;
                     }
-                    
+                    float normal_frac = 1.0 - ColGradient(col, previous_lookup) * _TextureBump;
                     float block_frac = pow(1.0 - blocked / float(NUM_STEPS), _ShadowStrength);
                     //float block_frac = step(blocked, 1);
-                    light_result += (1.0 - smoothstep(0.0, _ShadowRadius, delta_len)) * block_frac;
+                    light_result += pow((1.0 - smoothstep(0.0, _ShadowRadius, delta_len)) * block_frac, _ShadowFalloff) * normal_frac;
                 }
 
-                light_result = lerp(_LightAmbient, _LightPower, pow(light_result, _ShadowFalloff));
+                light_result = lerp(_LightAmbient, _LightPower, light_result);
 
                 col.xyz *= light_result;
                 /*

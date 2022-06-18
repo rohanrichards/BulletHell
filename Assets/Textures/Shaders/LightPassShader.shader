@@ -53,7 +53,7 @@ Shader "BulletHell/LightPassShader"
 
                 float3 out_col = float3(col.xyz);
                 out_col = floor(out_col * 255.0); // converts into 0-255 space
-                out_col = floor(out_col / 2.0) * 2.0; // removes lower bit
+                out_col = floor(out_col * 0.5) * 2.0; // removes lower bit
                 out_col = out_col / 255.0; // converts back into 0-1 space
                 col.xyz = fixed3(out_col);
 

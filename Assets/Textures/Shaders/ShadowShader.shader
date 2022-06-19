@@ -54,6 +54,13 @@ Shader "Unlit/ShadowShader"
             float _TextureBump;
             float _TextureBumpShadow;
 
+#define MAX_LIGHTS 8
+#define FLOATS_PER_LIGHT 6
+#define MAX_LIGHTS_FLOATS 48 // set to MAX_LIGHTS * FLOATS_PER_LIGHT
+
+            int _LightCount = 0;
+            float _Lights[MAX_LIGHTS_FLOATS];
+
             v2f vert (appdata v)
             {
                 v2f o;
@@ -86,49 +93,52 @@ Shader "Unlit/ShadowShader"
 
             fixed4 frag (v2f i) : SV_Target
             {
+                const int NUM_STEPS = 128;
+                float aspect_ratio = _MainTex_TexelSize.y / _MainTex_TexelSize.x;
+
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
                 //bool is_shadowed = IsShadowed(col);
 
-                float aspect_ratio = _MainTex_TexelSize.y / _MainTex_TexelSize.x;
-
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
 
-                float2 light_pos = float2(0.5, 0.5);
+                float3 light_result = float3(0.0, 0.0, 0.0);
+                for(int light = 0; light < _LightCount; light++) {
 
-                float light_result = 0.0;
-                {
-                    const int NUM_STEPS = 128;
-                    //const float uv_step = 0.01;
+                    //float2 light_pos = _LightPos[light].xy;
+                    int light_ind = FLOATS_PER_LIGHT * light;
+                    float2 light_pos = float2(_Lights[light_ind], _Lights[light_ind + 1]);
+                    float light_rad = _Lights[light_ind + 2];
+                    float3 light_col = float3(_Lights[light_ind + 3], _Lights[light_ind + 4], _Lights[light_ind + 5]);
                     float2 delta = (i.uv - light_pos);
                     delta.x *= aspect_ratio;
                     float delta_len = length(delta);
-                    //delta *= 1.0 / delta_len;
 
                     //fixed4 lookup = QuantizedTex(lerp(light_pos, i.uv, 0.5));
                     //bool blocked = !IsShadowed(lookup);
 
-                    //bool blocked = false;
                     float blocked = 0.0;
 
                     fixed4 previous_lookup = QuantizedTex(light_pos);
-
                     for(int x = 0; x < NUM_STEPS; x++) {
                         float along_frac = float(x) / float(NUM_STEPS);
                         float2 pos = lerp(light_pos, i.uv, along_frac);
                         fixed4 lookup = QuantizedTex(pos);
                         float prev_diff = abs(ColGradient(lookup, previous_lookup)) * _TextureBumpShadow;
+                        //float block_val = IsShadowed(lookup) ? prev_diff : pow(along_frac, _ShadowFade);
                         blocked += IsShadowed(lookup) ? prev_diff : pow(along_frac, _ShadowFade);
                         previous_lookup = lookup;
                     }
                     float normal_frac = 1.0 - ColGradient(col, previous_lookup) * _TextureBump;
                     float block_frac = pow(1.0 - blocked / float(NUM_STEPS), _ShadowStrength);
                     //float block_frac = step(blocked, 1);
-                    light_result += pow((1.0 - smoothstep(0.0, _ShadowRadius, delta_len)) * block_frac, _ShadowFalloff) * normal_frac;
+
+                    float light_str = pow((1.0 - smoothstep(0.0, light_rad, delta_len)) * block_frac, _ShadowFalloff) * normal_frac;
+                    light_result += light_col * light_str;
                 }
 
-                light_result = lerp(_LightAmbient, _LightPower, light_result);
+                light_result = lerp(float3(_LightAmbient, _LightAmbient, _LightAmbient), float3(_LightPower, _LightPower, _LightPower), light_result);
 
                 col.xyz *= light_result;
                 /*

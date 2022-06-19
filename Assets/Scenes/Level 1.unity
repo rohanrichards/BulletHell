@@ -2253,6 +2253,7 @@ GameObject:
   - component: {fileID: 1585473019}
   - component: {fileID: 1585473022}
   - component: {fileID: 1585473021}
+  - component: {fileID: 1585473020}
   m_Layer: 0
   m_Name: GameplayScripts
   m_TagString: Untagged
@@ -2446,6 +2447,18 @@ MonoBehaviour:
     type: 3}
   repairPrefab: {fileID: 9189390321236106799, guid: 46addb2e887b1b5498876243933c60c3,
     type: 3}
+--- !u!114 &1585473020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585473014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3402f9150e535f746b5755b17bf5a5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1585473021
 MonoBehaviour:
   m_ObjectHideFlags: 0

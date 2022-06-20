@@ -35,20 +35,25 @@ public class LightsController : MonoBehaviour
     }
 
     private lightsCollection lightsArray;
+    private int lightCount;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
+        lightCount = 5;
 
         lightsArray = new lightsCollection
         {
             lights = new lightData[] {
-                new lightData { world = new Vector3(playerLocation.Position.x, playerLocation.Position.y, 0), rad = 2.0f, r = 1.0f, g = 1.0f, b = 1.0f },
-                new lightData { world = new Vector3(10, 10, 0), rad = 0.5f, r = 1.0f, g = 0.0f, b = 0.0f },
-                new lightData { world = new Vector3(-10, 10, 0), rad = 0.5f, r = 0.0f, g = 0.0f, b = 1.0f },
+                new lightData { world = new Vector3(playerLocation.Position.x, playerLocation.Position.y, 0), rad = 1.0f, r = 1.0f, g = 1.0f, b = 1.0f },
+                new lightData { world = new Vector3(0, 5, 0), rad = 0.5f, r = 1.0f, g = 0.0f, b = 0.0f },
+                new lightData { world = new Vector3(4, 5, 0), rad = 0.5f, r = 0.0f, g = 1.0f, b = 0.0f },
+                new lightData { world = new Vector3(8, 5, 0), rad = 0.5f, r = 0.0f, g = 0.0f, b = 1.0f },
+                new lightData { world = new Vector3(12, 5, 0), rad = 0.5f, r = 1.0f, g = 0.0f, b = 1.0f },
                 new lightData { world = new Vector3(-10, -10, 0), rad = 0.5f, r = 0.0f, g = 1.0f, b = 0.0f },
-                new lightData { world = new Vector3(10, -10, 0), rad = 0.5f, r = 1.0f, g = 0.0f, b = 1.0f }
+                new lightData { world = new Vector3(-10, -10, 0), rad = 0.5f, r = 0.0f, g = 1.0f, b = 0.0f },
+                new lightData { world = new Vector3(-10, -10, 0), rad = 0.5f, r = 0.0f, g = 1.0f, b = 0.0f }
             }
         };
     }
@@ -58,7 +63,7 @@ public class LightsController : MonoBehaviour
     {
         updatePlayerLight();
         Shader.SetGlobalFloatArray("_Lights", lightsArray.toFloatArray());
-        Shader.SetGlobalInt("_LightCount", lightsArray.lights.Length);
+        Shader.SetGlobalInt("_LightCount", lightCount);
     }
 
     private void updatePlayerLight()

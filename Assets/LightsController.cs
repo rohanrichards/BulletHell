@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class LightsController : MonoBehaviour
 {
-    private float _Tick = 0.0f;
     private struct lightData
     {
-        public float x, y, rad, r, g, b;
+        public Vector3 world, local;
+        public float rad, r, g, b;
     }
 
     private struct lightsCollection
@@ -20,8 +20,11 @@ public class LightsController : MonoBehaviour
             for (int i = 0; i < lights.Length; i++)
             {
                 lightData l = lights[i];
-                res.Add(l.x);
-                res.Add(l.y);
+                Vector3 screenPoint = Camera.main.WorldToViewportPoint(new Vector3(l.world.x, l.world.y, 1));
+                l.local = screenPoint;
+
+                res.Add(l.local.x);
+                res.Add(l.local.y);
                 res.Add(l.rad);
                 res.Add(l.r);
                 res.Add(l.g);
@@ -31,33 +34,36 @@ public class LightsController : MonoBehaviour
         }
     }
 
+    private lightsCollection lightsArray;
+
     // Start is called before the first frame update
     void Start()
     {
+        LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
+
+        lightsArray = new lightsCollection
+        {
+            lights = new lightData[] {
+                new lightData { world = new Vector3(playerLocation.Position.x, playerLocation.Position.y, 0), rad = 2.0f, r = 1.0f, g = 1.0f, b = 1.0f },
+                new lightData { world = new Vector3(10, 10, 0), rad = 0.5f, r = 1.0f, g = 0.0f, b = 0.0f },
+                new lightData { world = new Vector3(-10, 10, 0), rad = 0.5f, r = 0.0f, g = 0.0f, b = 1.0f },
+                new lightData { world = new Vector3(-10, -10, 0), rad = 0.5f, r = 0.0f, g = 1.0f, b = 0.0f },
+                new lightData { world = new Vector3(10, -10, 0), rad = 0.5f, r = 1.0f, g = 0.0f, b = 1.0f }
+            }
+        };
     }
 
     // Update is called once per frame
     void Update()
     {
-        float ang = _Tick * 0.01f;
-        float rad = 0.4f;
+        updatePlayerLight();
+        Shader.SetGlobalFloatArray("_Lights", lightsArray.toFloatArray());
+        Shader.SetGlobalInt("_LightCount", lightsArray.lights.Length);
+    }
 
+    private void updatePlayerLight()
+    {
         LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
-
-        int num_lights = 2;
-        //int num_lights = (((int)_Tick / 100) % 2) == 0 ? 1 : 2;
-
-        lightsCollection array = new lightsCollection {
-            lights = new lightData[] { 
-                new lightData { x = 1 - playerLocation.Position.x/35, y = 1 - playerLocation.Position.y/15, rad = 1, r = 1, g = 1, b = 1 },
-                new lightData { x = 0, y = 1, rad = 1, r = 1.0f, g = 0.0f, b = 0.0f }
-            }
-        };
-           // 0.5f + Mathf.Sin(ang) * rad, 0.5f + Mathf.Cos(ang) * rad, 1.5f,
-           // Mathf.Abs(Mathf.Sin(ang * 5.0f)), 0.0f, 1.0f
-        Shader.SetGlobalFloatArray("_Lights", array.toFloatArray());
-        Shader.SetGlobalInt("_LightCount", num_lights);
-
-        _Tick++;
+        lightsArray.lights[0].world = playerLocation.Position;
     }
 }

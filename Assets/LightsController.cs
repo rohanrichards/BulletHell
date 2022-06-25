@@ -1,25 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.Transforms;
 using UnityEngine;
 
 public class LightsController : MonoBehaviour
 {
-    private struct lightData
+    private List<int> trackedLights;
+    // this will need to be updated in the shader too
+    private int maxLights = 8;
+    private LightsCollection lightsArray;
+    private class LightData
     {
         public Vector3 world, local;
         public float rad, r, g, b;
     }
 
-    private struct lightsCollection
+    private class LightsCollection
     {
-        public lightData[] lights;
+        public List<LightData> lights = new List<LightData>();
         public float[] toFloatArray()
         {
             List<float> res = new List<float>();
-            for (int i = 0; i < lights.Length; i++)
+            for (int i = 0; i < lights.Count; i++)
             {
-                lightData l = lights[i];
+                LightData l = lights[i];
                 Vector3 screenPoint = Camera.main.WorldToViewportPoint(new Vector3(l.world.x, l.world.y, 1));
                 l.local = screenPoint;
 
@@ -34,41 +39,52 @@ public class LightsController : MonoBehaviour
         }
     }
 
-    private lightsCollection lightsArray;
-    private int lightCount;
-
     // Start is called before the first frame update
     void Awake()
     {
-        LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
-        lightCount = 5;
+        trackedLights = new List<int>();
+        lightsArray = new LightsCollection();
+    }
 
-        lightsArray = new lightsCollection
-        {
-            lights = new lightData[] {
-                new lightData { world = new Vector3(playerLocation.Position.x, playerLocation.Position.y, 0), rad = 1.0f, r = 1.0f, g = 1.0f, b = 1.0f },
-                new lightData { world = new Vector3(0, 5, 0), rad = 0.5f, r = 1.0f, g = 0.0f, b = 0.0f },
-                new lightData { world = new Vector3(4, 5, 0), rad = 0.5f, r = 0.0f, g = 1.0f, b = 0.0f },
-                new lightData { world = new Vector3(8, 5, 0), rad = 0.5f, r = 0.0f, g = 0.0f, b = 1.0f },
-                new lightData { world = new Vector3(12, 5, 0), rad = 0.5f, r = 1.0f, g = 0.0f, b = 1.0f },
-                new lightData { world = new Vector3(-10, -10, 0), rad = 0.5f, r = 0.0f, g = 1.0f, b = 0.0f },
-                new lightData { world = new Vector3(-10, -10, 0), rad = 0.5f, r = 0.0f, g = 1.0f, b = 0.0f },
-                new lightData { world = new Vector3(-10, -10, 0), rad = 0.5f, r = 0.0f, g = 1.0f, b = 0.0f }
-            }
-        };
+    private void createNewTrackedLight()
+    {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        updatePlayerLight();
         Shader.SetGlobalFloatArray("_Lights", lightsArray.toFloatArray());
-        Shader.SetGlobalInt("_LightCount", lightCount);
+        Shader.SetGlobalInt("_LightCount", lightsArray.lights.Count);
     }
 
-    private void updatePlayerLight()
+    public void setLights(NativeList<LightManagerSystem.lightInfo> lightInfo)
     {
-        LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
-        lightsArray.lights[0].world = playerLocation.Position;
+        lightsArray = new LightsCollection();
+        List<int> newTrackedLights = new List<int>();
+        for (int i = 0; i < lightInfo.Length; i++)
+        {
+            int index = lightInfo[i].index;
+            bool exists = trackedLights.Contains(index);
+            if (exists && lightsArray.lights.Count < maxLights)
+            {
+                LightData light = new LightData { world = (Vector3)lightInfo[i].position, rad = lightInfo[i].radius, r = lightInfo[i].rgb.x, g = lightInfo[i].rgb.y, b = lightInfo[i].rgb.z };
+                lightsArray.lights.Add(light);
+                newTrackedLights.Add(index);
+            }
+        }
+
+        for (int i = 0; i < lightInfo.Length; i++)
+        {
+            int index = lightInfo[i].index;
+            bool exists = trackedLights.Contains(index);
+            if (!exists && lightsArray.lights.Count < maxLights)
+            {
+                LightData light = new LightData { world = (Vector3)lightInfo[i].position, rad = lightInfo[i].radius, r = lightInfo[i].rgb.x, g = lightInfo[i].rgb.y, b = lightInfo[i].rgb.z };
+                lightsArray.lights.Add(light);
+                newTrackedLights.Add(index);
+            }
+        }
+        trackedLights = newTrackedLights;
     }
 }

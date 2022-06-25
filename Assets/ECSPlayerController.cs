@@ -112,6 +112,7 @@ public class ECSPlayerController : MonoBehaviour
 
         player = entityManager.Instantiate(playerEntityPrefab);
         entityManager.SetComponentData(player, new Translation());
+        entityManager.AddComponent(player, typeof(LightTag));
     }
 
     void Update()

@@ -54,9 +54,9 @@ Shader "Unlit/ShadowShader"
             float _TextureBump;
             float _TextureBumpShadow;
 
-#define MAX_LIGHTS 8
+#define MAX_LIGHTS 64
 #define FLOATS_PER_LIGHT 6
-#define MAX_LIGHTS_FLOATS 48 // set to MAX_LIGHTS * FLOATS_PER_LIGHT
+#define MAX_LIGHTS_FLOATS 384 // set to MAX_LIGHTS * FLOATS_PER_LIGHT
 
             int _LightCount = 0;
             float _Lights[MAX_LIGHTS_FLOATS];
@@ -93,7 +93,7 @@ Shader "Unlit/ShadowShader"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                const int NUM_STEPS = 128;
+                //const int NUM_STEPS = 96;
                 float aspect_ratio = _MainTex_TexelSize.y / _MainTex_TexelSize.x;
 
                 // sample the texture
@@ -114,6 +114,13 @@ Shader "Unlit/ShadowShader"
                     float2 delta = (i.uv - light_pos);
                     delta.x *= aspect_ratio;
                     float delta_len = length(delta);
+
+                    if (delta_len > light_rad) {
+                        continue;
+                    }
+                    //const int NUM_STEPS = 96;
+                    //const int NUM_STEPS = int(ceil(delta_len / 0.001));
+                    const int NUM_STEPS = clamp(8, 96, int(ceil(delta_len / 0.001)));
 
                     //fixed4 lookup = QuantizedTex(lerp(light_pos, i.uv, 0.5));
                     //bool blocked = !IsShadowed(lookup);

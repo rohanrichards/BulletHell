@@ -8,7 +8,7 @@ public class LightsController : MonoBehaviour
 {
     private List<int> trackedLights;
     // this will need to be updated in the shader too
-    private int maxLights = 8;
+    private int maxLights = 25;
     private LightsCollection lightsArray;
     private class LightData
     {
@@ -44,11 +44,13 @@ public class LightsController : MonoBehaviour
     {
         trackedLights = new List<int>();
         lightsArray = new LightsCollection();
-    }
-
-    private void createNewTrackedLight()
-    {
-
+        for(int i = 0; i < maxLights; i++)
+        {
+            LightData light = new LightData { world = new Vector3(0.0f, 0.0f, 0.0f), rad = 0.0f, r = 0.0f, g = 0.0f, b = 0.0f };
+            lightsArray.lights.Add(light);
+        }
+        Shader.SetGlobalFloatArray("_Lights", lightsArray.toFloatArray());
+        Shader.SetGlobalInt("_LightCount", 0);
     }
 
     // Update is called once per frame

@@ -2276,7 +2276,7 @@ MonoBehaviour:
   generateGround: 1
   generateObstacles: 1
   generateStructures: 0
-  generateDestroyables: 0
+  generateDestroyables: 1
   chunkSize: 100
   renderBounds: 100
   minObstablesPerChunk: 10

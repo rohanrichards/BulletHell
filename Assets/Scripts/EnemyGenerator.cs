@@ -181,7 +181,6 @@ public class EnemyGenerator : MonoBehaviour
                 entityManager.SetComponentData(enemies[i], new EntityTargetSettings { targetMovementDirection = targetMoveDirection});
                 Quaternion originRotation = Quaternion.AngleAxis(Mathf.Atan2(targetMoveDirection.y, targetMoveDirection.x), new Vector3(0, 0, 1));
                 entityManager.SetComponentData(enemies[i], new Rotation { Value = originRotation});
-                entityManager.AddComponent(enemies[i], typeof(LightTag));
             }
 
             shellIndex++;

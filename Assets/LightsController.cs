@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
+using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
@@ -54,7 +55,10 @@ public class LightsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Shader.SetGlobalFloatArray("_Lights", lightsArray.toFloatArray());
+        if(lightsArray.lights.Count > 0)
+        {
+            Shader.SetGlobalFloatArray("_Lights", lightsArray.toFloatArray());
+        }
         Shader.SetGlobalInt("_LightCount", lightsArray.lights.Count);
     }
 
@@ -62,8 +66,13 @@ public class LightsController : MonoBehaviour
     {
         lightsArray = new LightsCollection();
         List<int> newTrackedLights = new List<int>();
+
         for (int i = 0; i < lightInfo.Length; i++)
         {
+            if (isOffScreen(lightInfo[i].position))
+            {
+                continue;
+            }
             int index = lightInfo[i].index;
             bool exists = trackedLights.Contains(index);
             if (exists && lightsArray.lights.Count < maxLights)
@@ -76,6 +85,10 @@ public class LightsController : MonoBehaviour
 
         for (int i = 0; i < lightInfo.Length; i++)
         {
+            if (isOffScreen(lightInfo[i].position))
+            {
+                continue;
+            }
             int index = lightInfo[i].index;
             bool exists = trackedLights.Contains(index);
             if (!exists && lightsArray.lights.Count < maxLights)
@@ -86,5 +99,17 @@ public class LightsController : MonoBehaviour
             }
         }
         trackedLights = newTrackedLights;
+    }
+
+    private bool isOffScreen(float3 pos)
+    {
+        Vector3 screenPoint = Camera.main.WorldToViewportPoint(new Vector3(pos.x, pos.y, 1));
+        if (screenPoint.x < -0.5 || screenPoint.x > 1.5 || screenPoint.y < -0.5 || screenPoint.y > 1.5)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 }

@@ -24,9 +24,8 @@ public partial class LightManagerSystem : SystemBase
         public NativeList<lightInfo> lightPositions;
         public void Execute(Entity entity, in Translation position)
         {
-            Debug.Log("found entity");
             int index = entity.Index;
-            lightPositions.Add(new lightInfo { index = index, position = position.Value, radius = 1.0f, rgb = {x = 1, y = 0, z = 1 } });
+            lightPositions.Add(new lightInfo { index = index, position = position.Value, radius = 1.0f, rgb = {x = 1, y = 1, z = 1 } });
         }
     }
 
@@ -49,10 +48,7 @@ public partial class LightManagerSystem : SystemBase
         lightsJob.lightPositions = lightPositions;
         JobHandle handle = lightsJob.Schedule(lightEntityQuery);
         handle.Complete();
-
-        Debug.Log(lightPositions.Length);
         lightsController.setLights(lightPositions);
-
         lightPositions.Dispose();
     }
 }

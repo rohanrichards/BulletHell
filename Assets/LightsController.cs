@@ -4,6 +4,7 @@ using Unity.Collections;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
+using static LightManagerSystem;
 
 public class LightsController : MonoBehaviour
 {
@@ -11,11 +12,6 @@ public class LightsController : MonoBehaviour
     // this will need to be updated in the shader too
     private int maxLights = 25;
     private LightsCollection lightsArray;
-    private class LightData
-    {
-        public Vector3 world, local;
-        public float rad, r, g, b;
-    }
 
     private class LightsCollection
     {
@@ -26,15 +22,14 @@ public class LightsController : MonoBehaviour
             for (int i = 0; i < lights.Count; i++)
             {
                 LightData l = lights[i];
-                Vector3 screenPoint = Camera.main.WorldToViewportPoint(new Vector3(l.world.x, l.world.y, 1));
-                l.local = screenPoint;
+                Vector3 screenPoint = Camera.main.WorldToViewportPoint(new Vector3(l.position.x, l.position.y, 1));
 
-                res.Add(l.local.x);
-                res.Add(l.local.y);
-                res.Add(l.rad);
-                res.Add(l.r);
-                res.Add(l.g);
-                res.Add(l.b);
+                res.Add(screenPoint.x);
+                res.Add(screenPoint.y);
+                res.Add(l.radius);
+                res.Add(l.rgb.x * l.intensity);
+                res.Add(l.rgb.y * l.intensity);
+                res.Add(l.rgb.z * l.intensity);
             }
             return res.ToArray();
         }
@@ -47,7 +42,7 @@ public class LightsController : MonoBehaviour
         lightsArray = new LightsCollection();
         for(int i = 0; i < maxLights; i++)
         {
-            LightData light = new LightData { world = new Vector3(0.0f, 0.0f, 0.0f), rad = 0.0f, r = 0.0f, g = 0.0f, b = 0.0f };
+            LightData light = new LightData { position = new Vector3(0.0f, 0.0f, 0.0f), intensity = 1, radius = 0.0f, rgb = { x = 0.0f, y = 0.0f, z = 0.0f } };
             lightsArray.lights.Add(light);
         }
         Shader.SetGlobalFloatArray("_Lights", lightsArray.toFloatArray());
@@ -64,7 +59,7 @@ public class LightsController : MonoBehaviour
         Shader.SetGlobalInt("_LightCount", lightsArray.lights.Count);
     }
 
-    public void setLights(NativeList<LightManagerSystem.lightInfo> lightInfo)
+    public void setLights(NativeList<LightManagerSystem.LightData> lightInfo)
     {
         lightsArray = new LightsCollection();
         List<int> newTrackedLights = new List<int>();
@@ -79,8 +74,7 @@ public class LightsController : MonoBehaviour
             bool exists = trackedLights.Contains(index);
             if (exists && lightsArray.lights.Count < maxLights)
             {
-                LightData light = new LightData { world = (Vector3)lightInfo[i].position, rad = lightInfo[i].radius, r = lightInfo[i].rgb.x, g = lightInfo[i].rgb.y, b = lightInfo[i].rgb.z };
-                lightsArray.lights.Add(light);
+                lightsArray.lights.Add(lightInfo[i]);
                 newTrackedLights.Add(index);
             }
         }
@@ -95,8 +89,7 @@ public class LightsController : MonoBehaviour
             bool exists = trackedLights.Contains(index);
             if (!exists && lightsArray.lights.Count < maxLights)
             {
-                LightData light = new LightData { world = (Vector3)lightInfo[i].position, rad = lightInfo[i].radius, r = lightInfo[i].rgb.x, g = lightInfo[i].rgb.y, b = lightInfo[i].rgb.z };
-                lightsArray.lights.Add(light);
+                lightsArray.lights.Add(lightInfo[i]);
                 newTrackedLights.Add(index);
             }
         }

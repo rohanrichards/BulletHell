@@ -10,5 +10,6 @@ public class ChestPickupAuthoringComponent : PickupBase, IConvertGameObjectToEnt
     {
         base.Convert(entity, dstManager, conversionSystem);
         dstManager.AddComponent(entity, typeof(PickupTag));
+        dstManager.AddComponentData(entity, new LightDataComponent { radius = 0.5f, color = { x = 1f, y = 0.75f, z = 0.1f }, intensity = 10 });
     }
 }

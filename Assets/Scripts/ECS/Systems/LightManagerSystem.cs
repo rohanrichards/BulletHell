@@ -10,40 +10,41 @@ using UnityEngine;
 
 public partial class LightManagerSystem : SystemBase
 {
-    public struct lightInfo {
+    public struct LightData {
         public int index;
         public float3 position;
         public float radius;
         public float3 rgb;
+        public float intensity;
     }
 
     [BurstCompile]
     partial struct UpdateLightsJob : IJobEntity
     {
         [WriteOnly]
-        public NativeList<lightInfo> lightPositions;
-        public void Execute(Entity entity, in Translation position)
+        public NativeList<LightData> lightPositions;
+        public void Execute(Entity entity, in Translation position, in LightDataComponent lightData)
         {
             int index = entity.Index;
-            lightPositions.Add(new lightInfo { index = index, position = position.Value, radius = 1.0f, rgb = {x = 1, y = 1, z = 1 } });
+            lightPositions.Add(new LightData { index = index, position = position.Value, radius = lightData.radius, intensity = lightData.intensity, rgb = lightData.color });
         }
     }
 
     private EntityQuery lightEntityQuery;
-    private NativeList<lightInfo> lightPositions;
+    private NativeList<LightData> lightPositions;
     private LightsController lightsController;
     protected override void OnStartRunning()
     {
         lightsController = GameObject.Find("GameplayScripts").GetComponent<LightsController>();
         lightEntityQuery = EntityManager.CreateEntityQuery(
             ComponentType.ReadOnly<Translation>(),
-            ComponentType.ReadOnly<LightTag>()
+            ComponentType.ReadOnly<LightDataComponent>()
         );
     }
 
     protected override void OnUpdate()
     {
-        lightPositions = new NativeList<lightInfo>(Allocator.TempJob);
+        lightPositions = new NativeList<LightData>(Allocator.TempJob);
         UpdateLightsJob lightsJob = new UpdateLightsJob { };
         lightsJob.lightPositions = lightPositions;
         JobHandle handle = lightsJob.Schedule(lightEntityQuery);

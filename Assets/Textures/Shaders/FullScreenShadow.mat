@@ -103,18 +103,18 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _LightAmbient: 0.471
-    - _LightPower: 3.25
+    - _LightAmbient: 0.398
+    - _LightPower: 1.14
     - _MaxShadowLights: 25
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _ShadowFade: 2.59
-    - _ShadowFalloff: 14.4
+    - _ShadowFade: 2.1
+    - _ShadowFalloff: 10.7
     - _ShadowRadius: 0.86
-    - _ShadowStrength: 5.65
+    - _ShadowStrength: 0.34
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

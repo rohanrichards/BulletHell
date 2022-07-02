@@ -58,6 +58,7 @@ Shader "BulletHell/LightPassShader"
                 col.xyz = fixed3(out_col);
 
                 //col.x = 1.0;
+                col.w = 1.0;
                 return col;
             }
             ENDCG

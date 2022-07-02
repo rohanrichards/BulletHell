@@ -1,4 +1,4 @@
-Shader "BulletHell/LightBlockDOTSShader"
+Shader "BulletHell/LightPassDOTSShader"
 {
     Properties
     {
@@ -131,7 +131,7 @@ UNITY_DOTS_INSTANCING_END(MaterialPropertyMetadata)
 
                 float3 out_col = float3(color.xyz);
                 out_col = floor(out_col * 255.0); // converts into 0-255 space
-                out_col = floor(out_col * 0.5) * 2.0 + float3(1.0, 1.0, 1.0); // ensures lower bit is set by removing it and adding it back
+                out_col = floor(out_col * 0.5) * 2.0; // removes lower bit
                 out_col = out_col / 255.0; // converts back into 0-1 space
                 color.xyz = half3(out_col);
 

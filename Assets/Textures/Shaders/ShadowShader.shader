@@ -204,7 +204,8 @@ Shader "Unlit/ShadowShader"
                             float along_frac = float(x) / float(NUM_STEPS);
                             float2 pos = lerp(light_pos, i.uv, along_frac);
                             fixed4 lookup = QuantizedTex(pos);
-                            float prev_diff = abs(ColGradient(lookup, previous_lookup)) * _TextureBumpShadow;
+                            //float prev_diff = abs(ColGradient(lookup, previous_lookup)) * _TextureBumpShadow;
+                            float prev_diff = 0.0;//abs(ColGradient(lookup, previous_lookup)) * _TextureBumpShadow;
                             //float block_val = IsShadowed(lookup) ? prev_diff : pow(along_frac, _ShadowFade);
                             blocked += IsShadowed(lookup) ? prev_diff : pow(along_frac, _ShadowFade);
                             previous_lookup = lookup;
@@ -240,7 +241,7 @@ Shader "Unlit/ShadowShader"
                 } else {
                     col.xyz += fixed3(0.0, abs(sin(i.uv.x * 500.0)), abs(sin(i.uv.y * 500.0))) * 0.02;
                 }*/
-
+                //return fixed4(0.0, 0.0, 1.0, 1.0);
                 return col;
             }
             ENDCG

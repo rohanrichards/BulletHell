@@ -111,10 +111,10 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _ShadowFade: 2.1
-    - _ShadowFalloff: 10.7
+    - _ShadowFade: 7.24
+    - _ShadowFalloff: 9.4
     - _ShadowRadius: 0.86
-    - _ShadowStrength: 0.34
+    - _ShadowStrength: 9.04
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

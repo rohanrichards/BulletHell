@@ -7,4 +7,5 @@ using Unity.Mathematics;
 public struct BulletConfigComponent : IComponentData
 {
     public float Damage;
+    public float Knockback;
 }

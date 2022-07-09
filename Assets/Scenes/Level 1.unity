@@ -1191,6 +1191,7 @@ GameObject:
   - component: {fileID: 1046950704}
   - component: {fileID: 1046950703}
   - component: {fileID: 1046950707}
+  - component: {fileID: 1046950708}
   m_Layer: 0
   m_Name: PlayerScripts
   m_TagString: Untagged
@@ -1307,6 +1308,41 @@ MonoBehaviour:
     type: 3}
   isFiring: 0
   toggleButton: 283
+--- !u!114 &1046950708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046950702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61231396dc7b5449b88118cb6cea7e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUnlocked: 0
+  level: 0
+  rarity: 5
+  upgradePool: []
+  levelUpgrades:
+  - {fileID: 11400000, guid: 2a2f90b6b568f004a940aa6ce02cda5f, type: 2}
+  - {fileID: 11400000, guid: 4327fea90dc5ec949a0f2cbb57b7a016, type: 2}
+  - {fileID: 11400000, guid: 17e69bd6a0e3eaa47bf11a902c1ff863, type: 2}
+  - {fileID: 11400000, guid: 7dd32264f76fa0c4fad3ccb8c36b31a7, type: 2}
+  - {fileID: 11400000, guid: 42a3ad3d0b59bbf4d92ce56d027a3056, type: 2}
+  - {fileID: 11400000, guid: b77b4925765077c429180ec9bc86f8a9, type: 2}
+  - {fileID: 11400000, guid: c56fdfc8f0afad74fb47dface8b9f98e, type: 2}
+  - {fileID: 11400000, guid: badaeecea74b8894f8e295d239f48fcd, type: 2}
+  - {fileID: 11400000, guid: 785c3c5d645f4e341af93f6cd13000fe, type: 2}
+  - {fileID: 11400000, guid: 46bb23f0790d6204a922ca73b67d7e17, type: 2}
+  weaponConfig: {fileID: 11400000, guid: 65b8fa7ef8525a44ebe61f787b6f1157, type: 2}
+  bulletConfig: {fileID: 11400000, guid: 8bc8bbd62c542984898588a224cab7e2, type: 2}
+  bulletPrefab: {fileID: 3800543936002685991, guid: aa4e28eb48efb59449a600e01b8e33cb,
+    type: 3}
+  isFiring: 0
+  toggleButton: 284
+  arcSize: 20
+  radius: 0.5
 --- !u!1 &1049670892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,7 +1905,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227021395}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 81865081}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7159893415839073091}
   - component: {fileID: -1215516549640195726}
   m_Layer: 3
-  m_Name: LaserBolt
+  m_Name: SmallPellet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3800543936002685991}
   m_LocalRotation: {x: 0, y: 0, z: -0.70710546, w: -0.7071081}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146bcf052dfe7ac459183059cf89f73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: f674a5a911afabb4db7cfc1af5583370, type: 2}
+  config: {fileID: 11400000, guid: 8bc8bbd62c542984898588a224cab7e2, type: 2}
   deathPrefab: {fileID: 0}
   parentWeapon: {fileID: 0}
 --- !u!114 &5512610781927168380
@@ -128,7 +128,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a55a505e0adc96943a44fea8ca992fbd, type: 2}
+  - {fileID: 2100000, guid: c038f1aac0031e142b3fa46539b70bc9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -162,15 +162,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShapeType: 1
+  m_ShapeType: 2
   m_PrimitiveCenter:
     x: 0
     y: 0
     z: 0
   m_PrimitiveSize:
-    x: 0.24
-    y: 0.24
-    z: 0.65
+    x: 1.16
+    y: 1.16
+    z: 1.16
   m_PrimitiveOrientation:
     Value:
       x: -90
@@ -178,15 +178,15 @@ MonoBehaviour:
       z: -90
     RotationOrder: 4
   m_Capsule:
-    Height: 0.65
-    Radius: 0.12
+    Height: 1.16
+    Radius: 0.58
     Axis: 2
   m_Cylinder:
-    Height: 0.65
-    Radius: 0.12
+    Height: 1.16
+    Radius: 0.58
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.325
+  m_SphereRadius: 0.58
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
     m_SimplificationTolerance: 0.015

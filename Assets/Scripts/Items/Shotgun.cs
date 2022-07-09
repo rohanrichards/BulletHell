@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
+using Unity.Physics;
+using Unity.Transforms;
 using UnityEngine;
 
 public class Shotgun : WeaponBase
@@ -25,10 +28,7 @@ public class Shotgun : WeaponBase
 
     public override IEnumerator Fire()
     {
-        if (!playerBody)
-        {
-            playerBody = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Rigidbody2D>();
-        }
+        LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
 
         float arcSegment = arcSize / ProjectileCount;
         for (int i = 0; i < ProjectileCount; i++)
@@ -37,10 +37,18 @@ public class Shotgun : WeaponBase
 
             float rotationOffset = (arcSegment / 2) + (arcSegment * i);
             Vector3 originOffset = new Vector3(circleposition.x, circleposition.y, 0);
-            Vector3 rotationOrigin = playerBody.transform.rotation.eulerAngles;
+            Vector3 rotationOrigin = ((Quaternion)playerLocation.Rotation).eulerAngles;
             Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Vector3 rotation = rotationOrigin + new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
+            Entity bullet = BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
+
+            PhysicsVelocity vel = manager.GetComponentData<PhysicsVelocity>(bullet);
+            vel.Linear += ECSPlayerController.getPlayerPhysicsVelocity().Linear;
+            manager.SetComponentData(bullet, vel);
+
+            BulletConfigComponent config = manager.GetComponentData<BulletConfigComponent>(bullet);
+            config.Knockback = KnockBackForce;
+            manager.SetComponentData(bullet, config);
         }
         yield return new WaitForSeconds(1 / RateOfFire);
         StartCoroutine(Fire());

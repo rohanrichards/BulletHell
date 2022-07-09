@@ -10,6 +10,7 @@ public struct RotateToFixedTargetTag: IComponentData { }
 public struct RotateToDirectionTag : IComponentData { }
 public struct ExplodeAndDeleteTag: IComponentData { }
 public struct EnemyTag: IComponentData { }
+public struct KnockableTag: IComponentData { }
 public struct ShootableTag: IComponentData { }
 public struct PlayerTag : IComponentData { }
 public struct BulletTag : IComponentData { }

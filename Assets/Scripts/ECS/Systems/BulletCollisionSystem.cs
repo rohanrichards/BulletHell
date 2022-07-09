@@ -33,22 +33,19 @@ public partial class BulletCollisionSystem : SystemBase
         {
             Entity bullet;
             Entity shootable;
-            int bulletBodyIndex;
             int shootableBodyIndex;
             bool shouldKnock = true;
 
             if (bulletGroup.HasComponent(triggerEvent.EntityA) && enemyGroup.HasComponent(triggerEvent.EntityB)) 
             {
                 bullet = triggerEvent.EntityA;
-                bulletBodyIndex = triggerEvent.BodyIndexA;
                 shootable = triggerEvent.EntityB;
-                shootableBodyIndex = triggerEvent.BodyIndexB;
+                shootableBodyIndex = physicsWorld.GetRigidBodyIndex(shootable);
             } else if (bulletGroup.HasComponent(triggerEvent.EntityB) && enemyGroup.HasComponent(triggerEvent.EntityA))
             {
                 bullet = triggerEvent.EntityB;
-                bulletBodyIndex = triggerEvent.BodyIndexB;
                 shootable = triggerEvent.EntityA;
-                shootableBodyIndex = triggerEvent.BodyIndexA;
+                shootableBodyIndex = physicsWorld.GetRigidBodyIndex(shootable);
             } else
             {
                 return;

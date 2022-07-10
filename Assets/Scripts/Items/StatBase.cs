@@ -29,8 +29,7 @@ public class StatBase : ItemBase
     {
         base.IncreaseLevel();
         StatUpgradeSO levelUpgrade = (StatUpgradeSO)levelUpgrades[level - 1];
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        StatsController controller = player.GetComponent<StatsController>();
+        StatsController controller = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
         levelUpgrade.ApplyUpgrade(controller);
     }
 }

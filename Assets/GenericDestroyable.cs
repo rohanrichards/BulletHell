@@ -10,6 +10,7 @@ public class GenericDestroyable : ContainerBase, IConvertGameObjectToEntity
 
         dstManager.AddComponentData(entity, GetPickupType());
         dstManager.AddComponentData(entity, new EntityHealthComponent { CurrentHealth = config.currentHealth, MaxHealth = config.baseHealth });
+        dstManager.AddComponentData(entity, new LightDataComponent { radius = 0.75f, color = { x = 1, y = 0.9f, z = 0.5f }, intensity = 1 });
     }
 
     private EntityDataComponent GetPickupType()

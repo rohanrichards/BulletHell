@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         playerScripts.GetComponent<ECSPlayerController>().CreatePlayer(startingPlayerStatsConfig, startingPlayerGlobalStatsConfig);
         
         yield return new WaitForSeconds(0.5f);
-        ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Launcher>();
+        ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Shotgun>();
         startingItem.Unlock();
         startingItem.IncreaseLevel();
         //StartCoroutine(SetWinGameTimer());

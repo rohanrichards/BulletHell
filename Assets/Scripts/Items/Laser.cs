@@ -47,9 +47,9 @@ public class Laser : WeaponBase
             vel.Linear += ECSPlayerController.getPlayerPhysicsVelocity().Linear;
             manager.SetComponentData(bullet, vel);
 
-            EntityDataComponent data = manager.GetComponentData<EntityDataComponent>(bullet);
-            data.Force = KnockBackForce;
-            manager.SetComponentData(bullet, data);
+            BulletConfigComponent config = manager.GetComponentData<BulletConfigComponent>(bullet);
+            config.Knockback = KnockBackForce;
+            manager.SetComponentData(bullet, config);
         }
         yield return new WaitForSeconds(1 / RateOfFire);
         StartCoroutine(Fire());

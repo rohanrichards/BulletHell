@@ -111,6 +111,8 @@ public class ECSPlayerController : MonoBehaviour
 
         playerEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(playerPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
         player = entityManager.Instantiate(playerEntityPrefab);
+        entityManager.SetComponentData(player, new Translation());
+        entityManager.AddComponentData(player, new LightDataComponent { radius = 1.5f, color = { x = 1f, y = 1f, z = 1f }, intensity = 3 });
     }
 
     void Update()

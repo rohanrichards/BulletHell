@@ -32,23 +32,6 @@ public abstract class BulletBase : MonoBehaviour, IConvertGameObjectToEntity
         }
     }
 
-    public static GameObject Create(GameObject prefab, Transform origin, Vector3 offset, Quaternion rotation, Vector3 rotationOffset, BulletSO config, WeaponBase weapon)
-    {
-        // create our bullet instance
-        /*        GameObject bulletInstance = Instantiate<GameObject>(prefab, origin.position + offset, rotation);
-                BulletBase controller = bulletInstance.GetComponent<BulletBase>();
-                controller.originalOffset = rotationOffset;
-                controller.config = config;
-                controller.parentWeapon = weapon;
-                controller.rb = bulletInstance.GetComponent<Rigidbody2D>();
-
-                // tell it when to die
-                controller.SetDeath();
-
-                return bulletInstance;*/
-        return null;
-    }
-
     public static Entity CreateEntity(Entity prefab, LocalToWorld origin, Vector3 offset, Quaternion rotation, Vector3 rotationOffset, BulletSO config, WeaponBase weapon)
     {
         entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;

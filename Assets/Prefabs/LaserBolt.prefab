@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3800543936002685986}
   - component: {fileID: 3800543936002685984}
-  - component: {fileID: 6919612997055425846}
   - component: {fileID: 5512610781927168380}
   - component: {fileID: 5565043828040190079}
   - component: {fileID: 7159893415839073091}
@@ -51,47 +50,6 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: f674a5a911afabb4db7cfc1af5583370, type: 2}
   deathPrefab: {fileID: 0}
   parentWeapon: {fileID: 0}
---- !u!114 &6919612997055425846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3800543936002685991}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
-  m_PointLightDistance: 3
-  m_PointLightQuality: 1
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 36
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 25
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
-  m_LightType: 0
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 1
-  m_Color: {r: 1, g: 0.2971698, b: 0.84175336, a: 1}
-  m_Intensity: 0.4
-  m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000
-  m_LightCookieSprite: {fileID: 0}
-  m_UseNormalMap: 0
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0
-  m_ShadowVolumeIntensity: 0
 --- !u!114 &5512610781927168380
 MonoBehaviour:
   m_ObjectHideFlags: 0

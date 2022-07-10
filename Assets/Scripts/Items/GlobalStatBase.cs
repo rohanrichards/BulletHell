@@ -29,8 +29,7 @@ public class GlobalStatBase : ItemBase
     {
         base.IncreaseLevel();
         GlobalStatUpgradeSO levelUpgrade = (GlobalStatUpgradeSO)levelUpgrades[level - 1];
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        StatsController controller = player.GetComponent<StatsController>();
+        StatsController controller = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
         levelUpgrade.ApplyUpgrade(controller);
     }
 }

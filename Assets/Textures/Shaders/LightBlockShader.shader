@@ -48,12 +48,19 @@ Shader "BulletHell/LightBlockShader"
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
-                // apply fog
                 if(col.w <= 0.0) {
                     discard;
                 }
+
+                float3 out_col = float3(col.xyz);
+                out_col = floor(out_col * 255.0); // converts into 0-255 space
+                out_col = floor(out_col * 0.5) * 2.0 + float3(1.0, 1.0, 1.0); // ensures lower bit is set by removing it and adding it back
+                out_col = out_col / 255.0; // converts back into 0-1 space
+                col.xyz = fixed3(out_col);
+
                 //col.z = 1.0;
 
+                // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 //if((col.x + col.y + col.z) > 0.01) {
                 return col;

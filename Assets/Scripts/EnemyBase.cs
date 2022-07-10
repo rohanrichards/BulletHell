@@ -13,6 +13,7 @@ public abstract class EnemyBase : MonoBehaviour, IConvertGameObjectToEntity
     {
         dstManager.AddComponent(entity, typeof(EnemyTag));
         dstManager.AddComponent(entity, typeof(ShootableTag));
+        dstManager.AddComponent(entity, typeof(KnockableTag));
 
         dstManager.AddComponentData(entity, new EntityDataComponent { Type = EntityDeathTypes.SplattersOnDeath, Size = transform.localScale.x, XP = config.XPValue });
         dstManager.AddComponentData(entity, new EntityMovementSettings { moveSpeed = config.moveSpeed });

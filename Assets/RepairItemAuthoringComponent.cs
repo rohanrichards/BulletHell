@@ -9,5 +9,7 @@ public class RepairItemAuthoringComponent : PickupBase, IConvertGameObjectToEnti
     {
         base.Convert(entity, dstManager, conversionSystem);
         dstManager.AddComponent(entity, typeof(PickupTag));
+        dstManager.AddComponentData(entity, new LightDataComponent { radius = 0.5f, color = { x = 0f, y = 0f, z = 1f }, intensity = 20 });
+
     }
 }

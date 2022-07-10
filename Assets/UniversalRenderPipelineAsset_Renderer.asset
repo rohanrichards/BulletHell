@@ -20,10 +20,10 @@ MonoBehaviour:
     setInverseViewMatrix: 0
     requireDepthNormals: 0
     srcType: 0
-    srcTextureId: _CameraColorTexture
-    srcTextureObject: {fileID: 0}
+    srcTextureId: 
+    srcTextureObject: {fileID: 8400000, guid: cd4b7dbfa4b8d4446aa7a6bcc18953e1, type: 2}
     dstType: 0
-    dstTextureId: _BlitPassTexture
+    dstTextureId: 
     dstTextureObject: {fileID: 0}
     overrideGraphicsFormat: 0
     graphicsFormat: 4

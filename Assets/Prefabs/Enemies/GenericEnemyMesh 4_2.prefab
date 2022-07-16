@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1132647691430176076}
   - component: {fileID: 9010832001166543377}
   - component: {fileID: 9120051144106755472}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: GenericEnemyMesh 4_2
   m_TagString: Shootable
   m_Icon: {fileID: 0}
@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfaf4c1f2b5490e47a9a61ac05077156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   config: {fileID: 11400000, guid: 417c9d7d3435663419d5bca859d8f91e, type: 2}
   likelihood:
     serializedVersion: 2
@@ -100,11 +99,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isTouchingPlayer: 0
-  deathPrefab: {fileID: 4846751104775270111, guid: db36dfd70e2daf041bdd3d864c4bc389,
-    type: 3}
-  isSuper: 0
-  attackRate: 0.85
 --- !u!33 &8680624641262637028
 MeshFilter:
   m_ObjectHideFlags: 0

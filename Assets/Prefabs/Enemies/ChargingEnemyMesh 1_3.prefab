@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1132647691430176076}
   - component: {fileID: 9010832001166543377}
   - component: {fileID: 9120051144106755472}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: ChargingEnemyMesh 1_3
   m_TagString: Shootable
   m_Icon: {fileID: 0}

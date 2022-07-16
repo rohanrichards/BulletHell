@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f959a900b98e7f94cb4c1a6358bc6d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameLengthInSeconds: 600
+  GameLengthInSeconds: 100
   startingPlayerStatsConfig: {fileID: 11400000, guid: 6da2b4df98c794f429f3c9fc6c6af0b3,
     type: 2}
   startingPlayerGlobalStatsConfig: {fileID: 11400000, guid: c595359f33d23bb41a275e55ac466fe4,

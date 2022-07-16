@@ -15,7 +15,7 @@ MonoBehaviour:
   upgradeName: Shotgun 9
   upgradeDescription: Increased damage
   rof: 10
-  damage: 100
+  damage: 150
   projectiles: 0
   knockback: 10
   lifespan: 0

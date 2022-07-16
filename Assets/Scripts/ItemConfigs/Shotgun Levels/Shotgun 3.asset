@@ -15,7 +15,7 @@ MonoBehaviour:
   upgradeName: Shotgun 3
   upgradeDescription: Increased damage and knockback
   rof: 10
-  damage: 100
+  damage: 150
   projectiles: 0
   knockback: 0
   lifespan: 20

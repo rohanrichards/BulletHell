@@ -2529,8 +2529,8 @@ MonoBehaviour:
   minWaveSpeed: 1
   baseClusterSize: 5
   maxClusterSize: 30
-  baseClusterCount: 3
-  maxClusterCount: 8
+  baseClusterCount: 5
+  maxClusterCount: 16
   spawnRadius: 30
   despawnRadius: 50
   availableEnemies:

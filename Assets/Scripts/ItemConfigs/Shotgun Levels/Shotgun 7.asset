@@ -15,7 +15,7 @@ MonoBehaviour:
   upgradeName: Shotgun 7
   upgradeDescription: Increased damage
   rof: 10
-  damage: 100
+  damage: 150
   projectiles: 0
   knockback: 0
   lifespan: 10

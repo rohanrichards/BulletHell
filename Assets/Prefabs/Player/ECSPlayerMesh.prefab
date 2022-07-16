@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5741221878584870603}
   - component: {fileID: 3981977899662103819}
   - component: {fileID: 5477433305406693639}
-  m_Layer: 22
+  m_Layer: 0
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4505740377609487672}
   - component: {fileID: 7225077975792249146}
   - component: {fileID: 1100492470208404807}
-  m_Layer: 22
+  m_Layer: 0
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,7 +703,7 @@ GameObject:
   - component: {fileID: 5639828761964547307}
   - component: {fileID: 1215692049742174195}
   - component: {fileID: 439804124243046777}
-  m_Layer: 22
+  m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5774886338626238585}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Bush 2
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9105841175555271080}
   - component: {fileID: 7191066027611398259}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2946183682225141204}
   - component: {fileID: 9189384542591886714}
   - component: {fileID: 5759382140001391739}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: Crates
   m_TagString: Shootable
   m_Icon: {fileID: 0}

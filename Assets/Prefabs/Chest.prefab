@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1074414441242658881}
   - component: {fileID: 3094353449497121474}
   - component: {fileID: 2393965420104760090}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Chest
   m_TagString: Pickups
   m_Icon: {fileID: 0}

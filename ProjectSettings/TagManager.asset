@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Pickups
   - Terrain
+  - Leader
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Terrain
   - Player
   - Attackers
-  - 
+  - CastsShadows
   - 
   - 
   - 

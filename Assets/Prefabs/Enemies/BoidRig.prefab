@@ -9,15 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4239134364593895133}
-  - component: {fileID: 3364568080195334498}
   - component: {fileID: 8680624641262637028}
   - component: {fileID: 1132647691430176076}
-  - component: {fileID: 2399396901431575738}
   - component: {fileID: 4704373881675629540}
   - component: {fileID: 1484577663571140050}
-  - component: {fileID: 4793445367613539240}
+  - component: {fileID: 6247931637251676111}
   m_Layer: 7
-  m_Name: ChargingEnemyMesh 1
+  m_Name: BoidRig
   m_TagString: Shootable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,43 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3364568080195334498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4239134364593895138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b8037a984f47b4f941ec83bce2bc91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 1a4ebde7ec834ae4b9d545917f1e57ac, type: 2}
-  likelihood:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0.1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!33 &8680624641262637028
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -123,19 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2399396901431575738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4239134364593895138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConversionMode: 0
 --- !u!114 &4704373881675629540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +278,7 @@ MonoBehaviour:
         Tag07: 0
     m_SerializedVersion: 1
   m_SerializedVersion: 1
---- !u!114 &4793445367613539240
+--- !u!114 &6247931637251676111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -339,7 +287,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4239134364593895138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a18119e8072ac54882c3f79cba8093e, type: 3}
+  m_Script: {fileID: 11500000, guid: cca30d25de2ecd7488f81da0eaebe811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _flockBox: {fileID: 0}
@@ -347,3 +295,4 @@ MonoBehaviour:
     type: 0
     radius: 1
   debugDrawShape: 0
+  activeSettings: {fileID: 11400000, guid: 3b60ef4ad0675ce469b6508338759243, type: 2}

@@ -7,10 +7,10 @@ using Unity.Collections;
 using UnityEngine;
 using Unity.Physics.Extensions;
 using Unity.Physics.Systems;
+using CloudFine.FlockBox.DOTS;
 
-[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
-[UpdateAfter(typeof(BuildPhysicsWorld))]
-[UpdateBefore(typeof(EndFramePhysicsSystem))]
+[UpdateInGroup(typeof(MovementSystemGroup))]
+[UpdateAfter(typeof(SteeringVelocitySystem))]
 public partial class ExplosionSystem : SystemBase
 {
     public NativeArray<Translation> locations;

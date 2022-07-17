@@ -28,9 +28,9 @@ public class Discharger : WeaponBase
             playerBody = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Rigidbody2D>();
         }
 
-        float arcSize = 50 + (30 * bulletConfig.AOE);
+        float arcSize = 50 + (30 * weaponConfig.AOE);
         float arcSegment = arcSize / ProjectileCount;
-        float offsetWidth = 1f * bulletConfig.AOE;
+        float offsetWidth = 1f * weaponConfig.AOE;
         float offsetSegment = offsetWidth / ProjectileCount;
         for (int i = 0; i < ProjectileCount; i++)
         {

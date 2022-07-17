@@ -43,15 +43,12 @@ public class EntityMessagingController : MonoBehaviour
             {
                 if (type.Type == EntityDeathTypes.ExplodesOnDeath)
                 {
-                    Instantiate(explosionDeathPrefab, message.position, message.rotation);
+                    GameObject explosionGameObject = Instantiate(explosionDeathPrefab, message.position, message.rotation);
+                    explosionGameObject.transform.localScale *= type.Size;
                     Entity exploder = manager.CreateEntity();
                     manager.AddComponent<ExplodeAndDeleteTag>(exploder);
-
-                    manager.AddComponent<EntityDataComponent>(exploder);
-                    manager.SetComponentData(exploder, type);
-
-                    manager.AddComponent<Translation>(exploder);
-                    manager.SetComponentData(exploder, new Translation { Value = message.position });
+                    manager.AddComponentData(exploder, type);
+                    manager.AddComponentData(exploder, new Translation { Value = message.position });
                 }
                 if (type.Type == EntityDeathTypes.SplattersOnDeath)
                 {

@@ -30,25 +30,22 @@ public class Launcher : WeaponBase
         for (int i = 0; i < ProjectileCount; i++)
         {
             LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
+            Vector3 playerVelocity = ECSPlayerController.getPlayerPhysicsVelocity().Linear;
 
             float rotationOffset = (arcSegment / 2) + (arcSegment * Random.Range(0, ProjectileCount));
             float offset = (offsetSegment / 2) + (offsetSegment * i);
             Vector3 originOffset = playerLocation.Up + (playerLocation.Right * ((offsetWidth / 2) - offset));
             Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Vector3 rotation = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            Entity bullet = BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation) * playerLocation.Rotation, offsetVector, bulletConfig, this);
-
-            EntityDataComponent data = manager.GetComponentData<EntityDataComponent>(bullet);
-            data.Force = KnockBackForce;
-            manager.SetComponentData(bullet, data);
+            Entity bullet = BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation) * playerLocation.Rotation, offsetVector, playerVelocity, weaponConfig);
 
             LifespanComponent lifespan = manager.GetComponentData<LifespanComponent>(bullet);
-            lifespan.Value += Random.Range(0, bulletConfig.Lifespan);
+            lifespan.Value += Random.Range(0, weaponConfig.Lifespan);
             manager.SetComponentData(bullet, lifespan);
 
-            PhysicsVelocity vel = manager.GetComponentData<PhysicsVelocity>(bullet);
-            vel.Linear += ECSPlayerController.getPlayerPhysicsVelocity().Linear;
-            manager.SetComponentData(bullet, vel);
+            EntityDataComponent type = new EntityDataComponent { Type = EntityDeathTypes.ExplodesOnDeath, Damage = weaponConfig.Damage, Size = weaponConfig.AOE, Force = weaponConfig.KnockBackForce };
+            manager.AddComponentData(bullet, type);
+
             yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(1 / RateOfFire);

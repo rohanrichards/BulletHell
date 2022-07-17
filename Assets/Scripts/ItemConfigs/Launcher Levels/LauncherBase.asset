@@ -17,5 +17,14 @@ MonoBehaviour:
   rofFlatBonus: 0
   projectileCount: 3
   projectileCountBonus: 0
-  knockBackForce: 8
+  baseDamage: 10
+  damageFlatBonus: 0
+  damagePercentBonus: 0
+  baseLifespan: 0.25
+  lifespanFlatBonus: 0
+  lifespanPercentBonus: 0
+  baseAOE: 1.5
+  aoePercentBonus: 0
+  baseKnockbackForce: 6
   knockBackForcePercentBonus: 0
+  baseSpeed: 30

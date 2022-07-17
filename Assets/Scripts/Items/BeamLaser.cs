@@ -23,7 +23,7 @@ public class BeamLaser : WeaponBase
 
     public override IEnumerator Fire()
     {
-        if (!playerBody)
+/*        if (!playerBody)
         {
             playerBody = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Rigidbody2D>();
         }
@@ -42,8 +42,8 @@ public class BeamLaser : WeaponBase
             Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Vector3 rotation = rotationOrigin + offsetVector;
             //BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
-        }
-        yield return new WaitForSeconds(1 / RateOfFire + bulletConfig.Lifespan);
+        }*/
+        yield return new WaitForSeconds(1 / RateOfFire + weaponConfig.Lifespan);
         StartCoroutine(Fire());
     }
 }

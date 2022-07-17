@@ -13,7 +13,7 @@ public class ECSPlayerController : MonoBehaviour
     protected Entity playerEntityPrefab;
     protected BlobAssetStore blobAssetStore;
     private static EntityQuery playerQuery;
-    protected StatsController stats;
+    public static StatsController stats;
     private static Entity player;
 
     public static LocalToWorld getPlayerLocation()

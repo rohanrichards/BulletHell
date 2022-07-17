@@ -7,7 +7,6 @@ public abstract class WeaponBase : ItemBase
     protected Rigidbody2D playerBody;
     protected StatsController statsController;
     public WeaponSO weaponConfig;
-    public BulletSO bulletConfig;
     public GameObject bulletPrefab;
     public bool isFiring = false;
     public KeyCode toggleButton;
@@ -25,14 +24,6 @@ public abstract class WeaponBase : ItemBase
         }
     }
 
-    public float KnockBackForce
-    {
-        get
-        {
-            return weaponConfig.KnockBackForce + (weaponConfig.KnockBackForce * (statsController.globalStatsConfig.knockbackPercentBonus/ 100));
-        }
-    }
-
     public float ProjectileCount
     {
         get
@@ -45,7 +36,6 @@ public abstract class WeaponBase : ItemBase
     {
         base.Start();
         weaponConfig = Instantiate<WeaponSO>(weaponConfig);
-        bulletConfig = Instantiate<BulletSO>(bulletConfig);
         statsController = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
 
         manager = World.DefaultGameObjectInjectionWorld.EntityManager;

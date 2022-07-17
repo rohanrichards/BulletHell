@@ -13,7 +13,7 @@ public class GenericDamagingBulletAuthoringComponent : BulletBase
     {
         base.Convert(entity, dstManager, conversionSystem);
 
-        EntityDataComponent type = new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath, Damage = config.Damage, Size = config.AOE };
+        EntityDataComponent type = new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath };
         dstManager.AddComponentData(entity, type);
     }
 }

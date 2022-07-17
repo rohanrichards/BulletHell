@@ -9,16 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecc5ddfaaad574541a8fddd094b33be7, type: 3}
-  m_Name: Laser 1
-  m_EditorClassIdentifier: 
-  upgradeName: Pulse Laser
-  upgradeDescription: Rapid firing short range laser
+  m_Script: {fileID: 11500000, guid: 69c3b83a0f4121d499d50780d872dbe9, type: 3}
+  m_Name: New Upgrade
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponMetaUpgradeSO
+  upgradeName: Double Damge
+  upgradeDescription: 
   rof: 0
-  damage: 0
+  damage: 100
   projectiles: 0
   knockback: 0
   lifespan: 0
   aoe: 0
   spread: 0
-  fireFunc: {fileID: 11400000, guid: 95147052dabc1b74898b8f854a07afd3, type: 2}
+  fireFunc: {fileID: 0}
+  requiredLevel: 10
+  purchased: 1
+  applied: 0

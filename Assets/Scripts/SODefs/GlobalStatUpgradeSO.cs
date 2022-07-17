@@ -4,9 +4,15 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Global Upgrade", menuName = "SO's/Global Upgrades/Level Up")]
 
-public class GlobalStatUpgrade : GlobalStatUpgradeSO
+public class GlobalStatUpgradeSO : UpgradeSO
 {
-    public override void ApplyUpgrade(StatsController statsController)
+    public float rof;
+    public int projectileCount;
+    public int projectilePierce;
+    public float damage;
+    public float knockback;
+    public float aoe;
+    public void ApplyUpgrade(StatsController statsController)
     {
         statsController.globalStatsConfig.rofPercentBonus += this.rof;
         statsController.globalStatsConfig.projectileCountBonus += this.projectileCount;
@@ -14,10 +20,5 @@ public class GlobalStatUpgrade : GlobalStatUpgradeSO
         statsController.globalStatsConfig.damagePercentBonus += this.damage;
         statsController.globalStatsConfig.areaPercentBonus += this.aoe;
         statsController.globalStatsConfig.knockbackPercentBonus += this.knockback;
-    }
-
-    public override void ApplyUpgrade(ItemBase target)
-    {
-        throw new System.NotImplementedException();
     }
 }

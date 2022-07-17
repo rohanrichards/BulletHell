@@ -15,16 +15,19 @@ MonoBehaviour:
   rof: 0.6
   rofPercentBonus: 0
   rofFlatBonus: 0
-  projectileCount: 3
-  projectileCountBonus: 0
+  projectileCount: 4
+  projectileCountFlatBonus: 0
+  projectileCountPercentBonus: 0
+  baseSpread: 45
+  spreadPercentBonus: 0
   baseDamage: 10
   damageFlatBonus: 0
   damagePercentBonus: 0
   baseLifespan: 0.25
   lifespanFlatBonus: 0
   lifespanPercentBonus: 0
-  baseAOE: 1.5
+  baseAOE: 1
   aoePercentBonus: 0
   baseKnockbackForce: 6
   knockBackForcePercentBonus: 0
-  baseSpeed: 30
+  baseSpeed: 25

@@ -1341,10 +1341,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d828cc67fc1521f4e97156073fb76c58, type: 2}
   - {fileID: 11400000, guid: d003c705982bf3d4d9679e7bee50b2e8, type: 2}
   - {fileID: 11400000, guid: be40b98690d860b4da72af78423433e0, type: 2}
+  metaUpgrades: []
   weaponConfig: {fileID: 11400000, guid: 808ca5693d9b3754ea0eaf657469a211, type: 2}
   bulletPrefab: {fileID: 3800543936002685991, guid: a05f09c2615f4714abc3288c1d6117d9,
     type: 3}
-  isFiring: 0
   toggleButton: 282
 --- !u!114 &1046950704
 MonoBehaviour:
@@ -1416,10 +1416,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 578df7d701943144ab5bfa1e62814d21, type: 2}
   - {fileID: 11400000, guid: b8381cd1ae766504a950396165a001c2, type: 2}
   - {fileID: 11400000, guid: 5d9899574a8e7d045a349b1890cadad4, type: 2}
+  metaUpgrades:
+  - {fileID: 11400000, guid: f443f9f1fea48384e9fcde675f458665, type: 2}
+  - {fileID: 11400000, guid: 79db368ac6d8bcc469f0614fc6c87fab, type: 2}
+  - {fileID: 11400000, guid: 2094d930cea7aac4c86386078f066c49, type: 2}
   weaponConfig: {fileID: 11400000, guid: 65e796e714d6a1a4c8890f29af2d4c71, type: 2}
   bulletPrefab: {fileID: 3800543936002685991, guid: 6bf769d6a0f7d734ca2a7b6c0ee83cfc,
     type: 3}
-  isFiring: 0
   toggleButton: 283
 --- !u!114 &1046950708
 MonoBehaviour:
@@ -1448,10 +1451,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: badaeecea74b8894f8e295d239f48fcd, type: 2}
   - {fileID: 11400000, guid: 785c3c5d645f4e341af93f6cd13000fe, type: 2}
   - {fileID: 11400000, guid: 46bb23f0790d6204a922ca73b67d7e17, type: 2}
+  metaUpgrades: []
   weaponConfig: {fileID: 11400000, guid: 65b8fa7ef8525a44ebe61f787b6f1157, type: 2}
   bulletPrefab: {fileID: 3800543936002685991, guid: aa4e28eb48efb59449a600e01b8e33cb,
     type: 3}
-  isFiring: 0
   toggleButton: 284
   arcSize: 20
   radius: 0.5
@@ -2532,9 +2535,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generateGround: 1
-  generateObstacles: 0
+  generateObstacles: 1
   generateStructures: 0
-  generateDestroyables: 0
+  generateDestroyables: 1
   chunkSize: 100
   renderBounds: 100
   minObstablesPerChunk: 10
@@ -2621,7 +2624,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1585473014}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbef2578282f2574bb61c4c6b974c778, type: 3}
   m_Name: 

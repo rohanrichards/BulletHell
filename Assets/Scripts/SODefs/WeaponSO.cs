@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Weapon", menuName = "SO's/Configs/Weapon", order = 1)]
@@ -12,10 +13,10 @@ public class WeaponSO : ScriptableObject
     public float rofFlatBonus = 0f;
     public float ROF
     {
-        get { 
+        get {
             float localROF = rof + rofFlatBonus + rof * (rofPercentBonus / 100);
             float globalROF = localROF + localROF * ((ECSPlayerController.stats.globalStatsConfig.rofPercentBonus / 100));
-            return globalROF; 
+            return globalROF;
         }
     }
     public int projectileCount = 1;
@@ -96,4 +97,7 @@ public class WeaponSO : ScriptableObject
             return baseSpeed;
         }
     }
+
+    public delegate void FireFunction(WeaponSO weaponConfig, Entity bulletPrefab);
+    public FireFunction FireFunc;
 }

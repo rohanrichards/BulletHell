@@ -2,11 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Upgrade", menuName = "SO's/Weapon Upgrades/Level Up")]
+[CreateAssetMenu(fileName = "New Upgrade", menuName = "SO's/Weapon Upgrades/Weapon Upgrade")]
 
-public class WeaponLevelUpgrade : WeaponUpgradeSO
+public class WeaponUpgradeSO : UpgradeSO
 {
-    public override void ApplyUpgrade(WeaponBase target)
+    public float rof;
+    public float damage;
+    public int projectiles;
+    public float knockback;
+    public float lifespan;
+    public float aoe;
+    public float spread;
+    [SerializeField]
+    public FirePatternSO fireFunc;
+    public virtual void ApplyUpgrade(WeaponBase target)
     {
         target.weaponConfig.rofPercentBonus += this.rof;
         target.weaponConfig.projectileCountFlatBonus += this.projectiles;
@@ -15,10 +24,9 @@ public class WeaponLevelUpgrade : WeaponUpgradeSO
         target.weaponConfig.lifespanPercentBonus += this.lifespan;
         target.weaponConfig.aoePercentBonus += this.aoe;
         target.weaponConfig.spreadPercentBonus += this.spread;
-    }
-
-    public override void ApplyUpgrade(ItemBase target)
-    {
-        throw new System.NotImplementedException();
+        if (this.fireFunc)
+        {
+            target.weaponConfig.FireFunc = this.fireFunc.Fire;
+        }
     }
 }

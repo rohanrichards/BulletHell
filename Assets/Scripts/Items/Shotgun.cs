@@ -31,8 +31,8 @@ public class Shotgun : WeaponBase
         LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
         Vector3 playerVelocity = ECSPlayerController.getPlayerPhysicsVelocity().Linear;
 
-        float arcSegment = arcSize / ProjectileCount;
-        for (int i = 0; i < ProjectileCount; i++)
+        float arcSegment = arcSize / weaponConfig.ProjectileCount;
+        for (int i = 0; i < weaponConfig.ProjectileCount; i++)
         {
             Vector2 circleposition = Random.insideUnitCircle * radius;
 
@@ -43,7 +43,7 @@ public class Shotgun : WeaponBase
             Vector3 rotation = rotationOrigin + new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Entity bullet = BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation), offsetVector, playerVelocity, weaponConfig);
         }
-        yield return new WaitForSeconds(1 / RateOfFire);
+        yield return new WaitForSeconds(1 / weaponConfig.ROF);
         StartCoroutine(Fire());
     }
 }

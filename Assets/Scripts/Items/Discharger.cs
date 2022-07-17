@@ -29,10 +29,10 @@ public class Discharger : WeaponBase
         }
 
         float arcSize = 50 + (30 * weaponConfig.AOE);
-        float arcSegment = arcSize / ProjectileCount;
+        float arcSegment = arcSize / weaponConfig.ProjectileCount;
         float offsetWidth = 1f * weaponConfig.AOE;
-        float offsetSegment = offsetWidth / ProjectileCount;
-        for (int i = 0; i < ProjectileCount; i++)
+        float offsetSegment = offsetWidth / weaponConfig.ProjectileCount;
+        for (int i = 0; i < weaponConfig.ProjectileCount; i++)
         {
 
             float rotationOffset = (arcSegment / 2) + (arcSegment * i);
@@ -44,7 +44,7 @@ public class Discharger : WeaponBase
             Vector3 rotation = rotationOrigin + new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             //BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
         }
-        yield return new WaitForSeconds(1 / RateOfFire);
+        yield return new WaitForSeconds(1 / weaponConfig.ROF);
         StartCoroutine(Fire());
     }
 }

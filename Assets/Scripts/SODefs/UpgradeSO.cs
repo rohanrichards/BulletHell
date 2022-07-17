@@ -8,6 +8,7 @@ public abstract class WeaponUpgradeSO : UpgradeSO
     public float knockback;
     public float lifespan;
     public float aoe;
+    public float spread;
     public abstract void ApplyUpgrade(WeaponBase target);
 }
 

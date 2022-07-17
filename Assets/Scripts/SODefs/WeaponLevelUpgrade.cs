@@ -9,11 +9,12 @@ public class WeaponLevelUpgrade : WeaponUpgradeSO
     public override void ApplyUpgrade(WeaponBase target)
     {
         target.weaponConfig.rofPercentBonus += this.rof;
-        target.weaponConfig.projectileCountBonus += this.projectiles;
+        target.weaponConfig.projectileCountFlatBonus += this.projectiles;
         target.weaponConfig.knockBackForcePercentBonus += this.knockback;
         target.weaponConfig.damagePercentBonus += this.damage;
         target.weaponConfig.lifespanPercentBonus += this.lifespan;
         target.weaponConfig.aoePercentBonus += this.aoe;
+        target.weaponConfig.spreadPercentBonus += this.spread;
     }
 
     public override void ApplyUpgrade(ItemBase target)

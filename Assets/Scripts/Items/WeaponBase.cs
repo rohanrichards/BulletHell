@@ -16,22 +16,6 @@ public abstract class WeaponBase : ItemBase
     protected BlobAssetStore blobAssetStore;
     protected EntityManager manager;
 
-    public float RateOfFire
-    {
-        get
-        {
-            return weaponConfig.ROF + weaponConfig.ROF * (statsController.globalStatsConfig.rofPercentBonus / 100);
-        }
-    }
-
-    public float ProjectileCount
-    {
-        get
-        {
-            return weaponConfig.ProjectileCount + statsController.globalStatsConfig.projectileCountBonus;
-        }
-    }
-
     protected override void Start()
     {
         base.Start();

@@ -11,5 +11,6 @@ public class GlobalStatsConfigSO : ScriptableObject
     public int projectilePierceBonus = 0;
     public float damagePercentBonus = 0f;
     public float areaPercentBonus = 0f;
+    public float spreadPercentBonus = 0f;
     public float knockbackPercentBonus = 0f;
 }

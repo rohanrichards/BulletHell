@@ -43,7 +43,7 @@ public class BeamLaser : WeaponBase
             Vector3 rotation = rotationOrigin + offsetVector;
             //BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
         }*/
-        yield return new WaitForSeconds(1 / RateOfFire + weaponConfig.Lifespan);
+        yield return new WaitForSeconds(1 / weaponConfig.ROF + weaponConfig.Lifespan);
         StartCoroutine(Fire());
     }
 }

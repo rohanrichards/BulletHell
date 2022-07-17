@@ -12,13 +12,35 @@ public class WeaponSO : ScriptableObject
     public float rofFlatBonus = 0f;
     public float ROF
     {
-        get { return rof + rofFlatBonus + rof * (rofPercentBonus / 100); }
+        get { 
+            float localROF = rof + rofFlatBonus + rof * (rofPercentBonus / 100);
+            float globalROF = localROF + localROF * ((ECSPlayerController.stats.globalStatsConfig.rofPercentBonus / 100));
+            return globalROF; 
+        }
     }
     public int projectileCount = 1;
-    public int projectileCountBonus = 0;
+    public int projectileCountFlatBonus = 0;
+    public int projectileCountPercentBonus = 0;
     public float ProjectileCount
     {
-        get { return projectileCount + projectileCountBonus; }
+        get {
+            int localProjectileCount = projectileCount + projectileCountFlatBonus;
+            localProjectileCount = Mathf.CeilToInt(localProjectileCount + localProjectileCount * (projectileCountPercentBonus / 100));
+            float globalProjectileCount = localProjectileCount + ECSPlayerController.stats.globalStatsConfig.projectileCountBonus;
+            return globalProjectileCount;
+        }
+    }
+    [Tooltip("Degrees. Used to calculate arc/bullet spread patterns")]
+    public float baseSpread = 0f;
+    public float spreadPercentBonus = 0f;
+    public float Spread
+    {
+        get
+        {
+            float localSpread = baseSpread + (baseSpread * (spreadPercentBonus / 100));
+            float globalSpread = localSpread + localSpread * (ECSPlayerController.stats.globalStatsConfig.spreadPercentBonus / 100);
+            return globalSpread;
+        }
     }
 
     [Header("Bullet Configs")]

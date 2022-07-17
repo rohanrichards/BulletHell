@@ -29,22 +29,23 @@ public class Laser : WeaponBase
         LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
         Vector3 playerVelocity = ECSPlayerController.getPlayerPhysicsVelocity().Linear;
 
-        float arcSize = 50 + (45 * weaponConfig.AOE);
-        float arcSegment = arcSize / ProjectileCount;
+        float arcSize = weaponConfig.Spread;
+        float arcSegment = arcSize / weaponConfig.ProjectileCount;
         float offsetWidth = 0.75f;
-        float offsetSegment = offsetWidth / ProjectileCount;
-        for (int i = 0; i < ProjectileCount; i++)
+        float offsetSegment = offsetWidth / weaponConfig.ProjectileCount;
+        for (int i = 0; i < weaponConfig.ProjectileCount; i++)
         {
 
             float rotationOffset = (arcSegment / 2) + (arcSegment * i);
             float offset = (offsetSegment / 2) + (offsetSegment * i);
-            Vector3 originOffset = playerLocation.Up + (playerLocation.Right * ((offsetWidth / 2) - offset));
+            //Vector3 originOffset = playerLocation.Up + (playerLocation.Right * ((offsetWidth / 2) - offset));
+            Vector3 originOffset = Vector3.zero;
             Vector3 rotationOrigin = ((Quaternion)playerLocation.Rotation).eulerAngles;
             Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Vector3 rotation = rotationOrigin + new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Entity bullet = BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation), offsetVector, playerVelocity, weaponConfig);
         }
-        yield return new WaitForSeconds(1 / RateOfFire);
+        yield return new WaitForSeconds(1 / weaponConfig.ROF);
         StartCoroutine(Fire());
     }
 }

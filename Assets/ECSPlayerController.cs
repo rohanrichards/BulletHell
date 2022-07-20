@@ -117,6 +117,10 @@ public class ECSPlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameObject.FindObjectOfType<PauseGameUIController>().Toggle();
+        }
     }
 
     private void FixedUpdate()

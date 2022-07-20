@@ -1,11 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
 public abstract class WeaponBase : ItemBase
 {
     protected StatsController statsController;
-    public WeaponMetaUpgradeSO[] metaUpgrades;
+    public List<WeaponMetaUpgradeSO> metaUpgrades;
     public WeaponSO weaponConfig;
     public GameObject bulletPrefab;
     public KeyCode toggleButton;

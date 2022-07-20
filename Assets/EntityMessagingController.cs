@@ -14,12 +14,14 @@ public class EntityMessagingController : MonoBehaviour
     EntityManager manager;
     private EntityQuery entityQuery;
     private StatsController stats;
+    private MetaUpgradeManager metaUpgradeManager;
     private PickupGenerator pickupGenerator;
     private OpenChestUIController chestUIController;
 
     void Start()
     {
         stats = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
+        metaUpgradeManager = MetaUpgradeManager.instance;
         pickupGenerator = GameObject.Find("GameplayScripts").GetComponent<PickupGenerator>();
         manager = World.DefaultGameObjectInjectionWorld.EntityManager;
         chestUIController = GameObject.FindObjectOfType<OpenChestUIController>();
@@ -65,7 +67,12 @@ public class EntityMessagingController : MonoBehaviour
                     pickupGenerator.CreateRepairItem(message.position, Mathf.CeilToInt(type.Health));
                 }
 
-                if(type.Chest)
+                if (type.Coin != 0)
+                {
+                    pickupGenerator.CreateCoin(message.position, Mathf.CeilToInt(type.Coin));
+                }
+
+                if (type.Chest)
                 {
                     pickupGenerator.CreateChest(message.position);
                 }
@@ -80,7 +87,12 @@ public class EntityMessagingController : MonoBehaviour
                 {
                     stats.ApplyHealth(Mathf.CeilToInt(type.Health));
                 }
-                if(type.Chest)
+                if (type.Coin > 0)
+                {
+                    metaUpgradeManager.gold += Mathf.CeilToInt(type.Coin);
+                    Debug.Log(metaUpgradeManager.gold);
+                }
+                if (type.Chest)
                 {
                     chestUIController.Show();
                 }

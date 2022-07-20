@@ -1416,10 +1416,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 578df7d701943144ab5bfa1e62814d21, type: 2}
   - {fileID: 11400000, guid: b8381cd1ae766504a950396165a001c2, type: 2}
   - {fileID: 11400000, guid: 5d9899574a8e7d045a349b1890cadad4, type: 2}
-  metaUpgrades:
-  - {fileID: 11400000, guid: f443f9f1fea48384e9fcde675f458665, type: 2}
-  - {fileID: 11400000, guid: 79db368ac6d8bcc469f0614fc6c87fab, type: 2}
-  - {fileID: 11400000, guid: 2094d930cea7aac4c86386078f066c49, type: 2}
+  metaUpgrades: []
   weaponConfig: {fileID: 11400000, guid: 65e796e714d6a1a4c8890f29af2d4c71, type: 2}
   bulletPrefab: {fileID: 3800543936002685991, guid: 6bf769d6a0f7d734ca2a7b6c0ee83cfc,
     type: 3}
@@ -2721,6 +2718,8 @@ MonoBehaviour:
     type: 3}
   repairPrefab: {fileID: 9189390321236106799, guid: 46addb2e887b1b5498876243933c60c3,
     type: 3}
+  coinPrefab: {fileID: 9189390321236106799, guid: 16d6b469c645f164a95d635a47fa7314,
+    type: 3}
 --- !u!114 &1585473020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3430,7 +3429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91565a68a0abb78489617fa3b526fd55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visible: 0
   choicePrefab: {fileID: 1220784720714399264, guid: 29119f11b5d54f84185f0b56e28fe1ab,
     type: 3}
   buttonContainer: {fileID: 920713802}

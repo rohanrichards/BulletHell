@@ -19,12 +19,17 @@ public class GenericDestroyable : ContainerBase, IConvertGameObjectToEntity
         if(chance <= 0.075)
         {
             return new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath, Chest = true };
-        }else if(chance <= 0.25) {
+        }
+        else if (chance <= 0.10)
+        {
+            return new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath, Coin = 1 };
+        }
+        else if(chance <= 0.25) {
             return new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath, Health = 10 };
         }
         else
         {
-            return new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath};
+            return new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath, Coin = 1 };
         }
     }
 }

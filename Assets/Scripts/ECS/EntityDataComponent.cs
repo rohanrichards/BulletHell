@@ -19,4 +19,5 @@ public struct EntityDataComponent : IComponentData
     public float XP;
     public float Health;
     public bool Chest;
+    public float Coin;
 }

@@ -9,9 +9,11 @@ public class PickupGenerator : MonoBehaviour
     public GameObject XPOrbPrefab;
     public GameObject chestPrefab;
     public GameObject repairPrefab;
+    public GameObject coinPrefab;
     private Entity XPOrbEntityPrefab;
     private Entity chestEntityPrefab;
     private Entity repairEntityPrefab;
+    private Entity coinEntityPrefab;
 
     protected EntityManager entityManager;
     protected BlobAssetStore blobAssetStore;
@@ -23,6 +25,7 @@ public class PickupGenerator : MonoBehaviour
         XPOrbEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(XPOrbPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
         chestEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(chestPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
         repairEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(repairPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
+        coinEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(coinPrefab, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
     }
 
     void Update()
@@ -47,6 +50,12 @@ public class PickupGenerator : MonoBehaviour
     {
         Entity newPickup = PickupBase.Create(repairEntityPrefab, location);
         entityManager.AddComponentData(newPickup, new EntityDataComponent { Health = value });
+    }
+
+    public void CreateCoin(float3 location, int value)
+    {
+        Entity newPickup = PickupBase.Create(coinEntityPrefab, location);
+        entityManager.AddComponentData(newPickup, new EntityDataComponent { Coin = value });
     }
 
     private void OnDestroy()

@@ -60,7 +60,18 @@ public class GameManager : MonoBehaviour
         //set up the player
         playerScripts = GameObject.Find("PlayerScripts");
         playerScripts.GetComponent<ECSPlayerController>().CreatePlayer(startingPlayerStatsConfig, startingPlayerGlobalStatsConfig);
-        
+        List<MetaUpgrade> metaUpgrades = GetComponent<MetaUpgradeManager>().metaUpgrades;
+        foreach (MetaUpgrade metaUpgrade in metaUpgrades)
+        {
+            foreach (WeaponMetaUpgradeSO upgrade in metaUpgrade.upgrades)
+            {
+                if (upgrade.purchased)
+                {
+                    WeaponBase weaponScript = (WeaponBase)playerScripts.GetComponent(metaUpgrade.weaponClassName);
+                    weaponScript.metaUpgrades.Add(Instantiate(upgrade));
+                }
+            }
+        }
         yield return new WaitForSeconds(0.5f);
         ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Laser>();
         startingItem.IncreaseLevel();

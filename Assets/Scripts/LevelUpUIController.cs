@@ -4,47 +4,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelUpUIController : MonoBehaviour
+public class LevelUpUIController : ToggleableUIController
 {
-    public bool visible = false;
-    private CanvasGroup group;
     public GameObject choicePrefab;
     private StatsController statsController;
     public GameObject buttonContainer;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         statsController = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
-        group = gameObject.GetComponent<CanvasGroup>();
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        if (visible)
-        {
-            group.alpha = 1;
-            group.interactable = true;
-            group.blocksRaycasts = true;
-        }else
-        {
-            group.alpha = 0;
-            group.interactable = false;
-            group.blocksRaycasts = false;
-        }
+        base.Update();
     }
 
-    public void Show()
+    public override void Show()
     {
+        base.Show();
         if (visible) ClearUpgrades(); //already visible so just reroll upgrades
-        visible = true;
         Time.timeScale = 0;
         SelectUpgrades();
     }
 
-    public void Hide()
+    public override void Hide()
     {
-        visible = false;
+        base.Hide();
         Time.timeScale = 1;
     }
 

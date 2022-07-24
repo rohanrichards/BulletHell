@@ -84,6 +84,11 @@ public class ECSPlayerController : MonoBehaviour
         }
     }
 
+    public static Entity getPlayerEntity()
+    {
+        return player;
+    }
+
     public void Awake()
     {
         playerQuery = World.DefaultGameObjectInjectionWorld.EntityManager.CreateEntityQuery(

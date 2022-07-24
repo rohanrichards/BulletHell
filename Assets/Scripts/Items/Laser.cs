@@ -26,7 +26,6 @@ public class Laser : WeaponBase
 
     public override IEnumerator Fire()
     {
-        Debug.Log("damage: " + weaponConfig.Damage);
         weaponConfig.FireFunc(weaponConfig, bulletEntityPrefab);
         yield return new WaitForSeconds(1 / weaponConfig.ROF);
         StartCoroutine(Fire());

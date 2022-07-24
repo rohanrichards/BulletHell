@@ -1,5 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Physics;
+using Unity.Transforms;
 using UnityEngine;
 
 public class BeamLaser : WeaponBase
@@ -23,27 +27,49 @@ public class BeamLaser : WeaponBase
 
     public override IEnumerator Fire()
     {
-/*        if (!playerBody)
+        EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+        List<Entity> bullets = weaponConfig.FireFunc(weaponConfig, bulletEntityPrefab);
+
+        foreach (Entity entity in bullets)
         {
-            playerBody = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Rigidbody2D>();
+            AttachToTargetComponent attached = new AttachToTargetComponent { target = ECSPlayerController.getPlayerEntity() };
+            entityManager.AddComponentData(entity, attached);
+
+            PhysicsVelocity vel = entityManager.GetComponentData<PhysicsVelocity>(entity);
+            vel.Linear = 0;
+            entityManager.SetComponentData<PhysicsVelocity>(entity, vel);
+
+            EntityOffsetData offset = entityManager.GetComponentData<EntityOffsetData>(entity);
+            offset.positionOffset = new Translation { Value = { x = 0, y = 0.5f + weaponConfig.AOE / 2, z = 0 } };
+            entityManager.SetComponentData<EntityOffsetData>(entity, offset);
+
+            //NonUniformScale scale = entityManager.GetComponentData<NonUniformScale>(entity);
+            NonUniformScale scale = new NonUniformScale { Value = new float3 { x = 2, y = 1 * weaponConfig.AOE, z = 1 } };
+            entityManager.AddComponentData<NonUniformScale>(entity, scale);
+
+            pointerHacking(entity);
         }
 
-        float arcSize = 315;
-        float arcSegment = arcSize / ProjectileCount;
-        float offsetWidth = 1f;
-        float offsetSegment = offsetWidth / ProjectileCount;
-        for (int i = 0; i < ProjectileCount; i++)
-        {
-
-            float rotationOffset = (arcSegment / 2) + (arcSegment * i);
-            float offset = (offsetSegment / 2) + (offsetSegment * i);
-            Vector3 originOffset = playerBody.transform.up + (playerBody.transform.right * ((offsetWidth / 2) - offset));
-            Vector3 rotationOrigin = playerBody.transform.rotation.eulerAngles;
-            Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            Vector3 rotation = rotationOrigin + offsetVector;
-            //BulletBase.Create(bulletPrefab, playerBody.transform, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
-        }*/
-        yield return new WaitForSeconds(1 / weaponConfig.ROF + weaponConfig.Lifespan);
+        yield return new WaitForSeconds(1 / weaponConfig.ROF);
         StartCoroutine(Fire());
+    }
+
+    private void pointerHacking(Entity entity)
+    {
+        EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+
+        unsafe
+        {
+            PhysicsCollider collider = entityManager.GetComponentData<PhysicsCollider>(entity);
+            Unity.Physics.CapsuleCollider* ptr = (Unity.Physics.CapsuleCollider*)collider.ColliderPtr;
+            CapsuleGeometry sphere = new CapsuleGeometry
+            {
+                Radius = 0.5f,
+                Vertex0 = new float3 { x = -1, y = -weaponConfig.AOE / 2, z = 0 },
+                Vertex1 = new float3 { x = 1, y = weaponConfig.AOE / 2, z = 0 }
+            };
+            ptr->Geometry = sphere;
+            manager.AddComponentData(entity, collider);
+        }
     }
 }

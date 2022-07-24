@@ -33,15 +33,22 @@ public abstract class WeaponBase : ItemBase
         base.Update();
         if (Input.GetKeyDown(toggleButton))
         {
-            if (isFiring)
+            if (!isUnlocked)
             {
-                StopFiring();
-                isFiring = false;
-            }
-            else
+                IncreaseLevel();
+                Unlock();
+            }else
             {
-                StartFiring();
-                isFiring = true;
+                if (isFiring)
+                {
+                    StopFiring();
+                    isFiring = false;
+                }
+                else
+                {
+                    StartFiring();
+                    isFiring = true;
+                }
             }
         }
     }

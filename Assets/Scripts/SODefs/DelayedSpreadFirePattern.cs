@@ -1,32 +1,24 @@
 using System.Collections;
-using Unity.Transforms;
+using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Transforms;
 using UnityEngine;
-using Unity.Physics;
 
-public class Launcher : WeaponBase
+[CreateAssetMenu(fileName = "New Spread Fire Pattern", menuName = "SO's/Fire Patterns/Spread")]
+
+public class DelayedSpreadFirePattern : FirePatternSO
 {
-    protected override void Start()
+    public float arcSize = 10f;
+    public float radius = 0.5f;
+    public override List<Entity> Fire(WeaponSO weaponConfig, Entity bulletPrefab)
     {
-        base.Start();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
-
-    public override void Unlock()
-    {
-        base.Unlock();
-    }
-
-    public override IEnumerator Fire()
-    {
+        EntityManager manager = World.DefaultGameObjectInjectionWorld.EntityManager;
         float arcSize = weaponConfig.Spread;
         float arcSegment = arcSize / weaponConfig.ProjectileCount;
         float offsetWidth = 0.75f;
         float offsetSegment = offsetWidth / weaponConfig.ProjectileCount;
+        List<Entity> bullets = new List<Entity>();
+
         for (int i = 0; i < weaponConfig.ProjectileCount; i++)
         {
             LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
@@ -37,7 +29,7 @@ public class Launcher : WeaponBase
             Vector3 originOffset = playerLocation.Up + (playerLocation.Right * ((offsetWidth / 2) - offset));
             Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
             Vector3 rotation = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            Entity bullet = BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation) * playerLocation.Rotation, Quaternion.Euler(offsetVector), playerVelocity, weaponConfig);
+            Entity bullet = BulletBase.CreateEntity(bulletPrefab, playerLocation, originOffset, Quaternion.Euler(rotation) * playerLocation.Rotation, Quaternion.Euler(offsetVector), playerVelocity, weaponConfig);
 
             LifespanComponent lifespan = manager.GetComponentData<LifespanComponent>(bullet);
             lifespan.Value += Random.Range(0, weaponConfig.Lifespan);
@@ -46,9 +38,8 @@ public class Launcher : WeaponBase
             EntityDataComponent type = new EntityDataComponent { Type = EntityDeathTypes.ExplodesOnDeath, Damage = weaponConfig.Damage, Size = weaponConfig.AOE, Force = weaponConfig.KnockBackForce };
             manager.AddComponentData(bullet, type);
 
-            yield return new WaitForSeconds(0.1f);
+            bullets.Add(bullet);
         }
-        yield return new WaitForSeconds(1 / weaponConfig.ROF);
-        StartCoroutine(Fire());
+        return bullets;
     }
 }

@@ -68,11 +68,11 @@ public class LevelUpUIController : ToggleableUIController
 
     void ApplyUpgrade(ItemBase selectedItem)
     {
-        if(selectedItem.level == 0)
+        selectedItem.IncreaseLevel();
+        if(!selectedItem.isUnlocked)
         {
             selectedItem.Unlock();
         }
-        selectedItem.IncreaseLevel();
 
         ClearUpgrades();
         Hide();

@@ -90,7 +90,6 @@ public class EntityMessagingController : MonoBehaviour
                 if (type.Coin > 0)
                 {
                     metaUpgradeManager.gold += Mathf.CeilToInt(type.Coin);
-                    Debug.Log(metaUpgradeManager.gold);
                 }
                 if (type.Chest)
                 {

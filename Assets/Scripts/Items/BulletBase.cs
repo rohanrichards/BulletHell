@@ -12,7 +12,7 @@ public abstract class BulletBase : MonoBehaviour, IConvertGameObjectToEntity
     protected Vector3 originalOffset;
     static protected EntityManager entityManager;
 
-    public static Entity CreateEntity(Entity prefab, LocalToWorld origin, Vector3 offset, Quaternion rotation, Vector3 rotationOffset, Vector3 velocityOffset, WeaponSO weaponConfig)
+    public static Entity CreateEntity(Entity prefab, LocalToWorld origin, Vector3 offset, Quaternion rotation, Quaternion rotationOffset, Vector3 velocityOffset, WeaponSO weaponConfig)
     {
         entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
 
@@ -21,13 +21,15 @@ public abstract class BulletBase : MonoBehaviour, IConvertGameObjectToEntity
 
         entityManager.SetComponentData(bullet, new Translation { Value = origin.Position+(float3)offset });
         entityManager.SetComponentData(bullet, new Rotation { Value = rotation });
+        entityManager.AddComponentData(bullet, new EntityOffsetData { positionOffset = new Translation { Value = offset }, rotationOffset = new Rotation {Value = rotationOffset } });
         PhysicsVelocity vel = entityManager.GetComponentData<PhysicsVelocity>(bullet);
         vel.Linear = velocityOffset + rotation * Vector3.up * weaponConfig.Speed;
         entityManager.SetComponentData<PhysicsVelocity>(bullet, vel);
 
         entityManager.AddComponentData(bullet, new EntityMovementSettings { moveSpeed = weaponConfig.Speed });
         entityManager.AddComponentData(bullet, new LifespanComponent { Value = weaponConfig.Lifespan });
-        entityManager.AddComponentData(bullet, new BulletConfigComponent { Damage = weaponConfig.Damage, Knockback = weaponConfig.KnockBackForce });
+        entityManager.AddComponentData(bullet, new BulletConfigComponent { Damage = weaponConfig.Damage, Knockback = weaponConfig.KnockBackForce, DOT = weaponConfig.doesDOT });
+
 
         return bullet;
     }

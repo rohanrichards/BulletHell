@@ -10,7 +10,7 @@ partial struct MoveForwardJob : IJobEntity
 {
     public float dt;
 
-    public void Execute(ref PhysicsVelocity velocity, in EntityMovementSettings settings, in LocalToWorld local)
+    public void Execute(ref PhysicsVelocity velocity, in EntityMovementSettings settings, in LocalToWorld local, in MoveForwardTag tag)
     {
         velocity.Linear += settings.moveSpeed * local.Up * dt;
     }

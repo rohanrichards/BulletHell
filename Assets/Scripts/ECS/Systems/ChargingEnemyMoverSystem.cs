@@ -14,9 +14,10 @@ public partial class ChargingEnemyMoverSystem : SystemBase
             ComponentType.ReadWrite<PhysicsVelocity>(),
             ComponentType.ReadWrite<Translation>(),
             ComponentType.ReadOnly<EntityMovementSettings>(),
-            ComponentType.ReadOnly<EntityTargetSettings>(),
+            ComponentType.ReadWrite<EntityTargetSettings>(),
             ComponentType.ReadOnly<MoveForwardTag>(),
-            ComponentType.ReadOnly<RotateToFixedTargetTag>()
+            ComponentType.ReadOnly<RotateToFixedTargetTag>(),
+            ComponentType.ReadOnly<LocalToWorld>()
         );
     }
 
@@ -24,6 +25,9 @@ public partial class ChargingEnemyMoverSystem : SystemBase
     {
         MoveForwardJob moveJob = new MoveForwardJob { dt = Time.DeltaTime };
         moveJob.ScheduleParallel(movingEntityQuery);
+
+        AdjustTargetAtDistanceJob adjustJob = new AdjustTargetAtDistanceJob { dt = Time.DeltaTime, playerPosition = ECSPlayerController.getPlayerLocation().Position };
+        adjustJob.ScheduleParallel(movingEntityQuery);
 
         RotateToFixedTargetJob rotateJob = new RotateToFixedTargetJob { dt = Time.DeltaTime };
         rotateJob.ScheduleParallel(movingEntityQuery);

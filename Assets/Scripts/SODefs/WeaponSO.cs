@@ -67,6 +67,8 @@ public class WeaponSO : ScriptableObject
             return baseLifespan + lifespanFlatBonus + (baseLifespan * (lifespanPercentBonus / 100));
         }
     }
+    public bool doesDOT = false;
+
     public float baseAOE = 1f;
     public float aoePercentBonus = 0f;
     public float AOE
@@ -98,6 +100,6 @@ public class WeaponSO : ScriptableObject
         }
     }
 
-    public delegate void FireFunction(WeaponSO weaponConfig, Entity bulletPrefab);
+    public delegate List<Entity> FireFunction(WeaponSO weaponConfig, Entity bulletPrefab);
     public FireFunction FireFunc;
 }

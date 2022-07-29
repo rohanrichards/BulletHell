@@ -1,9 +1,11 @@
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
+//[UpdateBefore(typeof(ParticleDisablerSystem))]
 public partial class EntityExpirationSystem : SystemBase
 {
     EndSimulationEntityCommandBufferSystem ecbs;
@@ -29,7 +31,14 @@ public partial class EntityExpirationSystem : SystemBase
     {
         DestroyDeadEntitiesJob deadJob = new DestroyDeadEntitiesJob { ecb = ecbs.CreateCommandBuffer() };
         JobHandle jobHandle = deadJob.Schedule(deadQuery);
-        DestroyExpiredEntitiesJob exJob = new DestroyExpiredEntitiesJob { ecb = ecbs.CreateCommandBuffer() };
+        jobHandle.Complete();
+        DestroyExpiredEntitiesJob exJob = new DestroyExpiredEntitiesJob 
+        { 
+            ecb = ecbs.CreateCommandBuffer(), 
+            translationsGroup = GetComponentDataFromEntity<Translation>(false),
+            rotationsGroup = GetComponentDataFromEntity<Rotation>(false),
+            localGroup = GetComponentDataFromEntity<LocalToWorld>(false)
+        };
         JobHandle exJobHandle = exJob.Schedule(expiredQuery);
         exJobHandle.Complete();
     }

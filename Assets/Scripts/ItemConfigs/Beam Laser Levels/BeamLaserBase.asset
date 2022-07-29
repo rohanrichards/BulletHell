@@ -20,15 +20,15 @@ MonoBehaviour:
   projectileCountPercentBonus: 0
   baseSpread: 360
   spreadPercentBonus: 0
-  baseDamage: 10
+  baseDamage: 0.25
   damageFlatBonus: 0
   damagePercentBonus: 0
-  baseLifespan: 2
+  baseLifespan: 1
   lifespanFlatBonus: 0
   lifespanPercentBonus: 0
   doesDOT: 1
   baseAOE: 5
   aoePercentBonus: 0
-  baseKnockbackForce: 0.05
+  baseKnockbackForce: 0.025
   knockBackForcePercentBonus: 0
   baseSpeed: 0

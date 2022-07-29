@@ -26,8 +26,9 @@ MonoBehaviour:
   baseLifespan: 0.25
   lifespanFlatBonus: 0
   lifespanPercentBonus: 0
+  doesDOT: 0
   baseAOE: 1
   aoePercentBonus: 0
-  baseKnockbackForce: 6
+  baseKnockbackForce: 4
   knockBackForcePercentBonus: 0
   baseSpeed: 25

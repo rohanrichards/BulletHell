@@ -15,8 +15,10 @@ MonoBehaviour:
   upgradeName: Beam Laser 5
   upgradeDescription: Increased range and damage
   rof: 0
-  damage: 50
+  damage: 100
   projectiles: 0
-  knockback: 50
+  knockback: 25
   lifespan: 10
   aoe: 20
+  spread: 0
+  fireFunc: {fileID: 0}

@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Level 9
   m_EditorClassIdentifier: 
   upgradeName: Beam Laser 9
-  upgradeDescription: Increased range and damage
+  upgradeDescription: Increased damage
   rof: 0
-  damage: 10
+  damage: 20
   projectiles: 0
   knockback: 0
   lifespan: 10
-  aoe: 20
+  aoe: 0
+  spread: 0
+  fireFunc: {fileID: 0}

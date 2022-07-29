@@ -1,36 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class PauseGameUIController : MonoBehaviour
+public class PauseGameUIController : ToggleableUIController
 {
-    public bool visible = false;
-    private CanvasGroup group;
-    private GameObject player;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        group = gameObject.GetComponent<CanvasGroup>();
+        base.Start();
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        if (visible)
-        {
-            group.alpha = 1;
-            group.interactable = true;
-            group.blocksRaycasts = true;
-        }
-        else
-        {
-            group.alpha = 0;
-            group.interactable = false;
-            group.blocksRaycasts = false;
-        }
+        base.Update();
     }
 
     public void Toggle()
@@ -44,16 +30,16 @@ public class PauseGameUIController : MonoBehaviour
         }
     }
 
-    public void Show()
+    public override void Show()
     {
-        visible = true;
+        base.Show();
         Time.timeScale = 0;
     }
 
 
-    public void Hide()
+    public override void Hide()
     {
-        visible = false;
+        base.Hide();
         Time.timeScale = 1;
     }
     public void QuitGame()
@@ -64,6 +50,8 @@ public class PauseGameUIController : MonoBehaviour
     public void MainMenu()
     {
         Hide();
+        World.DisposeAllWorlds();
+        DefaultWorldInitialization.Initialize("Default World", false);
         SceneManager.LoadScene("Main Menu");
     }
 }

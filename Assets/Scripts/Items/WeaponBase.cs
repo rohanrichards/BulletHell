@@ -1,51 +1,26 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
 public abstract class WeaponBase : ItemBase
 {
-    protected Rigidbody2D playerBody;
     protected StatsController statsController;
+    public List<WeaponMetaUpgradeSO> metaUpgrades;
     public WeaponSO weaponConfig;
-    public BulletSO bulletConfig;
     public GameObject bulletPrefab;
-    public bool isFiring = false;
     public KeyCode toggleButton;
+    protected bool isFiring = false;
 
     // ECS Stuff
     protected Entity bulletEntityPrefab;
     protected BlobAssetStore blobAssetStore;
     protected EntityManager manager;
 
-    public float RateOfFire
-    {
-        get
-        {
-            return weaponConfig.ROF + weaponConfig.ROF * (statsController.globalStatsConfig.rofPercentBonus / 100);
-        }
-    }
-
-    public float KnockBackForce
-    {
-        get
-        {
-            return weaponConfig.KnockBackForce + (weaponConfig.KnockBackForce * (statsController.globalStatsConfig.knockbackPercentBonus/ 100));
-        }
-    }
-
-    public float ProjectileCount
-    {
-        get
-        {
-            return weaponConfig.ProjectileCount + statsController.globalStatsConfig.projectileCountBonus;
-        }
-    }
-
     protected override void Start()
     {
         base.Start();
         weaponConfig = Instantiate<WeaponSO>(weaponConfig);
-        bulletConfig = Instantiate<BulletSO>(bulletConfig);
         statsController = GameObject.Find("PlayerScripts").GetComponent<StatsController>();
 
         manager = World.DefaultGameObjectInjectionWorld.EntityManager;
@@ -58,15 +33,22 @@ public abstract class WeaponBase : ItemBase
         base.Update();
         if (Input.GetKeyDown(toggleButton))
         {
-            if (isFiring)
+            if (!isUnlocked)
             {
-                StopFiring();
-                isFiring = false;
-            }
-            else
+                IncreaseLevel();
+                Unlock();
+            }else
             {
-                StartFiring();
-                isFiring = true;
+                if (isFiring)
+                {
+                    StopFiring();
+                    isFiring = false;
+                }
+                else
+                {
+                    StartFiring();
+                    isFiring = true;
+                }
             }
         }
     }
@@ -88,6 +70,15 @@ public abstract class WeaponBase : ItemBase
         base.IncreaseLevel();
         WeaponUpgradeSO levelUpgrade = (WeaponUpgradeSO)levelUpgrades[level - 1];
         levelUpgrade.ApplyUpgrade(this);
+
+        foreach (WeaponMetaUpgradeSO upgrade in metaUpgrades)
+        {
+            if(level >= upgrade.requiredLevel && upgrade.applied == false)
+            {
+                upgrade.ApplyUpgrade(this);
+                upgrade.applied = true;
+            }
+        }
     }
 
     public void StartFiring()

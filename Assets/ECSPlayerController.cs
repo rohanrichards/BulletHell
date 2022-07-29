@@ -13,7 +13,7 @@ public class ECSPlayerController : MonoBehaviour
     protected Entity playerEntityPrefab;
     protected BlobAssetStore blobAssetStore;
     private static EntityQuery playerQuery;
-    protected StatsController stats;
+    public static StatsController stats;
     private static Entity player;
 
     public static LocalToWorld getPlayerLocation()
@@ -84,6 +84,11 @@ public class ECSPlayerController : MonoBehaviour
         }
     }
 
+    public static Entity getPlayerEntity()
+    {
+        return player;
+    }
+
     public void Awake()
     {
         playerQuery = World.DefaultGameObjectInjectionWorld.EntityManager.CreateEntityQuery(
@@ -117,6 +122,10 @@ public class ECSPlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameObject.FindObjectOfType<PauseGameUIController>().Toggle();
+        }
     }
 
     private void FixedUpdate()

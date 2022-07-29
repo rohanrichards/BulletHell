@@ -28,29 +28,8 @@ public class Shotgun : WeaponBase
 
     public override IEnumerator Fire()
     {
-        LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
-
-        float arcSegment = arcSize / ProjectileCount;
-        for (int i = 0; i < ProjectileCount; i++)
-        {
-            Vector2 circleposition = Random.insideUnitCircle * radius;
-
-            float rotationOffset = (arcSegment / 2) + (arcSegment * i);
-            Vector3 originOffset = new Vector3(circleposition.x, circleposition.y, 0);
-            Vector3 rotationOrigin = ((Quaternion)playerLocation.Rotation).eulerAngles;
-            Vector3 offsetVector = new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            Vector3 rotation = rotationOrigin + new Vector3(0, 0, (-arcSize / 2) + rotationOffset);
-            Entity bullet = BulletBase.CreateEntity(bulletEntityPrefab, playerLocation, originOffset, Quaternion.Euler(rotation), offsetVector, bulletConfig, this);
-
-            PhysicsVelocity vel = manager.GetComponentData<PhysicsVelocity>(bullet);
-            vel.Linear += ECSPlayerController.getPlayerPhysicsVelocity().Linear;
-            manager.SetComponentData(bullet, vel);
-
-            BulletConfigComponent config = manager.GetComponentData<BulletConfigComponent>(bullet);
-            config.Knockback = KnockBackForce;
-            manager.SetComponentData(bullet, config);
-        }
-        yield return new WaitForSeconds(1 / RateOfFire);
+        weaponConfig.FireFunc(weaponConfig, bulletEntityPrefab);
+        yield return new WaitForSeconds(1 / weaponConfig.ROF);
         StartCoroutine(Fire());
     }
 }

@@ -25,6 +25,7 @@ public partial class BulletCollisionSystem : SystemBase
         [ReadOnly] public ComponentDataFromEntity<BulletTag> bulletGroup;
         [ReadOnly] public ComponentDataFromEntity<ShootableTag> enemyGroup;
         [ReadOnly] public ComponentDataFromEntity<PhysicsVelocity> velGroup;
+        [ReadOnly] public ComponentDataFromEntity<Rotation> rotationGroup;
         [ReadOnly] public ComponentDataFromEntity<BulletConfigComponent> configGroup;
         [ReadOnly] public ComponentDataFromEntity<KnockableTag> knockGroup;
         public ComponentDataFromEntity<LifespanComponent> lifespanGroup;
@@ -63,9 +64,7 @@ public partial class BulletCollisionSystem : SystemBase
                         health.CurrentHealth -= configGroup[bullet].Damage;
                         healthGroup[shootable] = health;
 
-                        // bullet reduced health so destroy the bullet
-                        lifespan.Value = 0;
-                        lifespanGroup[bullet] = lifespan;
+                        lifespanGroup[bullet] = handleLifespan(bullet);
                     }
 
                     // if their health is now below zero we dont want to knock
@@ -77,8 +76,7 @@ public partial class BulletCollisionSystem : SystemBase
                 {
                     // the bullet hit a shootable but it didn't have health
                     // we just stop the bullet in this case
-                    lifespan.Value = 0;
-                    lifespanGroup[bullet] = lifespan;
+                    lifespanGroup[bullet] = handleLifespan(bullet);
                 }
 
                 // check if the target can be knocked back
@@ -86,8 +84,28 @@ public partial class BulletCollisionSystem : SystemBase
                 {
                     float force = configGroup[bullet].Knockback;
                     float3 vel = math.normalize(velGroup[bullet].Linear);
+                    if(float.IsNaN(vel.x) || float.IsNaN(vel.y))
+                    {
+                        float3 direction = new float3 { x = 0, y = 1, z = 0 };
+                        quaternion rotation = rotationGroup[bullet].Value;
+                        vel = math.mul(rotation, direction);
+                    }
                     PhysicsWorldExtensions.ApplyLinearImpulse(physicsWorld, shootableBodyIndex, force * vel * deltaTime);
                 }
+            }
+        }
+
+        private LifespanComponent handleLifespan(Entity entity)
+        {
+            BulletConfigComponent bulletConfig = configGroup[entity];
+            LifespanComponent lifespan = lifespanGroup[entity];
+            if (bulletConfig.DOT)
+            {
+                return lifespan;
+            }else
+            {
+                lifespan.Value = 0;
+                return lifespan;
             }
         }
     }
@@ -114,6 +132,7 @@ public partial class BulletCollisionSystem : SystemBase
             knockGroup = GetComponentDataFromEntity<KnockableTag>(true),
             configGroup = GetComponentDataFromEntity<BulletConfigComponent>(true),
             velGroup = GetComponentDataFromEntity<PhysicsVelocity>(true),
+            rotationGroup = GetComponentDataFromEntity<Rotation>(true),
             lifespanGroup = GetComponentDataFromEntity<LifespanComponent>(),
             healthGroup = GetComponentDataFromEntity<EntityHealthComponent>()
         }.Schedule(stepPhysicsWorld.Simulation, Dependency);

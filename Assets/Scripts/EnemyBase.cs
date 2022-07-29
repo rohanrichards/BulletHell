@@ -15,8 +15,9 @@ public abstract class EnemyBase : MonoBehaviour, IConvertGameObjectToEntity
         dstManager.AddComponent(entity, typeof(ShootableTag));
         dstManager.AddComponent(entity, typeof(KnockableTag));
 
+        float modifiedSpeed = UnityEngine.Random.Range(0.0f, 0.25f) * config.moveSpeed + config.moveSpeed;
         dstManager.AddComponentData(entity, new EntityDataComponent { Type = EntityDeathTypes.SplattersOnDeath, Size = transform.localScale.x, XP = config.XPValue });
-        dstManager.AddComponentData(entity, new EntityMovementSettings { moveSpeed = config.moveSpeed });
+        dstManager.AddComponentData(entity, new EntityMovementSettings { moveSpeed = modifiedSpeed });
         dstManager.AddComponentData(entity, new EntityHealthComponent { CurrentHealth = config.currentHealth, MaxHealth = config.baseHealth });
         dstManager.AddComponentData(entity, new EntityDamageComponent { Damage = config.damage, attacking = false, attackTime = 0, attackCooldown = 1f, attackRange = 1.5f });
     }

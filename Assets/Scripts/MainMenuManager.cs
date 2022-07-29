@@ -4,15 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenuManager : MonoBehaviour
+public class MainMenuManager : ToggleableUIController
 {
     public GameObject mechSelectorPrefab;
     public GameObject mechSelectorContainer;
     public int defaultSelectedMechIndex = 1;
     private GameManager gameManager;
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
+        visible = true;
         gameManager = GameManager.instance;
         List<MechConfig> configs = gameManager.mechConfigs;
 
@@ -38,11 +40,25 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
+    public override void Update()
+    {
+        base.Update();
+    }
+
     public void SelectMech(MechConfig config, GameObject button)
     {
         gameManager.startingPlayerStatsConfig = config.statsConfig;
         gameManager.startingPlayerGlobalStatsConfig = config.globalStatsConfig;
         Debug.Log("set selected mech to: " + config.title);
+    }
+    public override void Show()
+    {
+        base.Show();
+    }
+
+    public override void Hide()
+    {
+        base.Hide();
     }
 
     public void NewGame()

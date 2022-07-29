@@ -11,7 +11,7 @@ public class SpiralingPiercingDoTProjectile : BulletBase
 
     IEnumerator DamageLoop()
     {
-        ContactFilter2D filter = new ContactFilter2D();
+/*        ContactFilter2D filter = new ContactFilter2D();
         filter.SetLayerMask(LayerMask.GetMask("Enemies"));
         List<Collider2D> hits = new List<Collider2D>();
         // get anything it's touching
@@ -23,7 +23,7 @@ public class SpiralingPiercingDoTProjectile : BulletBase
                 IShootable controller = collision.gameObject.GetComponentInParent<IShootable>();
                 controller.ApplyDamage(Damage);
             }
-        }
+        }*/
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(DamageLoop());
     }

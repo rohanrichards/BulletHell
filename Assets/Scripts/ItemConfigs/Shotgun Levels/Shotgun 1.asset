@@ -20,3 +20,5 @@ MonoBehaviour:
   knockback: 0
   lifespan: 0
   aoe: 0
+  spread: 0
+  fireFunc: {fileID: 11400000, guid: 3c60606abb9252e4b968d9617d217d77, type: 2}

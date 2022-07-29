@@ -67,7 +67,7 @@ public class NonmovingBeam : BulletBase
 
     private  IEnumerator AttemptAttack()
     {
-        foreach(Collider2D coll in collisions)
+/*        foreach(Collider2D coll in collisions)
         {
             if (coll.gameObject.tag == "Shootable")
             {
@@ -77,7 +77,7 @@ public class NonmovingBeam : BulletBase
                 targetBody.AddForce(direction.normalized * 50 * parentWeapon.KnockBackForce * targetBody.mass * Time.fixedDeltaTime);
                 controller.ApplyDamage(Damage);
             }
-        }
+        }*/
         yield return new WaitForSeconds(attackRateInSeconds);
         StartCoroutine(AttemptAttack());
     }

@@ -8,31 +8,11 @@ using UnityEngine;
 
 public abstract class BulletBase : MonoBehaviour, IConvertGameObjectToEntity
 {
-    public BulletSO config;
-    public GameObject deathPrefab;
-    [HideInInspector]
-    public WeaponBase parentWeapon;
     protected StatsController statsController;
     protected Vector3 originalOffset;
     static protected EntityManager entityManager;
 
-    public float Damage
-    {
-        get
-        {
-            return config.Damage + config.Damage * (statsController.globalStatsConfig.damagePercentBonus / 100);
-        }
-    }
-
-    public float AOE
-    {
-        get
-        {
-            return config.AOE + config.AOE * (statsController.globalStatsConfig.areaPercentBonus / 100);
-        }
-    }
-
-    public static Entity CreateEntity(Entity prefab, LocalToWorld origin, Vector3 offset, Quaternion rotation, Vector3 rotationOffset, BulletSO config, WeaponBase weapon)
+    public static Entity CreateEntity(Entity prefab, LocalToWorld origin, Vector3 offset, Quaternion rotation, Quaternion rotationOffset, Vector3 velocityOffset, WeaponSO weaponConfig)
     {
         entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
 
@@ -41,9 +21,15 @@ public abstract class BulletBase : MonoBehaviour, IConvertGameObjectToEntity
 
         entityManager.SetComponentData(bullet, new Translation { Value = origin.Position+(float3)offset });
         entityManager.SetComponentData(bullet, new Rotation { Value = rotation });
+        entityManager.AddComponentData(bullet, new EntityOffsetData { positionOffset = new Translation { Value = offset }, rotationOffset = new Rotation {Value = rotationOffset } });
         PhysicsVelocity vel = entityManager.GetComponentData<PhysicsVelocity>(bullet);
-        vel.Linear = rotation * Vector3.up * config.baseSpeed;
+        vel.Linear = velocityOffset + rotation * Vector3.up * weaponConfig.Speed;
         entityManager.SetComponentData<PhysicsVelocity>(bullet, vel);
+
+        entityManager.AddComponentData(bullet, new EntityMovementSettings { moveSpeed = weaponConfig.Speed });
+        entityManager.AddComponentData(bullet, new LifespanComponent { Value = weaponConfig.Lifespan });
+        entityManager.AddComponentData(bullet, new BulletConfigComponent { Damage = weaponConfig.Damage, Knockback = weaponConfig.KnockBackForce, DOT = weaponConfig.doesDOT });
+
 
         return bullet;
     }
@@ -55,10 +41,6 @@ public abstract class BulletBase : MonoBehaviour, IConvertGameObjectToEntity
 
     public virtual void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        dstManager.AddComponentData(entity, new EntityMovementSettings { moveSpeed = config.baseSpeed });
-        dstManager.AddComponentData(entity, new LifespanComponent { Value = config.Lifespan });
-        dstManager.AddComponentData(entity, new BulletConfigComponent { Damage = config.Damage });
-
         dstManager.AddComponent(entity, typeof(BulletTag));
     }
 }

@@ -20,5 +20,5 @@ MonoBehaviour:
   knockback: 25
   lifespan: 25
   aoe: 50
-  spread: 0
+  spread: 15
   fireFunc: {fileID: 0}

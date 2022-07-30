@@ -15,8 +15,10 @@ MonoBehaviour:
   upgradeName: Beam Laser 3
   upgradeDescription: +2 Beams
   rof: 0
-  damage: 10
+  damage: 0
   projectiles: 2
   knockback: 0
-  lifespan: 10
-  aoe: 10
+  lifespan: 0
+  aoe: 0
+  spread: 15
+  fireFunc: {fileID: 0}

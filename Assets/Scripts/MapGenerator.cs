@@ -40,7 +40,12 @@ public class MapGenerator : MonoBehaviour
 
     Tile GetRandomTile()
     {
-        return grassTiles[Random.Range(0, grassTiles.Length)];
+        Tile tile =  grassTiles[Random.Range(0, grassTiles.Length)];
+        Vector3 randomVector = new Vector3(Random.Range(0, 4) * 45, Random.Range(0, 4) * 45, Random.Range(0, 4) * 45);
+        Quaternion randomRotation =  Quaternion.Euler(new Vector3(Random.Range(0, 4) * 45, Random.Range(0, 4) * 45, Random.Range(0, 4) * 45));
+        tile.transform.SetTRS(Vector3.zero, randomRotation, Vector3.one);
+
+        return tile;
     }
 
     void RenderChunkAt(Vector3 position)

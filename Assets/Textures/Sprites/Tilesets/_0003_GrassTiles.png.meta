@@ -1,0 +1,933 @@
+fileFormatVersion: 2
+guid: c61ae33779fd91a4e874a40d16b830bf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4178248205127931945
+    second: _0003_GrassTiles_0
+  - first:
+      213: 5842745361941473502
+    second: _0003_GrassTiles_1
+  - first:
+      213: 3153707364910958968
+    second: _0003_GrassTiles_2
+  - first:
+      213: 5019719753325626154
+    second: _0003_GrassTiles_3
+  - first:
+      213: 3047569651035925046
+    second: _0003_GrassTiles_4
+  - first:
+      213: 4984351822390614475
+    second: _0003_GrassTiles_5
+  - first:
+      213: 5835263380670048420
+    second: _0003_GrassTiles_6
+  - first:
+      213: 3407559295790530640
+    second: _0003_GrassTiles_7
+  - first:
+      213: -3594290657413637557
+    second: _0003_GrassTiles_8
+  - first:
+      213: 6278436962764818596
+    second: _0003_GrassTiles_9
+  - first:
+      213: -1679129724639067384
+    second: _0003_GrassTiles_10
+  - first:
+      213: -7371267258580686034
+    second: _0003_GrassTiles_11
+  - first:
+      213: -4339014381279882952
+    second: _0003_GrassTiles_12
+  - first:
+      213: 1440791449226685939
+    second: _0003_GrassTiles_13
+  - first:
+      213: 4013701864747492028
+    second: _0003_GrassTiles_14
+  - first:
+      213: 5842934115260938239
+    second: _0003_GrassTiles_15
+  - first:
+      213: 8645498449834413178
+    second: _0003_GrassTiles_16
+  - first:
+      213: -7966879156034464401
+    second: _0003_GrassTiles_17
+  - first:
+      213: 4102116561625215166
+    second: _0003_GrassTiles_18
+  - first:
+      213: 7953933967696847782
+    second: _0003_GrassTiles_19
+  - first:
+      213: -8368041355809231188
+    second: _0003_GrassTiles_20
+  - first:
+      213: -354238066973116277
+    second: _0003_GrassTiles_21
+  - first:
+      213: 5680065945244919874
+    second: _0003_GrassTiles_22
+  - first:
+      213: 2314322879310453134
+    second: _0003_GrassTiles_23
+  - first:
+      213: 9166353144987875504
+    second: _0003_GrassTiles_24
+  - first:
+      213: 997040434647607932
+    second: _0003_GrassTiles_25
+  - first:
+      213: 1370191368885253879
+    second: _0003_GrassTiles_26
+  - first:
+      213: -1653408642732734322
+    second: _0003_GrassTiles_27
+  - first:
+      213: -4677819127816658086
+    second: _0003_GrassTiles_28
+  - first:
+      213: -1790569352669200478
+    second: _0003_GrassTiles_29
+  - first:
+      213: -6837217852514352914
+    second: _0003_GrassTiles_30
+  - first:
+      213: -8427252694439180878
+    second: _0003_GrassTiles_31
+  - first:
+      213: 8721568627422472167
+    second: _0003_GrassTiles_32
+  - first:
+      213: 505156618990521845
+    second: _0003_GrassTiles_33
+  - first:
+      213: -6603495041348474043
+    second: _0003_GrassTiles_34
+  - first:
+      213: -457617310857946805
+    second: _0003_GrassTiles_35
+  - first:
+      213: 8553432780905710541
+    second: _0003_GrassTiles_36
+  - first:
+      213: -6605769604222383809
+    second: _0003_GrassTiles_37
+  - first:
+      213: 8291550500493159522
+    second: _0003_GrassTiles_38
+  - first:
+      213: 4230384808126410644
+    second: _0003_GrassTiles_39
+  - first:
+      213: 8682323973346772126
+    second: _0003_GrassTiles_40
+  - first:
+      213: 3358596505392824383
+    second: _0003_GrassTiles_41
+  - first:
+      213: -1617977706955809939
+    second: _0003_GrassTiles_42
+  - first:
+      213: 6968480035103583140
+    second: _0003_GrassTiles_43
+  - first:
+      213: -2342045557180748679
+    second: _0003_GrassTiles_44
+  - first:
+      213: 3652040975790905459
+    second: _0003_GrassTiles_45
+  - first:
+      213: -3123121822326891829
+    second: _0003_GrassTiles_46
+  - first:
+      213: 392595580025208365
+    second: _0003_GrassTiles_47
+  - first:
+      213: 3533176576192830230
+    second: _0003_GrassTiles_48
+  - first:
+      213: 6963176054905610220
+    second: _0003_GrassTiles_49
+  - first:
+      213: 956286670559839248
+    second: _0003_GrassTiles_50
+  - first:
+      213: -3599541801519524238
+    second: _0003_GrassTiles_51
+  - first:
+      213: -6673768495772430962
+    second: _0003_GrassTiles_52
+  - first:
+      213: 5190409279954863740
+    second: _0003_GrassTiles_53
+  - first:
+      213: -8709458700435886003
+    second: _0003_GrassTiles_54
+  - first:
+      213: 1623100347895641812
+    second: _0003_GrassTiles_55
+  - first:
+      213: 2818980127173650163
+    second: _0003_GrassTiles_56
+  - first:
+      213: 6665758898085247407
+    second: _0003_GrassTiles_57
+  - first:
+      213: -3133104805807684886
+    second: _0003_GrassTiles_58
+  - first:
+      213: -2696006152945378993
+    second: _0003_GrassTiles_59
+  - first:
+      213: 6418680903576849750
+    second: _0003_GrassTiles_60
+  - first:
+      213: 6545095218759290648
+    second: _0003_GrassTiles_61
+  - first:
+      213: -2988954374651992074
+    second: _0003_GrassTiles_62
+  - first:
+      213: -3709234491779651943
+    second: _0003_GrassTiles_63
+  - first:
+      213: 5538865831092114355
+    second: _0003_GrassTiles_64
+  - first:
+      213: -6882110184426093477
+    second: _0003_GrassTiles_65
+  - first:
+      213: 2809113580639711102
+    second: _0003_GrassTiles_66
+  - first:
+      213: -1248335470500497791
+    second: _0003_GrassTiles_67
+  - first:
+      213: -5896391877214402942
+    second: _0003_GrassTiles_68
+  - first:
+      213: -1720462243310994544
+    second: _0003_GrassTiles_69
+  - first:
+      213: -98212824850467671
+    second: _0003_GrassTiles_70
+  - first:
+      213: -8178731794180853706
+    second: _0003_GrassTiles_71
+  - first:
+      213: 6894279228020140863
+    second: _0003_GrassTiles_72
+  - first:
+      213: 4905340170052747881
+    second: _0003_GrassTiles_73
+  - first:
+      213: 3011004991722528552
+    second: _0003_GrassTiles_74
+  - first:
+      213: 3478093442120011302
+    second: _0003_GrassTiles_75
+  - first:
+      213: 7697716759623420529
+    second: _0003_GrassTiles_76
+  - first:
+      213: -2596168448073329939
+    second: _0003_GrassTiles_77
+  - first:
+      213: -2381271088310612574
+    second: _0003_GrassTiles_78
+  - first:
+      213: 1277435009375672450
+    second: _0003_GrassTiles_79
+  - first:
+      213: -1526008575988736939
+    second: _0003_GrassTiles_80
+  - first:
+      213: 6452009702594124800
+    second: _0003_GrassTiles_81
+  - first:
+      213: -639704909946508207
+    second: _0003_GrassTiles_82
+  - first:
+      213: 4333319780780164010
+    second: _0003_GrassTiles_83
+  - first:
+      213: -8157072386622357202
+    second: _0003_GrassTiles_84
+  - first:
+      213: 5639210579677285347
+    second: _0003_GrassTiles_85
+  - first:
+      213: -2800073942867665744
+    second: _0003_GrassTiles_86
+  - first:
+      213: -1844578548170461653
+    second: _0003_GrassTiles_87
+  - first:
+      213: 7192421952567218594
+    second: _0003_GrassTiles_88
+  - first:
+      213: 2368478461389723755
+    second: _0003_GrassTiles_89
+  - first:
+      213: -6775015554228477226
+    second: _0003_GrassTiles_90
+  - first:
+      213: -7422884982451446808
+    second: _0003_GrassTiles_91
+  - first:
+      213: 2695068930279264067
+    second: _0003_GrassTiles_92
+  - first:
+      213: 8626971448321984046
+    second: _0003_GrassTiles_93
+  - first:
+      213: -320105656576917810
+    second: _0003_GrassTiles_94
+  - first:
+      213: 1236160179072212434
+    second: _0003_GrassTiles_95
+  - first:
+      213: 4540085782306395656
+    second: _0003_GrassTiles_96
+  - first:
+      213: -6403859498918041795
+    second: _0003_GrassTiles_97
+  - first:
+      213: -6847698481207752325
+    second: _0003_GrassTiles_98
+  - first:
+      213: -8269058077212989409
+    second: _0003_GrassTiles_99
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: _0003_GrassTiles_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9285012fa9e1cf930800000000000000
+      internalID: 4178248205127931945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed8259353f9951150800000000000000
+      internalID: 5842745361941473502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8790d0ba32834cb20800000000000000
+      internalID: 3153707364910958968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a234cf02580a9a540800000000000000
+      internalID: 5019719753325626154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63ae14e63742b4a20800000000000000
+      internalID: 3047569651035925046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc9d9210399fb2540800000000000000
+      internalID: 4984351822390614475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a8eeafc0250bf050800000000000000
+      internalID: 5835263380670048420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_7
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 050cca020251a4f20800000000000000
+      internalID: 3407559295790530640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_8
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4ada51c0b38e1ec0800000000000000
+      internalID: -3594290657413637557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a8874e272d712750800000000000000
+      internalID: 6278436962764818596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 803c61f696882b8e0800000000000000
+      internalID: -1679129724639067384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2ba4d3ab7ff3b990800000000000000
+      internalID: -7371267258580686034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_12
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8315088c869b8c3c0800000000000000
+      internalID: -4339014381279882952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_13
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fda39e7038bef310800000000000000
+      internalID: 1440791449226685939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_14
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb2e89a949883b730800000000000000
+      internalID: 4013701864747492028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff7b322ee95461150800000000000000
+      internalID: 5842934115260938239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_16
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7c0298c80bfaf770800000000000000
+      internalID: 8645498449834413178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_17
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f651a103e95ff6190800000000000000
+      internalID: -7966879156034464401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_18
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb0fae26745ade830800000000000000
+      internalID: 4102116561625215166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_19
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a3eb774dcc026e60800000000000000
+      internalID: 7953933967696847782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cae663109bebedb80800000000000000
+      internalID: -8368041355809231188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_21
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b88752cda5e751bf0800000000000000
+      internalID: -354238066973116277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_22
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 248ed1702e5a3de40800000000000000
+      internalID: 5680065945244919874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_23
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e89dbdc95602e1020800000000000000
+      internalID: 2314322879310453134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _0003_GrassTiles_24
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b879c4be9d653f70800000000000000
+      internalID: 9166353144987875504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

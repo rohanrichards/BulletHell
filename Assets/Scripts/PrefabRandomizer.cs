@@ -16,7 +16,9 @@ public class PrefabRandomizer : MonoBehaviour
 
 
         int index = Random.Range(0, prefabs.Length);
-        GameObject newPrefab = Instantiate(prefabs[index], transform);
+        Vector3 randomVector = new Vector3(0, 0, Random.Range(0, 360));
+        Quaternion randomRotation = Quaternion.Euler(randomVector);
+        GameObject newPrefab = Instantiate(prefabs[index], transform.position, randomRotation, transform);
     }
 
     private void Awake()

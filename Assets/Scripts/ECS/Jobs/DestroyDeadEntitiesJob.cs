@@ -23,7 +23,23 @@ partial struct DestroyExpiredEntitiesJob : IJobEntity
             Entity message = ecb.CreateEntity();
             ecb.AddComponent(message, new MessageDataComponent { position = localGroup[entity].Position, rotation = localGroup[entity].Rotation, type = MessageTypes.Death });
             ecb.AddComponent(message, data);
+            ecb.DestroyEntity(entity);
+        }
+    }
+}
 
+[BurstCompile]
+partial struct DeparentDeadEntitiesJob : IJobEntity
+{
+    public EntityCommandBuffer ecb;
+    [ReadOnly] public ComponentDataFromEntity<Translation> translationsGroup;
+    [ReadOnly] public ComponentDataFromEntity<Rotation> rotationsGroup;
+    [ReadOnly] public ComponentDataFromEntity<LocalToWorld> localGroup;
+
+    public void Execute(Entity entity, ref LifespanComponent lifespan, in DeparentTag deparent, ref DynamicBuffer<LinkedEntityGroup> linkedEntityGroup)
+    {
+        if (lifespan.Value <= 0)
+        {
             if (!linkedEntityGroup.IsEmpty)
             {
                 NativeArray<LinkedEntityGroup> children = linkedEntityGroup.ToNativeArray(Unity.Collections.Allocator.Temp);
@@ -40,11 +56,11 @@ partial struct DestroyExpiredEntitiesJob : IJobEntity
                 }
             }
             linkedEntityGroup.RemoveRange(0, linkedEntityGroup.Length);
-            ecb.DestroyEntity(entity);
         }
     }
 }
 
+[BurstCompile]
 partial struct DestroyDeadEntitiesJob : IJobEntity
 {
     public EntityCommandBuffer ecb;

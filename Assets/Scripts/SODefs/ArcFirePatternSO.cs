@@ -8,10 +8,11 @@ using UnityEngine;
 
 public class ArcFirePatternSO : FirePatternSO
 {
-    public override List<Entity> Fire(WeaponSO weaponConfig, Entity bulletPrefab)
+    public override List<Entity> Fire(WeaponSO weaponConfig, Entity bulletPrefab, bool ignoreVelocity = false)
     {
         LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
         Vector3 playerVelocity = ECSPlayerController.getPlayerPhysicsVelocity().Linear;
+        if (ignoreVelocity) { playerVelocity = Vector3.zero; }
         List<Entity> bullets = new List<Entity>();
 
         float arcSize = weaponConfig.Spread;

@@ -10,7 +10,7 @@ public class DelayedSpreadFirePattern : FirePatternSO
 {
     public float arcSize = 10f;
     public float radius = 0.5f;
-    public override List<Entity> Fire(WeaponSO weaponConfig, Entity bulletPrefab)
+    public override List<Entity> Fire(WeaponSO weaponConfig, Entity bulletPrefab, bool ignoreVelocity = false)
     {
         EntityManager manager = World.DefaultGameObjectInjectionWorld.EntityManager;
         float arcSize = weaponConfig.Spread;

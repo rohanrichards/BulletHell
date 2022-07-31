@@ -47,14 +47,14 @@ public class BeamLaser : WeaponBase
             NonUniformScale scale = new NonUniformScale { Value = new float3 { x = 2, y = 1 * weaponConfig.AOE, z = 1 } };
             entityManager.AddComponentData<NonUniformScale>(entity, scale);
 
-            pointerHacking(entity);
+            RebuildCollider(entity);
         }
 
         yield return new WaitForSeconds(1 / weaponConfig.ROF);
         StartCoroutine(Fire());
     }
 
-    private void pointerHacking(Entity entity)
+    private void RebuildCollider(Entity entity)
     {
         EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
 

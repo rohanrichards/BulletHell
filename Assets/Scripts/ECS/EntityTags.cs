@@ -18,3 +18,4 @@ public struct PickupTag : IComponentData { }
 public struct MagneticPickupTag : IComponentData { }
 
 public struct DisableParticlesTag : IComponentData { }
+public struct DeparentTag : IComponentData { }

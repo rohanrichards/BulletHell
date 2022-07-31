@@ -6,5 +6,5 @@ using UnityEngine;
 public abstract class FirePatternSO : ScriptableObject
 {
     public string patternName;
-    public abstract List<Entity> Fire(WeaponSO weaponConfig, Entity bulletPrefab);
+    public abstract List<Entity> Fire(WeaponSO weaponConfig, Entity bulletPrefab, bool ignoreVelocity = false);
 }

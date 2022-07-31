@@ -17,6 +17,8 @@ public class EntityMessagingController : MonoBehaviour
     private MetaUpgradeManager metaUpgradeManager;
     private PickupGenerator pickupGenerator;
     private OpenChestUIController chestUIController;
+    protected BlobAssetStore blobAssetStore;
+
 
     void Start()
     {
@@ -30,6 +32,9 @@ public class EntityMessagingController : MonoBehaviour
             ComponentType.ReadWrite<MessageDataComponent>(),
             ComponentType.ReadWrite<EntityDataComponent>()
         );
+
+        blobAssetStore = new BlobAssetStore();
+
     }
 
     void Update()
@@ -47,6 +52,11 @@ public class EntityMessagingController : MonoBehaviour
                 {
                     GameObject explosionGameObject = Instantiate(explosionDeathPrefab, message.position, message.rotation);
                     explosionGameObject.transform.localScale *= type.Size;
+                    Entity explosionEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(explosionGameObject, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
+                    LightDataComponent light = manager.GetComponentData<LightDataComponent>(explosionEntity);
+                    light.radius *= type.Size;
+                    light.intensity *= type.Size / 2;
+                    manager.SetComponentData<LightDataComponent>(explosionEntity, light);
                     Entity exploder = manager.CreateEntity();
                     manager.AddComponent<ExplodeAndDeleteTag>(exploder);
                     manager.AddComponentData(exploder, type);
@@ -106,5 +116,10 @@ public class EntityMessagingController : MonoBehaviour
             }
         }
         manager.DestroyEntity(entityQuery);
+    }
+
+    private void OnDestroy()
+    {
+        blobAssetStore.Dispose();
     }
 }

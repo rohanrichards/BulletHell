@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7961359399402433145}
   - component: {fileID: 2596958722318346114}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Panzer_Broken2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,10 +91,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7215588353806131255}
-  - component: {fileID: 1588692182434701752}
   - component: {fileID: 5232208185331851423}
-  m_Layer: 0
-  m_Name: BrokenTank 2
+  m_Layer: 11
+  m_Name: Tank 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,19 +115,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 24.829}
---- !u!114 &1588692182434701752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7215588353806131240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConversionMode: 0
 --- !u!114 &5232208185331851423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,7 +268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1381320057943804284}
   - component: {fileID: 6518719417569269438}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Panzer_BrokenTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}

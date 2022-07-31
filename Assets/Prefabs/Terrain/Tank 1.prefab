@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 346673047615571147}
   - component: {fileID: 6375301691717409763}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BTR_BrokenTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -44025399
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 0989b8794fb16304584c704e6b3f70ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -91,10 +91,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7215588353806131255}
-  - component: {fileID: 1588692182434701752}
   - component: {fileID: 5232208185331851423}
-  m_Layer: 0
-  m_Name: BrokenTank 1
+  m_Layer: 11
+  m_Name: Tank 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,19 +115,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 24.829}
---- !u!114 &1588692182434701752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7215588353806131240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConversionMode: 0
 --- !u!114 &5232208185331851423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,7 +268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 140789393784064789}
   - component: {fileID: 5650806684586740676}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BTR_BrokenBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,8 +326,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -44025399
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 2443f51c512a17c4e992e5a2e3c23d23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

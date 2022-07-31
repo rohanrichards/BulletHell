@@ -18,9 +18,9 @@ MonoBehaviour:
   projectileCount: 1
   projectileCountFlatBonus: 0
   projectileCountPercentBonus: 0
-  baseSpread: 0
+  baseSpread: 360
   spreadPercentBonus: 0
-  baseDamage: 2
+  baseDamage: 0.1
   damageFlatBonus: 0
   damagePercentBonus: 0
   baseLifespan: 5
@@ -29,6 +29,6 @@ MonoBehaviour:
   doesDOT: 1
   baseAOE: 1
   aoePercentBonus: 0
-  baseKnockbackForce: 1
+  baseKnockbackForce: 0
   knockBackForcePercentBonus: 0
   baseSpeed: 1

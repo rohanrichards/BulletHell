@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Discharger 9
   m_EditorClassIdentifier: 
   upgradeName: Discharger Level 9
-  upgradeDescription: +1 orb
+  upgradeDescription: Increased damage lifespan
   rof: 0
   damage: 15
-  projectiles: 1
+  projectiles: 0
   knockback: 0
-  lifespan: 10
-  aoe: 0
+  lifespan: 0
+  aoe: 15
+  spread: 0
+  fireFunc: {fileID: 0}

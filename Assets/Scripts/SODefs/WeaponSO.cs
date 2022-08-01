@@ -100,6 +100,6 @@ public class WeaponSO : ScriptableObject
         }
     }
 
-    public delegate List<Entity> FireFunction(WeaponSO weaponConfig, Entity bulletPrefab);
+    public delegate List<Entity> FireFunction(WeaponSO weaponConfig, Entity bulletPrefab, bool ignoreVelocity = false);
     public FireFunction FireFunc;
 }

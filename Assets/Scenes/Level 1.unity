@@ -1303,6 +1303,7 @@ GameObject:
   - component: {fileID: 1046950707}
   - component: {fileID: 1046950708}
   - component: {fileID: 1046950714}
+  - component: {fileID: 1046950715}
   - component: {fileID: 1046950709}
   - component: {fileID: 1046950713}
   - component: {fileID: 1046950712}
@@ -1598,6 +1599,38 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3800543936002685991, guid: f278b2a98f5ea3a46b4d05feff6fcf42,
     type: 3}
   toggleButton: 285
+--- !u!114 &1046950715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046950702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39089d322608bd441b97ba48be373873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUnlocked: 0
+  level: 0
+  rarity: 5
+  upgradePool: []
+  levelUpgrades:
+  - {fileID: 11400000, guid: c0d9edbb677e8774e856b9be46932ce8, type: 2}
+  - {fileID: 11400000, guid: ded75915db4acfa4ea4105dbd62cc251, type: 2}
+  - {fileID: 11400000, guid: e227c08e62ef1f146965c1af4e398a4a, type: 2}
+  - {fileID: 11400000, guid: f06f4a6f280fba64cbb53364c8868747, type: 2}
+  - {fileID: 11400000, guid: 9c7cc016cf49e1e48bacff81e6ae5ba4, type: 2}
+  - {fileID: 11400000, guid: bcda92a920ba36d44a91115db9392212, type: 2}
+  - {fileID: 11400000, guid: 1c75ed898118a7d4ead0ef6dabc77023, type: 2}
+  - {fileID: 11400000, guid: 784bd6861683995479485ec4ad75552b, type: 2}
+  - {fileID: 11400000, guid: 35ceb74770aeb1a49917ae2ac2845a6e, type: 2}
+  - {fileID: 11400000, guid: 6572036bf21a1c948ba20bc7087e882a, type: 2}
+  metaUpgrades: []
+  weaponConfig: {fileID: 11400000, guid: 71ac1d26062c7754e8658e53f616cc76, type: 2}
+  bulletPrefab: {fileID: 3800543936002685991, guid: 690be69410349f54983e0d5d4bcc831d,
+    type: 3}
+  toggleButton: 286
 --- !u!1 &1049670892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,7 +1772,7 @@ RectTransform:
   - {fileID: 1423399330}
   - {fileID: 1305835599}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3661,7 +3694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22451668, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 22451668, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4052,7 +4085,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &2121905781 stripped
 RectTransform:
@@ -4075,7 +4108,7 @@ PrefabInstance:
     - target: {fileID: 5436931201346597731, guid: be00bb62889c6eb43973ab6550b7fb82,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5436931201346597731, guid: be00bb62889c6eb43973ab6550b7fb82,
         type: 3}

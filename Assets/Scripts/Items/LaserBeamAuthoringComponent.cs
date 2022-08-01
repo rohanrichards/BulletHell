@@ -16,6 +16,8 @@ public class LaserBeamAuthoringComponent : BulletBase
 
         EntityDataComponent type = new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath };
         dstManager.AddComponentData(entity, type);
+
+        dstManager.AddComponent(entity, typeof(DeparentTag));
         dstManager.RemoveComponent<MoveForwardTag>(entity);
     }
 }

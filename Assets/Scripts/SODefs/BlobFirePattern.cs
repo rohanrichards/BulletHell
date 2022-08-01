@@ -10,7 +10,7 @@ public class BlobFirePattern : FirePatternSO
 {
     public float arcSize = 10f;
     public float radius = 0.5f;
-    public override List<Entity> Fire(WeaponSO weaponConfig, Entity bulletPrefab)
+    public override List<Entity> Fire(WeaponSO weaponConfig, Entity bulletPrefab, bool ignoreVelocity = false)
     {
         LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
         Vector3 playerVelocity = ECSPlayerController.getPlayerPhysicsVelocity().Linear;

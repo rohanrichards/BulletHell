@@ -7,6 +7,7 @@ public abstract class ItemBase : MonoBehaviour
     public bool isUnlocked = false;
     public int level = 0;
     public int rarity = 5;
+    public FMODUnity.EventReference TriggerEvent;
 
     // this is the upgrades the item will add into the available upgrades pool
     // probably something specific like "Shotgun Level Up" but may add others for synergy unlocks
@@ -17,7 +18,7 @@ public abstract class ItemBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        
+
     }
 
     // Update is called once per frame

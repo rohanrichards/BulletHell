@@ -722,9 +722,10 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420029}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -732,14 +733,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
-AudioListener:
+--- !u!114 &519420029
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!114 &519420030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,6 +849,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a2730204836a4409d1346ce3e4f899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1976726952
+      Data2: 1143612600
+      Data3: -379138627
+      Data4: -718657866
+    Path: event:/FireLaserInternal
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &572484068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,6 +1367,13 @@ MonoBehaviour:
   isUnlocked: 0
   level: 0
   rarity: 5
+  TriggerEvent:
+    Guid:
+      Data1: -1578081321
+      Data2: 1133067621
+      Data3: -760863864
+      Data4: 165535135
+    Path: event:/RocketLaunch
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: de7f352f1d3a05f4abd4d908e419abe5, type: 2}
@@ -1406,6 +1449,13 @@ MonoBehaviour:
   isUnlocked: 0
   level: 0
   rarity: 5
+  TriggerEvent:
+    Guid:
+      Data1: -1976726952
+      Data2: 1143612600
+      Data3: -379138627
+      Data4: -718657866
+    Path: event:/FireLaser
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: f6e27f1b084025a4f8e35ccea97a98ee, type: 2}
@@ -1438,6 +1488,13 @@ MonoBehaviour:
   isUnlocked: 0
   level: 0
   rarity: 5
+  TriggerEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: 2a2f90b6b568f004a940aa6ce02cda5f, type: 2}
@@ -1472,6 +1529,13 @@ MonoBehaviour:
   isUnlocked: 0
   level: 0
   rarity: 5
+  TriggerEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: 82e52efa17b66f946bab39c90ffc5eca, type: 2}
@@ -1494,6 +1558,13 @@ MonoBehaviour:
   isUnlocked: 0
   level: 0
   rarity: 5
+  TriggerEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: 904863b16a84e504ab2428f4bf21f28e, type: 2}
@@ -1516,6 +1587,13 @@ MonoBehaviour:
   isUnlocked: 0
   level: 0
   rarity: 5
+  TriggerEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: 0de710611fe64a347bd0f4bbd32f61ba, type: 2}
@@ -1538,6 +1616,13 @@ MonoBehaviour:
   isUnlocked: 0
   level: 0
   rarity: 5
+  TriggerEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: 8455170e0d7409a40b27cda65526bc00, type: 2}
@@ -1560,6 +1645,13 @@ MonoBehaviour:
   isUnlocked: 0
   level: 0
   rarity: 5
+  TriggerEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: 649c9bc0ec964fb4ab3673043a7ffa62, type: 2}
@@ -1582,6 +1674,13 @@ MonoBehaviour:
   isUnlocked: 0
   level: 0
   rarity: 5
+  TriggerEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: e57506e2ea3c0684c83e92d49ca9976b, type: 2}
@@ -1614,6 +1713,13 @@ MonoBehaviour:
   isUnlocked: 0
   level: 0
   rarity: 5
+  TriggerEvent:
+    Guid:
+      Data1: 547559125
+      Data2: 1183839257
+      Data3: -1716856391
+      Data4: -1520115480
+    Path: event:/DischargerOrb
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: c0d9edbb677e8774e856b9be46932ce8, type: 2}

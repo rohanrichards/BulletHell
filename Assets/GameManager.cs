@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        if(SceneManager.GetActiveScene().name == "Level 1")
+        {
+            StartCoroutine(GameManager.instance.StartNewGame());
+        }
     } 
 
     void Update()
@@ -60,7 +64,7 @@ public class GameManager : MonoBehaviour
         //set up the player
         playerScripts = GameObject.Find("PlayerScripts");
         playerScripts.GetComponent<ECSPlayerController>().CreatePlayer(startingPlayerStatsConfig, startingPlayerGlobalStatsConfig);
-        List<MetaUpgrade> metaUpgrades = GetComponent<MetaUpgradeManager>().metaUpgrades;
+/*        List<MetaUpgrade> metaUpgrades = GetComponent<MetaUpgradeManager>().metaUpgrades;
         foreach (MetaUpgrade metaUpgrade in metaUpgrades)
         {
             foreach (WeaponMetaUpgradeSO upgrade in metaUpgrade.upgrades)
@@ -71,9 +75,9 @@ public class GameManager : MonoBehaviour
                     weaponScript.metaUpgrades.Add(Instantiate(upgrade));
                 }
             }
-        }
+        }*/
         yield return new WaitForSeconds(0.5f);
-        ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Discharger>();
+        ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Laser>();
         startingItem.IncreaseLevel();
         startingItem.Unlock();
         //StartCoroutine(SetWinGameTimer());

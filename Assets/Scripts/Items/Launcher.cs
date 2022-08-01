@@ -46,6 +46,8 @@ public class Launcher : WeaponBase
             EntityDataComponent type = new EntityDataComponent { Type = EntityDeathTypes.ExplodesOnDeath, Damage = weaponConfig.Damage, Size = weaponConfig.AOE, Force = weaponConfig.KnockBackForce };
             manager.AddComponentData(bullet, type);
 
+            FMODUnity.RuntimeManager.PlayOneShot(this.TriggerEvent, Vector3.zero);
+
             yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(1 / weaponConfig.ROF);

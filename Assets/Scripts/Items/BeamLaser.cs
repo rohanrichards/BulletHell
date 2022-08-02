@@ -8,10 +8,19 @@ using UnityEngine;
 
 public class BeamLaser : WeaponBase
 {
+    private FMOD.Studio.EventInstance eventInstance;
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        eventInstance = FMODUnity.RuntimeManager.CreateInstance(this.TriggerEvent);
+        Vector3 playerVector = ECSPlayerController.getPlayerLocationVector();
+        FMOD.VECTOR position = new FMOD.VECTOR { x = playerVector.x, y = playerVector.y, z=playerVector.z };
+        FMOD.VECTOR forward = new FMOD.VECTOR { x = 0, y = 1, z = 0 };
+        FMOD.VECTOR up = new FMOD.VECTOR { x = 0, y = 0, z = 1 };
+        FMOD.VECTOR velocity = new FMOD.VECTOR { x = 0, y = 0, z = 0 };
+        FMOD.ATTRIBUTES_3D attributes = new FMOD.ATTRIBUTES_3D { position = position, forward = forward, up = up, velocity = velocity };
+        eventInstance.set3DAttributes(attributes);
     }
 
     // Update is called once per frame
@@ -29,6 +38,8 @@ public class BeamLaser : WeaponBase
     {
         EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
         List<Entity> bullets = weaponConfig.FireFunc(weaponConfig, bulletEntityPrefab);
+        eventInstance.start();
+        StartCoroutine(StopEvent(weaponConfig.Lifespan));
 
         foreach (Entity entity in bullets)
         {
@@ -52,6 +63,12 @@ public class BeamLaser : WeaponBase
 
         yield return new WaitForSeconds(1 / weaponConfig.ROF);
         StartCoroutine(Fire());
+    }
+
+    private IEnumerator StopEvent(float time)
+    {
+        yield return new WaitForSeconds(time);
+        eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     private void RebuildCollider(Entity entity)

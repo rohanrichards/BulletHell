@@ -29,6 +29,19 @@ public class ECSPlayerController : MonoBehaviour
         }
     }
 
+    public static Vector3 getPlayerLocationVector()
+    {
+        var queryResult = playerQuery.ToComponentDataArray<Translation>(Allocator.Temp);
+        if (queryResult.Length > 0)
+        {
+            return queryResult[0].Value;
+        }
+        else
+        {
+            return Vector3.zero;
+        }
+    }
+
     public static PhysicsVelocity getPlayerPhysicsVelocity()
     {
         var queryResult = playerQuery.ToComponentDataArray<PhysicsVelocity>(Allocator.Temp);

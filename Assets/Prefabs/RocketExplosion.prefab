@@ -9812,7 +9812,7 @@ MonoBehaviour:
       Data2: 1113775214
       Data3: 978892979
       Data4: -790349562
-    Path: event:/RocketWithExplosion
+    Path: event:/RocketExplosion
   Event: 
   PlayEvent: 1
   StopEvent: 0

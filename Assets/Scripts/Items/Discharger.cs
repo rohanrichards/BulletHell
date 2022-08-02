@@ -27,7 +27,7 @@ public class Discharger : WeaponBase
 
     public override IEnumerator Fire()
     {
-        FMODUnity.RuntimeManager.PlayOneShot(this.TriggerEvent, Vector3.zero);
+        //FMODUnity.RuntimeManager.PlayOneShot(this.TriggerEvent, ECSPlayerController.getPlayerLocationVector());
         EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
         List<Entity> bullets = weaponConfig.FireFunc(weaponConfig, bulletEntityPrefab, true);
 

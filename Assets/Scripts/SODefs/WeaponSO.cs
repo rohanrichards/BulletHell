@@ -6,6 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "SO's/Configs/Weapon", order = 1)]
 public class WeaponSO : ScriptableObject
 {
+    
+    public FMODUnity.EventReference triggerEvent;
+
     [Header("Weapon Configs")]
     [Tooltip("Expressed as rounds per second")]
     public float rof = 1.0f;

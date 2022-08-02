@@ -20,6 +20,7 @@ public class StatsController : MonoBehaviour
     private Animation damageFlashLight;
     DifficultyManager difficultyManager;
     GameManager gameManager;
+    public FMODUnity.EventReference XPSoundEvent;
 
     public float MoveSpeed
     {
@@ -55,6 +56,7 @@ public class StatsController : MonoBehaviour
 
     public void ApplyXP(int XP)
     {
+        FMODUnity.RuntimeManager.PlayOneShot(XPSoundEvent, ECSPlayerController.getPlayerLocationVector());
         statsConfig.currentXP += Mathf.CeilToInt(XP + XP * (statsConfig.XPPercentBonus / 100));
         CheckForLevelUp();
     }

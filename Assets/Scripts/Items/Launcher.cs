@@ -3,6 +3,7 @@ using Unity.Transforms;
 using Unity.Entities;
 using UnityEngine;
 using Unity.Physics;
+using FMODUnity;
 
 public class Launcher : WeaponBase
 {
@@ -46,7 +47,7 @@ public class Launcher : WeaponBase
             EntityDataComponent type = new EntityDataComponent { Type = EntityDeathTypes.ExplodesOnDeath, Damage = weaponConfig.Damage, Size = weaponConfig.AOE, Force = weaponConfig.KnockBackForce };
             manager.AddComponentData(bullet, type);
 
-            FMODUnity.RuntimeManager.PlayOneShot(this.TriggerEvent, Vector3.zero);
+            FMODUnity.RuntimeManager.PlayOneShot(this.TriggerEvent, ECSPlayerController.getPlayerLocationVector());
 
             yield return new WaitForSeconds(0.1f);
         }

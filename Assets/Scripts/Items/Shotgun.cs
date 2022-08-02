@@ -28,6 +28,8 @@ public class Shotgun : WeaponBase
 
     public override IEnumerator Fire()
     {
+        FMODUnity.RuntimeManager.PlayOneShot(this.TriggerEvent, ECSPlayerController.getPlayerLocationVector());
+
         weaponConfig.FireFunc(weaponConfig, bulletEntityPrefab);
         yield return new WaitForSeconds(1 / weaponConfig.ROF);
         StartCoroutine(Fire());

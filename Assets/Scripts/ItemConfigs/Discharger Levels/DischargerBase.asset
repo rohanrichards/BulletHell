@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16aee1c7ec8f6a94ab6acdd65a11b48b, type: 3}
   m_Name: DischargerBase
   m_EditorClassIdentifier: 
+  triggerEvent:
+    Guid:
+      Data1: 547559125
+      Data2: 1183839257
+      Data3: -1716856391
+      Data4: -1520115480
+    Path: event:/DischargerOrb
   rof: 0.15
   rofPercentBonus: 0
   rofFlatBonus: 0

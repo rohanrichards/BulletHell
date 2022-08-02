@@ -30,7 +30,11 @@ public abstract class BulletBase : MonoBehaviour, IConvertGameObjectToEntity
         entityManager.AddComponentData(bullet, new LifespanComponent { Value = weaponConfig.Lifespan });
         entityManager.AddComponentData(bullet, new BulletConfigComponent { Damage = weaponConfig.Damage, Knockback = weaponConfig.KnockBackForce, DOT = weaponConfig.doesDOT });
 
-
+        if (!weaponConfig.triggerEvent.IsNull)
+        {
+            entityManager.World.GetOrCreateSystem<SoundEmitterSystem>().toCreate.Add(weaponConfig.triggerEvent.Guid);
+            entityManager.AddComponent(bullet, typeof(SoundEmitterTag));
+        }
         return bullet;
     }
 

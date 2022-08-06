@@ -1376,6 +1376,13 @@ MonoBehaviour:
   statsConfig: {fileID: 11400000, guid: 88e2e2f3d4f1824469bba5a5b781c1ec, type: 2}
   globalStatsConfig: {fileID: 11400000, guid: 786d9cf96a563b24db0ec5a847efeefc, type: 2}
   availableUpgrades: []
+  XPSoundEvent:
+    Guid:
+      Data1: -715814024
+      Data2: 1126474697
+      Data3: 249013692
+      Data4: -911001748
+    Path: event:/XPPickup
 --- !u!114 &1046950705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1460,11 +1467,11 @@ MonoBehaviour:
   rarity: 5
   TriggerEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1383329210
+      Data2: 1101907424
+      Data3: -1168654410
+      Data4: -1671149235
+    Path: event:/Shotgun
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: 2a2f90b6b568f004a940aa6ce02cda5f, type: 2}
@@ -1646,11 +1653,11 @@ MonoBehaviour:
   rarity: 5
   TriggerEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -242032772
+      Data2: 1313497222
+      Data3: -340431463
+      Data4: 867365761
+    Path: event:/LaserBeam
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: e57506e2ea3c0684c83e92d49ca9976b, type: 2}

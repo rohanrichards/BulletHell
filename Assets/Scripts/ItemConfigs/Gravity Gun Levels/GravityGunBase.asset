@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16aee1c7ec8f6a94ab6acdd65a11b48b, type: 3}
   m_Name: GravityGunBase
   m_EditorClassIdentifier: 
-  rof: 0.5
+  rof: 0.6
   rofPercentBonus: 0
   rofFlatBonus: 0
   projectileCount: 1
@@ -20,15 +20,15 @@ MonoBehaviour:
   projectileCountPercentBonus: 0
   baseSpread: 30
   spreadPercentBonus: 0
-  baseDamage: 0
+  baseDamage: 0.025
   damageFlatBonus: 0
   damagePercentBonus: 0
   baseLifespan: 5
   lifespanFlatBonus: 0
   lifespanPercentBonus: 0
   doesDOT: 1
-  baseAOE: 2
+  baseAOE: 1.1
   aoePercentBonus: 0
-  baseKnockbackForce: 0.1
+  baseKnockbackForce: 0.025
   knockBackForcePercentBonus: 0
-  baseSpeed: 4
+  baseSpeed: 5

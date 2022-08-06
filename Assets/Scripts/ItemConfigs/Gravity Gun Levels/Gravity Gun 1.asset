@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc5ddfaaad574541a8fddd094b33be7, type: 3}
   m_Name: Gravity Gun 1
   m_EditorClassIdentifier: 
-  upgradeName: Discharger
-  upgradeDescription: Gravity gun lol
+  upgradeName: Gravity Gun 1
+  upgradeDescription: Fun with...gravity!
   rof: 0
   damage: 0
   projectiles: 0

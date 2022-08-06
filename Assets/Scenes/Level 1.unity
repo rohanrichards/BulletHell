@@ -1650,7 +1650,6 @@ MonoBehaviour:
   upgradePool: []
   levelUpgrades:
   - {fileID: 11400000, guid: 31b0e0ce669c49a42bc455205bf911f4, type: 2}
-  - {fileID: 11400000, guid: d6bf907618751c44e8f245b0d2d49644, type: 2}
   metaUpgrades: []
   weaponConfig: {fileID: 11400000, guid: c16fa4ecfb0a4a64c9c8862ee12e6b86, type: 2}
   bulletPrefab: {fileID: 3800543936002685991, guid: b0e5341ff092b324f96c8897d42c03a8,
@@ -4110,7 +4109,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &2121905781 stripped
 RectTransform:
@@ -4133,7 +4132,7 @@ PrefabInstance:
     - target: {fileID: 5436931201346597731, guid: be00bb62889c6eb43973ab6550b7fb82,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5436931201346597731, guid: be00bb62889c6eb43973ab6550b7fb82,
         type: 3}

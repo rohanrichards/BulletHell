@@ -16,5 +16,7 @@ public class GravityAuthoringComponent : BulletBase
         EntityDataComponent type = new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath };
         dstManager.AddComponentData(entity, type);
         dstManager.AddComponent(entity, typeof(GravityTag));
+        dstManager.AddComponent(entity, typeof(SpeedReducerTag));
+        dstManager.AddComponentData(entity, new LightDataComponent { radius = 0.5f, color = { x = 1.0f, y = 1.0f, z = 1.0f }, intensity = -1.0f });
     }
 }

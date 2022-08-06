@@ -16,7 +16,10 @@ public struct PlayerTag : IComponentData { }
 public struct BulletTag : IComponentData { }
 public struct GravityTag : IComponentData { }
 public struct PickupTag : IComponentData { }
+public struct SpeedReducerTag : IComponentData { }
 public struct MagneticPickupTag : IComponentData { }
 
 public struct DisableParticlesTag : IComponentData { }
 public struct DeparentTag : IComponentData { }
+
+

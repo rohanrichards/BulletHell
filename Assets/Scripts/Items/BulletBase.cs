@@ -28,7 +28,12 @@ public abstract class BulletBase : MonoBehaviour, IConvertGameObjectToEntity
 
         entityManager.AddComponentData(bullet, new EntityMovementSettings { moveSpeed = weaponConfig.Speed });
         entityManager.AddComponentData(bullet, new LifespanComponent { Value = weaponConfig.Lifespan });
-        entityManager.AddComponentData(bullet, new BulletConfigComponent { Damage = weaponConfig.Damage, Knockback = weaponConfig.KnockBackForce, DOT = weaponConfig.doesDOT });
+        entityManager.AddComponentData(bullet, new BulletConfigComponent {
+            Damage = weaponConfig.Damage,
+            Knockback = weaponConfig.KnockBackForce,
+            DOT = weaponConfig.doesDOT,
+            Size = weaponConfig.AOE
+        });
 
 
         return bullet;

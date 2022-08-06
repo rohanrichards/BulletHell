@@ -8,5 +8,6 @@ public struct BulletConfigComponent : IComponentData
 {
     public float Damage;
     public float Knockback;
+    public float Size;
     public bool DOT;
 }

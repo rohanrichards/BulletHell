@@ -37,8 +37,6 @@ public partial class FlailSystem : SystemBase
     partial struct FlailJob : IJobEntity
     {
         public float3 playerPos;
-        // public PhysicsWorld physicsWorld;
-        // public float deltaTime;
 
         public void Execute(Entity entity, in FlailTag tag, in Translation location, in BulletConfigComponent config, ref PhysicsVelocity vel)
         {
@@ -49,14 +47,13 @@ public partial class FlailSystem : SystemBase
             float dist = math.length(playerDelta);
 
             if(dist > slackDist) {
-                float force = (slackDist - dist);
-                force = force * force;
-                playerDelta *= 1.0f / dist;
 
-                vel.Linear += playerDelta * force * forceMult;
+                float distDiff = dist - slackDist;
+                playerDelta *= 1.0f / dist;
+                float outComponent = math.dot(vel.Linear, -playerDelta);
+
+                vel.Linear += playerDelta * (outComponent + distDiff * forceMult);
             }
-            // int physicsIndex = physicsWorld.GetRigidBodyIndex(entity);
-            // PhysicsWorldExtensions.ApplyLinearImpulse(physicsWorld, physicsIndex, goalDelta * deltaTime * 1.01f);
         }
     }
 
@@ -64,14 +61,8 @@ public partial class FlailSystem : SystemBase
     {
         NativeArray<Translation> playerLocations = playerQuery.ToComponentDataArray<Translation>(Allocator.Temp);
 
-        var physicsWorld = World.GetOrCreateSystem<BuildPhysicsWorld>().PhysicsWorld;
-
         var deltaTime = Time.DeltaTime;
-        FlailJob flailJob = new FlailJob{
-            playerPos = playerLocations[0].Value//,
-            // physicsWorld = physicsWorld,
-            // deltaTime = deltaTime
-        };
+        FlailJob flailJob = new FlailJob{ playerPos = playerLocations[0].Value };
         flailJob.Schedule(entityQuery);
     }
 }

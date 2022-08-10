@@ -41,7 +41,8 @@ public partial class FlailSystem : SystemBase
         public void Execute(Entity entity, in FlailTag tag, in Translation location, in BulletConfigComponent config, ref PhysicsVelocity vel)
         {
             float slackDist = config.Size * 5.0f;
-            float forceMult = config.Knockback;
+            // float forceMult = config.Knockback * 1.0f;
+            float forceMult = 2.0f;
 
             float3 playerDelta = playerPos - location.Value;
             float dist = math.length(playerDelta);
@@ -60,9 +61,9 @@ public partial class FlailSystem : SystemBase
     protected override void OnUpdate()
     {
         NativeArray<Translation> playerLocations = playerQuery.ToComponentDataArray<Translation>(Allocator.Temp);
-
         var deltaTime = Time.DeltaTime;
         FlailJob flailJob = new FlailJob{ playerPos = playerLocations[0].Value };
         flailJob.Schedule(entityQuery);
+        this.CompleteDependency();
     }
 }

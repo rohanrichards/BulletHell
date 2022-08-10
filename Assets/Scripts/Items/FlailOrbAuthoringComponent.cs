@@ -16,5 +16,6 @@ public class FlailOrbAuthoringComponent : BulletBase
         EntityDataComponent type = new EntityDataComponent { Type = EntityDeathTypes.DoesNothingOnDeath };
         dstManager.AddComponentData(entity, type);
         dstManager.AddComponent(entity, typeof(FlailTag));
+        dstManager.AddComponent(entity, typeof(ForceDamageTag));
     }
 }

@@ -12,23 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16aee1c7ec8f6a94ab6acdd65a11b48b, type: 3}
   m_Name: FlailBase
   m_EditorClassIdentifier: 
-  rof: 0.5
+  rof: 0.1
   rofPercentBonus: 0
   rofFlatBonus: 0
   projectileCount: 1
   projectileCountFlatBonus: 0
   projectileCountPercentBonus: 0
-  baseSpread: 360
+  baseSpread: 90
   spreadPercentBonus: 0
   baseDamage: 0.1
   damageFlatBonus: 0
   damagePercentBonus: 0
-  baseLifespan: 5
+  baseLifespan: 10
   lifespanFlatBonus: 0
   lifespanPercentBonus: 0
   doesDOT: 1
-  baseAOE: 1
+  baseAOE: 0.5
   aoePercentBonus: 0
   baseKnockbackForce: 0
   knockBackForcePercentBonus: 0
-  baseSpeed: 2
+  baseSpeed: 5

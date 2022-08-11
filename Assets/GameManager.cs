@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(0.5f);
-        ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Discharger>();
+        ItemBase startingItem = (ItemBase)playerScripts.GetComponent<AcidPool>();
         startingItem.IncreaseLevel();
         startingItem.Unlock();
         //StartCoroutine(SetWinGameTimer());

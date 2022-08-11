@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16aee1c7ec8f6a94ab6acdd65a11b48b, type: 3}
-  m_Name: DischargerBase
+  m_Name: AcidPoolBase
   m_EditorClassIdentifier: 
-  rof: 1
+  rof: 0.15
   rofPercentBonus: 0
   rofFlatBonus: 0
   projectileCount: 1
@@ -31,4 +31,4 @@ MonoBehaviour:
   aoePercentBonus: 0
   baseKnockbackForce: 0
   knockBackForcePercentBonus: 0
-  baseSpeed: 1
+  baseSpeed: 0

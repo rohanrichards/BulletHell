@@ -9,16 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecc5ddfaaad574541a8fddd094b33be7, type: 3}
-  m_Name: Laser 5
+  m_Script: {fileID: 11500000, guid: 9bd316079f1d49142b8f76ecca3add6b, type: 3}
+  m_Name: RandomArcFirePattern
   m_EditorClassIdentifier: 
-  upgradeName: Pulse Laser 5
-  upgradeDescription: +4 projectiles
-  rof: 0
-  damage: 0
-  projectiles: 4
-  knockback: 0
-  lifespan: 0
-  aoe: 0
-  spread: 0
-  fireFunc: {fileID: 0}
+  patternName: Random Arc Pattern

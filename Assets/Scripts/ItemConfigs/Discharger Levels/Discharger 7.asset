@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Discharger 7
   m_EditorClassIdentifier: 
   upgradeName: Discharger Level 7
-  upgradeDescription: Increased damage size and lifespan
+  upgradeDescription: Increased damage and size
   rof: 0
-  damage: 25
+  damage: 50
   projectiles: 0
   knockback: 0
-  lifespan: 25
-  aoe: 15
+  lifespan: 0
+  aoe: 25
   spread: 0
   fireFunc: {fileID: 0}

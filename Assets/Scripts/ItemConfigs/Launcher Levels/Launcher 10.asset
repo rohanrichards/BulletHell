@@ -16,7 +16,9 @@ MonoBehaviour:
   upgradeDescription: Greatly increased damage and blast size
   rof: 0
   damage: 100
-  projectiles: 2
+  projectiles: 0
   knockback: 50
   lifespan: 0
   aoe: 25
+  spread: 0
+  fireFunc: {fileID: 0}

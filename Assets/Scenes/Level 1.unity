@@ -123,38 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &40149031
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 177638, guid: 0abab5bb77339e4428787a870eb31bd3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1934727271}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 40149032}
-  m_Layer: 0
-  m_Name: '[Graphy] (Missing Prefab with guid: 0abab5bb77339e4428787a870eb31bd3)'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &40149032
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 22451668, guid: 0abab5bb77339e4428787a870eb31bd3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1934727271}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40149031}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &58632229
 Mesh:
   m_ObjectHideFlags: 0
@@ -1338,6 +1306,7 @@ GameObject:
   - component: {fileID: 1046950715}
   - component: {fileID: 1046950716}
   - component: {fileID: 1046950717}
+  - component: {fileID: 1046950718}
   - component: {fileID: 1046950709}
   - component: {fileID: 1046950713}
   - component: {fileID: 1046950712}
@@ -1711,6 +1680,29 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3800543936002685991, guid: 45b9c3b5fc792ac4da1fd1553a296f28,
     type: 3}
   toggleButton: 288
+--- !u!114 &1046950718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046950702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036a3155c50cdff45a0379a9ee8437c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUnlocked: 0
+  level: 0
+  rarity: 5
+  upgradePool: []
+  levelUpgrades:
+  - {fileID: 11400000, guid: 4726596474955de48a2ae79c4163ee38, type: 2}
+  metaUpgrades: []
+  weaponConfig: {fileID: 11400000, guid: f73b2b321fc21b44fa9c87607c0a489d, type: 2}
+  bulletPrefab: {fileID: 3800543936002685991, guid: 5f0d5bfb66165254d9349af9f6b651e1,
+    type: 3}
+  toggleButton: 289
 --- !u!1 &1049670892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2755,11 +2747,11 @@ MonoBehaviour:
   testEnemyIndex: 1
   testClusterCount: 10
   testGridSize: 3
-  baseWaveSpeed: 5
+  baseWaveSpeed: 4
   minWaveSpeed: 1
-  baseClusterSize: 5
+  baseClusterSize: 8
   maxClusterSize: 30
-  baseClusterCount: 5
+  baseClusterCount: 8
   maxClusterCount: 16
   spawnRadius: 30
   despawnRadius: 50
@@ -4165,7 +4157,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &2121905781 stripped
 RectTransform:

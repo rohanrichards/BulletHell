@@ -21,4 +21,4 @@ MonoBehaviour:
   lifespan: 0
   aoe: 0
   spread: 0
-  fireFunc: {fileID: 11400000, guid: c16d2eb4503122b489bb5aa0486fd7d0, type: 2}
+  fireFunc: {fileID: 11400000, guid: 38874c06d32bdba4e80c3d1819284ff1, type: 2}

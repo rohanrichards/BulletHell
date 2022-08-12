@@ -15,7 +15,7 @@ MonoBehaviour:
   upgradeName: Beam Laser 4
   upgradeDescription: Increased range and damage
   rof: 0
-  damage: 10
+  damage: 50
   projectiles: 0
   knockback: 0
   lifespan: 0

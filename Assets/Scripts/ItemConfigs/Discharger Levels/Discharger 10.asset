@@ -15,10 +15,10 @@ MonoBehaviour:
   upgradeName: Discharger Level 10
   upgradeDescription: +2 orb, increased damage size and lifespan
   rof: 0
-  damage: 25
+  damage: 100
   projectiles: 2
   knockback: 0
-  lifespan: 25
+  lifespan: 0
   aoe: 25
   spread: 0
   fireFunc: {fileID: 0}

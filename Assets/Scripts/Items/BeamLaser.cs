@@ -50,7 +50,7 @@ public class BeamLaser : WeaponBase
             RebuildCollider(entity);
         }
 
-        yield return new WaitForSeconds(1 / weaponConfig.ROF);
+        yield return new WaitForSeconds(1 / weaponConfig.ROF + weaponConfig.Lifespan);
         StartCoroutine(Fire());
     }
 

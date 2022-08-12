@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16aee1c7ec8f6a94ab6acdd65a11b48b, type: 3}
   m_Name: LauncherBase
   m_EditorClassIdentifier: 
-  rof: 0.6
+  rof: 0.55
   rofPercentBonus: 0
   rofFlatBonus: 0
-  projectileCount: 4
+  projectileCount: 5
   projectileCountFlatBonus: 0
   projectileCountPercentBonus: 0
   baseSpread: 45
@@ -23,12 +23,12 @@ MonoBehaviour:
   baseDamage: 10
   damageFlatBonus: 0
   damagePercentBonus: 0
-  baseLifespan: 0.25
+  baseLifespan: 0.2
   lifespanFlatBonus: 0
   lifespanPercentBonus: 0
   doesDOT: 0
-  baseAOE: 1
+  baseAOE: 1.5
   aoePercentBonus: 0
-  baseKnockbackForce: 4
+  baseKnockbackForce: 2
   knockBackForcePercentBonus: 0
   baseSpeed: 25

@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Shotgun 4
   m_EditorClassIdentifier: 
   upgradeName: Shotgun 4
-  upgradeDescription: +5 pellets, increased damage and knockback
-  rof: 10
-  damage: 25
-  projectiles: 5
-  knockback: 10
+  upgradeDescription: +10 pellets
+  rof: 0
+  damage: 0
+  projectiles: 10
+  knockback: 0
   lifespan: 0
   aoe: 0
+  spread: 0
+  fireFunc: {fileID: 0}

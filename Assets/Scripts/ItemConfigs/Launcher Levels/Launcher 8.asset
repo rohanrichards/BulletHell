@@ -17,6 +17,8 @@ MonoBehaviour:
   rof: 0
   damage: 25
   projectiles: 0
-  knockback: 10
+  knockback: 0
   lifespan: 0
   aoe: 25
+  spread: 0
+  fireFunc: {fileID: 0}

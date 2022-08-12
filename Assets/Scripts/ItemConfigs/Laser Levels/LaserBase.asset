@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16aee1c7ec8f6a94ab6acdd65a11b48b, type: 3}
   m_Name: LaserBase
   m_EditorClassIdentifier: 
-  rof: 1.3
+  rof: 0.5
   rofPercentBonus: 0
   rofFlatBonus: 0
   projectileCount: 3
@@ -20,7 +20,7 @@ MonoBehaviour:
   projectileCountPercentBonus: 0
   baseSpread: 80
   spreadPercentBonus: 0
-  baseDamage: 2
+  baseDamage: 1
   damageFlatBonus: 0
   damagePercentBonus: 0
   baseLifespan: 0.2

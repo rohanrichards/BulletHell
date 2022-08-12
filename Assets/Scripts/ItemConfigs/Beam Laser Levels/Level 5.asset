@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Level 5
   m_EditorClassIdentifier: 
   upgradeName: Beam Laser 5
-  upgradeDescription: Increased range and damage
+  upgradeDescription: Double damage
   rof: 0
   damage: 100
   projectiles: 0
-  knockback: 25
-  lifespan: 10
-  aoe: 20
+  knockback: 0
+  lifespan: 0
+  aoe: 0
   spread: 0
   fireFunc: {fileID: 0}

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BloblFirePattern
   m_EditorClassIdentifier: 
   patternName: Blob Fire Pattern
-  arcSize: 10
-  radius: 0.5
+  arcSize: 30
+  radius: 0.75

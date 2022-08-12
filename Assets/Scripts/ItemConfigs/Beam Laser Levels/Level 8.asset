@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Level 8
   m_EditorClassIdentifier: 
   upgradeName: Beam Laser 8
-  upgradeDescription: Increased damage
+  upgradeDescription: Increased lifespan
   rof: 0
-  damage: 20
+  damage: 0
   projectiles: 0
   knockback: 0
-  lifespan: 10
+  lifespan: 50
   aoe: 0
   spread: 0
   fireFunc: {fileID: 0}

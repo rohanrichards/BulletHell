@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Laser 6
   m_EditorClassIdentifier: 
   upgradeName: Pulse Laser 6
-  upgradeDescription: Increased range, damage and ROF
-  rof: 25
-  damage: 10
+  upgradeDescription: Increased Damage
+  rof: 0
+  damage: 100
   projectiles: 0
   knockback: 0
   lifespan: 0
-  aoe: 50
+  aoe: 0
+  spread: 0
+  fireFunc: {fileID: 0}

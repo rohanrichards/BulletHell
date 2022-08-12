@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Launcher 3
   m_EditorClassIdentifier: 
   upgradeName: Rocket Launcher 3
-  upgradeDescription: +1 rocket
+  upgradeDescription: Increased damage and blast size
   rof: 0
-  damage: 10
-  projectiles: 1
+  damage: 25
+  projectiles: 0
   knockback: 0
   lifespan: 0
-  aoe: 10
+  aoe: 25
+  spread: 0
+  fireFunc: {fileID: 0}

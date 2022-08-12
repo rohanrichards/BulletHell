@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Shotgun 3
   m_EditorClassIdentifier: 
   upgradeName: Shotgun 3
-  upgradeDescription: Increased damage and knockback
-  rof: 10
-  damage: 150
+  upgradeDescription: Increased knockback
+  rof: 0
+  damage: 0
   projectiles: 0
-  knockback: 0
-  lifespan: 20
+  knockback: 50
+  lifespan: 0
   aoe: 0
+  spread: 0
+  fireFunc: {fileID: 0}

@@ -35,6 +35,10 @@ public class Discharger : WeaponBase
             Scale scale = new Scale { Value = 0.75f * weaponConfig.AOE };
             entityManager.AddComponentData<Scale>(entity, scale);
 
+            PhysicsVelocity vel = entityManager.GetComponentData<PhysicsVelocity>(entity);
+            vel.Linear += UnityEngine.Random.Range(-weaponConfig.Speed * 0.3f, weaponConfig.Speed * 0.1f );
+            entityManager.SetComponentData<PhysicsVelocity>(entity, vel);
+
             RebuildCollider(entity);
         }
 

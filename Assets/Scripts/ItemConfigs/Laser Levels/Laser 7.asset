@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Laser 7
   m_EditorClassIdentifier: 
   upgradeName: Pulse Laser 7
-  upgradeDescription: +2 projectiles, increased ROF
-  rof: 25
+  upgradeDescription: +2 projectiles
+  rof: 0
   damage: 0
   projectiles: 2
   knockback: 0
   lifespan: 0
   aoe: 0
+  spread: 0
+  fireFunc: {fileID: 0}

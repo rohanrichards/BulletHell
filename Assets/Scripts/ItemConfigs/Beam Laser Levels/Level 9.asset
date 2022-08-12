@@ -15,10 +15,10 @@ MonoBehaviour:
   upgradeName: Beam Laser 9
   upgradeDescription: Increased damage
   rof: 0
-  damage: 20
+  damage: 50
   projectiles: 0
   knockback: 0
-  lifespan: 10
+  lifespan: 0
   aoe: 0
   spread: 0
   fireFunc: {fileID: 0}

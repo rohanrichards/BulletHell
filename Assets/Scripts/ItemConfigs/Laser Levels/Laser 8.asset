@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Laser 8
   m_EditorClassIdentifier: 
   upgradeName: Pulse Laser 8
-  upgradeDescription: Increased damage and ROF
-  rof: 25
-  damage: 10
+  upgradeDescription: Increased damage
+  rof: 0
+  damage: 100
   projectiles: 0
   knockback: 0
   lifespan: 0
   aoe: 0
+  spread: 0
+  fireFunc: {fileID: 0}

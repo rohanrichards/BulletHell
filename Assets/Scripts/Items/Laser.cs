@@ -26,7 +26,14 @@ public class Laser : WeaponBase
 
     public override IEnumerator Fire()
     {
-        weaponConfig.FireFunc(weaponConfig, bulletEntityPrefab);
+        int pulseCount = 3;
+        float pulsePause = 0.1f;
+        for (int i = 0; i < pulseCount; i++)
+        {
+            weaponConfig.FireFunc(weaponConfig, bulletEntityPrefab);
+            yield return new WaitForSeconds(pulsePause);
+        }
+
         yield return new WaitForSeconds(1 / weaponConfig.ROF);
         StartCoroutine(Fire());
     }

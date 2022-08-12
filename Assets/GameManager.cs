@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(0.5f);
-        ItemBase startingItem = (ItemBase)playerScripts.GetComponent<GravityGun>();
+        ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Shotgun>();
         startingItem.IncreaseLevel();
         startingItem.Unlock();
         //StartCoroutine(SetWinGameTimer());

@@ -27,6 +27,7 @@ public class Launcher : WeaponBase
         float arcSegment = arcSize / weaponConfig.ProjectileCount;
         float offsetWidth = 0.75f;
         float offsetSegment = offsetWidth / weaponConfig.ProjectileCount;
+        Debug.Log("firing");
         for (int i = 0; i < weaponConfig.ProjectileCount; i++)
         {
             LocalToWorld playerLocation = ECSPlayerController.getPlayerLocation();
@@ -48,7 +49,9 @@ public class Launcher : WeaponBase
 
             yield return new WaitForSeconds(0.1f);
         }
+        Debug.Log("all fired...waiting");
         yield return new WaitForSeconds(1 / weaponConfig.ROF);
+        Debug.Log("done waiting");
         StartCoroutine(Fire());
     }
 }

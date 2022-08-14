@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e78b4a158305245ac80b975d971144, type: 3}
+  m_Name: Items_Laser
+  m_EditorClassIdentifier: 
+  startingXP: 0
+  numShotgunLevels: 0
+  numLaserLevels: 5
+  numDiscGunLevels: 0
+  numDischargerLevels: 0
+  numBeamLaserLevels: 0
+  numLauncherLevels: 0
+  numFlailLevels: 0
+  numAcidLevels: 0
+  numBlackHoleLevels: 0
+  numDamageLevels: 0
+  numROFLevels: 0
+  numMobilityLevels: 0
+  numRotateSpeedLevels: 0
+  numXPIncreaseLevels: 0

@@ -55,6 +55,9 @@ public abstract class WeaponBase : ItemBase
 
     public override void Unlock()
     {
+        if(this.isUnlocked) {
+            return;
+        }
         base.Unlock();
         //enable the weapon and add its upgrades into available upgrades
         foreach (WeaponUpgradeSO upgrade in upgradePool)

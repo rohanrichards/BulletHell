@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     public GlobalStatsConfigSO startingPlayerGlobalStatsConfig;
     public List<MechConfig> mechConfigs;
 
+    public BaseItemFixtureSO itemFixture;
+    public BaseLevelFixtureSO levelFixture;
+    public BaseMetaFixtureSO metaFixture;
+
     private void Awake()
     {
         if(instance != null)
@@ -77,6 +81,11 @@ public class GameManager : MonoBehaviour
         startingItem.IncreaseLevel();
         startingItem.Unlock();
         //StartCoroutine(SetWinGameTimer());
+
+        InitTestMetaFixtures();
+        InitTestLevelFixtures();
+        InitTestItemFixtures();
+
     }
 
     IEnumerator SetWinGameTimer()
@@ -97,4 +106,42 @@ public class GameManager : MonoBehaviour
             ui.Lose();
         }
     }
+
+    private void InitTestItemFixtures()
+    {
+        if(itemFixture == null)
+        {
+            return;
+        }
+        for(int i = 0; i < itemFixture.numLaserLevels; i++)
+        {
+            ItemBase item = (ItemBase)playerScripts.GetComponent<Laser>();
+            item.IncreaseLevel();
+            item.Unlock();
+        }
+        for(int i = 0; i < itemFixture.numLauncherLevels; i++)
+        {
+            ItemBase item = (ItemBase)playerScripts.GetComponent<Launcher>();
+            item.IncreaseLevel();
+            item.Unlock();
+        }
+
+    }
+
+    private void InitTestLevelFixtures()
+    {
+        if(levelFixture == null)
+        {
+            return;
+        }
+    }
+
+    private void InitTestMetaFixtures()
+    {
+        if(metaFixture == null)
+        {
+            return;
+        }
+    }
+
 }

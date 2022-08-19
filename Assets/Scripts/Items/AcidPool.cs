@@ -27,15 +27,21 @@ public class AcidPool : WeaponBase
 
     public override IEnumerator Fire()
     {
-        EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        List<Entity> bullets = weaponConfig.FireFunc(weaponConfig, bulletEntityPrefab, true);
-
-        foreach (Entity entity in bullets)
+        int trailCount = 5;
+        float trailDelay = 0.1f;
+        for (int i = 0; i < trailCount; i++)
         {
-            Scale scale = new Scale { Value = 0.75f * weaponConfig.AOE };
-            entityManager.AddComponentData<Scale>(entity, scale);
+            EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            List<Entity> bullets = weaponConfig.FireFunc(weaponConfig, bulletEntityPrefab, true);
 
-            RebuildCollider(entity);
+            foreach (Entity entity in bullets)
+            {
+                Scale scale = new Scale { Value = 0.75f * weaponConfig.AOE };
+                entityManager.AddComponentData<Scale>(entity, scale);
+
+                RebuildCollider(entity);
+            }
+            yield return new WaitForSeconds(trailDelay);
         }
 
         yield return new WaitForSeconds(1 / weaponConfig.ROF);

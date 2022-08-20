@@ -10,20 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86e78b4a158305245ac80b975d971144, type: 3}
-  m_Name: Items_Laser
+  m_Name: Items_10_Laser
   m_EditorClassIdentifier: 
   startingXP: 0
-  numShotgunLevels: 0
-  numLaserLevels: 5
-  numDiscGunLevels: 0
-  numDischargerLevels: 0
-  numBeamLaserLevels: 0
-  numLauncherLevels: 0
-  numFlailLevels: 0
-  numAcidLevels: 0
-  numBlackHoleLevels: 0
-  numDamageLevels: 0
-  numROFLevels: 0
-  numMobilityLevels: 0
-  numRotateSpeedLevels: 0
-  numXPIncreaseLevels: 0
+  weapons: []
+  stats: []

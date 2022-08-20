@@ -2,24 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponType {
+    BeamLaser,
+    DiscGun,
+    Discharger,
+    Laser,
+    Launcher,
+    Shotgun
+};
+
+public enum StatType {
+    DamageIncrease,
+    HealthIncrease,
+    MovementIncrease,
+    RoFIncrease,
+    RotateIncrease,
+    XPIncrease
+};
+
+[System.Serializable]
+public class WeaponEntry
+{
+    public WeaponType label;
+    public int level;
+};
+
+[System.Serializable]
+public class StatEntry
+{
+    public StatType label;
+    public int level;
+};
+
 [CreateAssetMenu(fileName = "Items_", menuName = "BulletHellTesting/ItemFixture", order = 1)]
 public class BaseItemFixtureSO : ScriptableObject
 {
     public int startingXP;
 
-    public int numShotgunLevels;
-    public int numLaserLevels;
-    public int numDiscGunLevels;
-    public int numDischargerLevels;
-    public int numBeamLaserLevels;
-    public int numLauncherLevels;
-    public int numFlailLevels;
-    public int numAcidLevels;
-    public int numBlackHoleLevels;
+    [SerializeField]
+    public WeaponEntry[] weapons;
 
-    public int numDamageLevels;
-    public int numROFLevels;
-    public int numMobilityLevels;
-    public int numRotateSpeedLevels;
-    public int numXPIncreaseLevels;
+    [SerializeField]
+    public StatEntry[] stats;
 }

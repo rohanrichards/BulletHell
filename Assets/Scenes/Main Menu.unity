@@ -390,6 +390,10 @@ MonoBehaviour:
     statsConfig: {fileID: 11400000, guid: 6da2b4df98c794f429f3c9fc6c6af0b3, type: 2}
     globalStatsConfig: {fileID: 11400000, guid: c595359f33d23bb41a275e55ac466fe4,
       type: 2}
+  testingEnabled: 1
+  itemFixture: {fileID: 11400000, guid: 70304917c438979458a482677b4ed674, type: 2}
+  levelFixture: {fileID: 11400000, guid: 7110afcc7b82be940887a35c9f07ac57, type: 2}
+  metaFixture: {fileID: 0}
 --- !u!4 &1368613460
 Transform:
   m_ObjectHideFlags: 0

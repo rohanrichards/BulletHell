@@ -19,6 +19,11 @@ public class GameManager : MonoBehaviour
     public GlobalStatsConfigSO startingPlayerGlobalStatsConfig;
     public List<MechConfig> mechConfigs;
 
+    public bool testingEnabled = false;
+    public BaseItemFixtureSO itemFixture;
+    public BaseLevelFixtureSO levelFixture;
+    public BaseMetaFixtureSO metaFixture;
+
     private void Awake()
     {
         if(instance != null)
@@ -73,10 +78,16 @@ public class GameManager : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(0.5f);
-        ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Shotgun>();
-        startingItem.IncreaseLevel();
-        startingItem.Unlock();
-        //StartCoroutine(SetWinGameTimer());
+        if (testingEnabled) {
+            InitTestMetaFixtures();
+            InitTestLevelFixtures();
+            InitTestItemFixtures();
+        } else {
+            ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Discharger>();
+            startingItem.IncreaseLevel();
+            startingItem.Unlock();
+            //StartCoroutine(SetWinGameTimer());
+        }
     }
 
     IEnumerator SetWinGameTimer()
@@ -97,4 +108,52 @@ public class GameManager : MonoBehaviour
             ui.Lose();
         }
     }
+
+    private void InitTestItemFixtures()
+    {
+        if(itemFixture == null)
+        {
+            return;
+        }
+
+        for(int w = 0; w < itemFixture.weapons.Length; w++)
+        {
+            ItemBase item = (ItemBase)playerScripts.GetComponent(itemFixture.weapons[w].label.ToString());
+            for(int i = itemFixture.weapons[w].level; i > 0; i--)
+            {
+                item.IncreaseLevel();
+                item.Unlock();
+            }
+        }
+
+        for(int s = 0; s < itemFixture.stats.Length; s++)
+        {
+            ItemBase item = (ItemBase)playerScripts.GetComponent(itemFixture.stats[s].label.ToString());
+            for(int i = itemFixture.stats[s].level; i > 0; i--)
+            {
+                item.IncreaseLevel();
+                item.Unlock();
+            }
+        }
+
+    }
+
+    private void InitTestLevelFixtures()
+    {
+        if(levelFixture == null)
+        {
+            return;
+        }
+        DifficultyManager gameplayScripts = GameObject.Find("GameplayScripts").GetComponent<DifficultyManager>();
+        gameplayScripts.secondsPlayedOffset = levelFixture.secondsPlayed;
+    }
+
+    private void InitTestMetaFixtures()
+    {
+        if(metaFixture == null)
+        {
+            return;
+        }
+    }
+
 }

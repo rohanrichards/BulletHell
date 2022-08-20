@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        for(int s = 0; s < itemFixture.stats.Length; w++)
+        for(int s = 0; s < itemFixture.stats.Length; s++)
         {
             ItemBase item = (ItemBase)playerScripts.GetComponent(itemFixture.stats[s].label.ToString());
             for(int i = itemFixture.stats[s].level; i > 0; i--)

@@ -391,7 +391,7 @@ MonoBehaviour:
     globalStatsConfig: {fileID: 11400000, guid: c595359f33d23bb41a275e55ac466fe4,
       type: 2}
   testingEnabled: 1
-  itemFixture: {fileID: 11400000, guid: 5badfc83f0990c642b375ba16bbb42de, type: 2}
+  itemFixture: {fileID: 11400000, guid: 70304917c438979458a482677b4ed674, type: 2}
   levelFixture: {fileID: 11400000, guid: 7110afcc7b82be940887a35c9f07ac57, type: 2}
   metaFixture: {fileID: 0}
 --- !u!4 &1368613460

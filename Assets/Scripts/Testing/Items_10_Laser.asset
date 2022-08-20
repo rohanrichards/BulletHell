@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: Items_10_Laser
   m_EditorClassIdentifier: 
   startingXP: 0
-  weapons: []
+  weapons:
+  - label: 3
+    level: 1
+  - label: 0
+    level: 1
   stats: []

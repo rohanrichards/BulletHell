@@ -92,7 +92,7 @@ public class EnemyGenerator : MonoBehaviour
     void GenerateTestEntities(int size)
     {
         EnemyGeneratorSystem generatorSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystem<EnemyGeneratorSystem>();
-        NativeArray<Translation> locations = generatorSystem.GetClusterLocations(size, spawnRadius);
+        NativeArray<Translation> locations = generatorSystem.GetClusterLocations(size, spawnRadius, ECSPlayerController.getSpawnBiasDegreesArc());
 
         for (int i = 0; i < locations.Length; i++)
         {
@@ -129,7 +129,7 @@ public class EnemyGenerator : MonoBehaviour
         int clustersToSpawn = clusterOverride == 0 ? ClusterCount : clusterOverride;
 
         EnemyGeneratorSystem generatorSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystem<EnemyGeneratorSystem>();
-        NativeArray<Translation> locations = generatorSystem.GetClusterLocations(clustersToSpawn, spawnRadius);
+        NativeArray<Translation> locations = generatorSystem.GetClusterLocations(clustersToSpawn, spawnRadius, ECSPlayerController.getSpawnBiasDegreesArc());
 
         for (int i = 0; i < locations.Length; i++)
         {

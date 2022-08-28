@@ -17,7 +17,7 @@ public partial class EnemyGeneratorSystem : SystemBase
         );
     }
 
-    public NativeList<Translation> GetClusterLocations(int number, int radius)
+    public NativeList<Translation> GetClusterLocations(int number, int radius, float2 biasAngleArc)
     {
         NativeArray<Translation> playerLocations = playerQuery.ToComponentDataArray<Translation>(Allocator.Temp);
         NativeList<Translation> spawnLocations = new NativeList<Translation>(number, Allocator.Temp);
@@ -25,7 +25,7 @@ public partial class EnemyGeneratorSystem : SystemBase
 
         for (int i = 0; i < number; i++)
         {
-            float3 clusterLocation = playerLocation.Value + RandomPointOnCircleEdge(radius);
+            float3 clusterLocation = playerLocation.Value + RandomPointOnCircleEdgeBiased(radius, biasAngleArc.x, biasAngleArc.y);
             int attempts = 0;
             int maxAttempts = 5;
             while(attempts < maxAttempts)
@@ -76,6 +76,13 @@ public partial class EnemyGeneratorSystem : SystemBase
         {
             return false;
         }
+    }
+
+    private float3 RandomPointOnCircleEdgeBiased(float radius, float biasAngleDegree, float biasArcSizeDegrees)
+    {
+        float radians = (biasAngleDegree + (UnityEngine.Random.value - 0.5f) * biasArcSizeDegrees) * 0.01745329251f; // convert degrees to radians
+        float2 point = new float2(math.cos(radians), math.sin(radians)) * radius;
+        return new float3(point.x, point.y, 0);
     }
 
     private float3 RandomPointOnCircleEdge(float radius)

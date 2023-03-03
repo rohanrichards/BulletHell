@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
             InitTestLevelFixtures();
             InitTestItemFixtures();
         } else {
-            ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Discharger>();
+            ItemBase startingItem = (ItemBase)playerScripts.GetComponent<Launcher>();
             startingItem.IncreaseLevel();
             startingItem.Unlock();
             //StartCoroutine(SetWinGameTimer());
